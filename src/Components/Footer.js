@@ -294,32 +294,6 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <div id="popupNewsletter" className="modal-info-content js-newslettermodal newslettermodal--classic p-0" style={{ display: 'none' }} data-pause={12000} data-expires={0} data-only-index="false">
-                <div className="row align-items-center">
-                    <div className="col-sm-8 d-none d-sm-block">
-                        <div className="popup-newsletter-image image-container" style={{ paddingBottom: '160.0%' }}>
-                            <img className="lazyload w-100" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/popup-image.webp" alt="" />
-                        </div>
-                    </div>
-                    <div className="col-sm-10">
-                        <div className="popup-newsletter-content">
-                            <form method="post" action="#" className="newslettermodal-content-form">
-                                <h3 className="newslettermodal-content-title">Be The First To Know</h3>
-                                <div className="newslettermodal-content-text">About our newest arrivals, special offers plus 10% off
-                                    on your first order.</div>
-                                <div className="form-group mt-3">
-                                    <input type="hidden" name="contact[tags]" defaultValue="newsletter" />
-                                    <div className="form-label">Email address</div>
-                                    <input type="email" name="contact[email]" className="form-control form-control--sm" defaultValue placeholder="Email address" />
-                                </div>
-                                <button type="submit" className="btn w-100">Subscribe</button>
-                                <div className="popup-newsletter-info-sm mt-2">By subscribing, you accept the <a href="#" className="modal-info-link" data-src="#agreementInfo">Terms of Use</a></div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div data-fancybox-close className="fancybox-close-small modal-close"><i className="icon-close" /></div>
-            </div>
         </div>
     )
 }

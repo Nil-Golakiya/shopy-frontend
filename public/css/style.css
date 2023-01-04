@@ -10273,7 +10273,7 @@ select.selectpicker {
 
     transition: .2s;
     transform: translateZ(0);
-    text-align: right;
+    /* text-align: right; */
 
     color: #282828;
     background: #fff;
@@ -10298,8 +10298,7 @@ select.selectpicker {
 
 .dropdn-content .dropdn-close>span:hover {
     text-decoration: underline;
-
-    color: #282828;
+    color: #17c6aa;
 }
 
 .dropdn-content .dropdn-close .ps__scrollbar-x-rail,
@@ -10397,9 +10396,9 @@ body.boxed .dropdn.dropdn_fullheight .dropdn-content {
     display: block;
     overflow-y: auto;
 
-    width: 485px;
+    width: 330px;
     height: 100%;
-    padding: 0 60px 35px;
+    padding: 0 45px 35px;
 
     transition: transform .35s;
     transform: translate3d(110%, 0, 0);
@@ -10429,7 +10428,7 @@ body.boxed .dropdn.dropdn_fullheight .dropdn-content {
 }
 
 .account-drop {
-    text-align: right;
+    /* text-align: right; */
 }
 
 .account-drop .form-control {

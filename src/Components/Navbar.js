@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import logo from "../Image/logo.jpeg"
-import axios from "axios"
-let loaded = false
+import { Link } from "react-router-dom"
 
-const Navbar = ({data}) => {
 
-    useEffect(() => {
-        if (!loaded) {
-            loaded = true
-            const scriptTag = document.createElement('script')
-            scriptTag.src = "/js/app-html.js"
-            document.body.appendChild(scriptTag);
-        }
-    }, [])
+
+const Navbar = ({ data }) => {
+
 
     return (
         <>
@@ -25,7 +18,7 @@ const Navbar = ({data}) => {
                                 </div>
                             </div>
                             <div className="col-auto hdr-logo">
-                                <a href="index.html" className="logo"><img srcSet={logo} alt="Logo" height="60px" /></a>
+                                <Link to="/" className="logo"><img srcSet={logo} alt="Logo" height="60px" /></Link>
                             </div>
                             <div className="hdr-nav hide-mobile nav-holder-s">
                             </div>
@@ -46,9 +39,9 @@ const Navbar = ({data}) => {
                                         </div>
                                     </div>
                                     <div className="dropdn dropdn_wishlist">
-                                        <a href="account-wishlist.html" className="dropdn-link only-icon wishlist-link ">
+                                        <Link to="/wishlist" className="dropdn-link only-icon wishlist-link ">
                                             <i className="icon-heart" /><span className="dropdn-link-txt">Wishlist</span><span className="wishlist-qty">3</span>
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className="hdr_container_desktop">
                                         <div className="dropdn dropdn_account dropdn_fullheight">
@@ -75,7 +68,7 @@ const Navbar = ({data}) => {
                                     <div className="menu-toggle"> <a href="#" className="mobilemenu-toggle"><i className="icon-menu" /></a> </div>
                                 </div>
                                 <div className="col-auto hdr-logo">
-                                    <a href="index.html" className="logo"><img srcSet={logo} height="54px" alt="Logo" /></a>
+                                    <Link to="/" className="logo"><img srcSet={logo} height="54px" alt="Logo" /></Link>
                                 </div>
                                 <div className="hdr-nav hide-mobile nav-holder justify-content-center px-4">
                                     <ul className="mmenu mmenu-js">
@@ -117,9 +110,9 @@ const Navbar = ({data}) => {
                                             </div>
                                         </div>
                                         <div className="dropdn dropdn_wishlist">
-                                            <a href="account-wishlist.html" className="dropdn-link only-icon wishlist-link ">
+                                            <Link to="/wishlist" className="dropdn-link only-icon wishlist-link ">
                                                 <i className="icon-heart" /><span className="dropdn-link-txt">Wishlist</span><span className="wishlist-qty">3</span>
-                                            </a>
+                                            </Link>
                                         </div>
                                         <div className="hdr_container_desktop">
                                             <div className="dropdn dropdn_account dropdn_fullheight">

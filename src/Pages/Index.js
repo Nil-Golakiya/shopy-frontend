@@ -22,7 +22,7 @@ const Index = ({ Component }) => {
                 <header className="hdr-wrap">
                     <Navbar data={data} />
                 </header>
-                <div className="has-smround-btns has-loader-bg equal-height">
+                <div className="has-smround-btns has-loader-bg equal-height has-sm-container">
                     <Sidebar data={data} />
                     <Component />
                 </div>

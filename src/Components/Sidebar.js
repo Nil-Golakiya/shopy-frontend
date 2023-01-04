@@ -1,6 +1,19 @@
 import React from 'react'
+import { Link, useNavigate } from "react-router-dom"
+import { toast } from 'react-toastify';
+import "../asstes/sidebar.css"
 
 const Sidebar = ({ data }) => {
+
+    const navigate = useNavigate()
+    const user = localStorage.getItem("myuser");
+
+    const handleLogout = async () => {
+        localStorage.removeItem("myuser");
+        navigate("/login")
+        toast.error("Your are successfully logout..!")
+    }
+
     return (
         <div className="header-side-panel">
             <div className="mobilemenu js-push-mbmenu">
@@ -41,27 +54,19 @@ const Sidebar = ({ data }) => {
             </div>
             <div className="dropdn-content account-drop" id="dropdnAccount">
                 <div className="dropdn-content-block">
-                    <div className="dropdn-close"><span className="js-dropdn-close">Close</span></div>
-                    <ul>
-                        <li><a href="account-create.html"><span>Log In</span><i className="icon-login"></i></a></li>
-                        <li><a href="account-create.html"><span>Register</span><i className="icon-user2"></i></a></li>
-                        <li><a href="checkout.html"><span>Checkout</span><i className="icon-card"></i></a></li>
+                    {/* <button className="dropdn-close"><span className="js-dropdn-close">X</span></button> */}
+                    <div class="dropdn-close btn-wrap text-right" data-animation="fadeIn" data-animation-delay="2000"><span class="js-dropdn-close btn btn--sm closebtn" >X</span></div>
+                    <ul className="sidebar_ul">
+                        {user ? <li><button onClick={() => handleLogout()} className="logoutbutton"><i className="fa fa-power-off"></i><span>Logout</span></button></li> :
+                            <li><Link to="/login"><i className="icon-login"></i><span>Log In</span></Link></li>}
+
+                        {user ? "" : <li><Link to="/login"><i className="icon-user2"></i><span>Register</span></Link></li>}
+                        <li><Link to="/account-details"><i class="fa fa-user"></i><span>My Account</span></Link></li>
+                        <li><Link to="/account-order"><i className="fa fa-shopping-basket "></i><span>My Order</span></Link></li>
+                        <li><Link to="/wishlist"><i className="fa fa-heart "></i><span>My Wishlist</span></Link></li>
+                        <li><a href="checkout.html"><i className="fa fa-cart-arrow-down "></i><span>My Cart</span></a></li>
+                        <li><a href="checkout.html"><i className="fa fa-credit-card "></i><span>My Wishlist</span></a></li>
                     </ul>
-                    <div className="dropdn-form-wrapper">
-                        <h5>Quick Login</h5>
-                        <form action="#">
-                            <div className="form-group">
-                                <input type="text" className="form-control form-control--sm is-invalid"
-                                    placeholder="Enter your e-mail" />
-                                <div className="invalid-feedback">Can't be blank</div>
-                            </div>
-                            <div className="form-group">
-                                <input type="password" className="form-control form-control--sm"
-                                    placeholder="Enter your password" />
-                            </div>
-                            <button type="submit" className="btn">Enter</button>
-                        </form>
-                    </div>
                 </div>
                 <div className="drop-overlay js-dropdn-close"></div>
             </div>
