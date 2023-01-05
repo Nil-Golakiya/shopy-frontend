@@ -9,6 +9,7 @@ import Wishlist from './Pages/Wishlist';
 import Account_details from './Pages/Account_details';
 import Account_address from './Pages/Account_address';
 import Account_order from './Pages/Account_order';
+import Product_list from './Pages/Product_list';
 let loaded = false;
 
 
@@ -35,7 +36,11 @@ function App() {
         <Route exact path="/account-details" element={<Homepage Component={Account_details} />} />
         <Route exact path="/account-address" element={<Homepage Component={Account_address} />} />
         <Route exact path="/account-order" element={<Homepage Component={Account_order} />} />
-        <Route path="/products" element={<Homepage Component={Account_order} />} />
+        <Route path="/products">
+          <Route path=":category" element={<Homepage Component={Product_list} />} />
+          <Route path=":category/:subcategory" element={<Homepage Component={Product_list} />} />
+          <Route path=":category/:subcategory/:id" element={<Homepage Component={Account_order} />} />
+        </Route>
         <Route exact path="/login" element={<Login />} />
       </Routes>
     </>

@@ -5,7 +5,6 @@ import Account_sidebar from '../Components/Account_sidebar'
 const Account_details = () => {
 
     useEffect(() => {
-        console.log("vghbuvfkgj")
         const scriptTag = document.createElement('script')
         scriptTag.src = "/js/app-html.js"
         document.body.appendChild(scriptTag);

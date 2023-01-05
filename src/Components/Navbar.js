@@ -75,13 +75,13 @@ const Navbar = ({ data }) => {
                                         {
                                             data && data.map((cat) => {
                                                 return (
-                                                    <li className="mmenu-item--simple" key={cat._id}><a href="#">{cat.name}</a>
+                                                    <li className="mmenu-item--simple" key={cat._id}><Link to={`/products/${cat.name}`}>{cat.name}</Link>
                                                         <div className="mmenu-submenu">
                                                             <ul className="submenu-list">
                                                                 {
                                                                     cat.subcategory_details && cat.subcategory_details.map((subcat) => {
                                                                         return (
-                                                                            <li key={subcat._id}><a href="product.html">{subcat.name}</a></li>
+                                                                            <li key={subcat._id}><Link to={`/products/${cat.name}/${subcat.name}`}>{subcat.name}</Link></li>
                                                                         )
                                                                     })
                                                                 }
