@@ -16927,6 +16927,7 @@ body:not(.has-sticky) .bnr-sticky {
 
     -ms-flex-align: center;
     align-items: center;
+    justify-content: center;
 }
 
 .prd .prd-action .btn {
@@ -17066,6 +17067,8 @@ body:not(.has-sticky) .bnr-sticky {
     width: 100%;
 
     transition: opacity .2s;
+    height: 100%;
+    object-fit: cover;
 }
 
 .prd-img img+img {

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import ProductCard from '../Components/ProductCard'
 
 const Product_list = () => {
 
@@ -18,7 +19,7 @@ const Product_list = () => {
         if (params.subcategory) {
             getparams.subcategory_id = params.subcategory;
         }
-        console.log(getparams)
+
         const { data } = await axios.get("http://localhost:8800/product/categorywiseproduct", { params: getparams });
         setData(data)
         console.log("data", data)
@@ -233,69 +234,9 @@ const Product_list = () => {
                                 <div className="col-lg aside">
                                     <div className="prd-grid-wrap">
                                         <div className="prd-grid product-listing data-to-show-4 data-to-show-md-3 data-to-show-sm-2 js-category-grid" data-grid-tab-content>
-                                            <div className="prd prd--style2 prd-labels--max prd-labels-shadow ">
-                                                <div className="prd-inside">
-                                                    <div className="prd-img-area">
-                                                        <a href="product.html" className="prd-img image-hover-scale image-container" style={{ paddingBottom: '128.48%' }}>
-                                                            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-01-1.webp" alt="Leather Pegged Pants" className="js-prd-img lazyload fade-up" />
-                                                            <div className="foxic-loader" />
-                                                            <div className="prd-big-squared-labels">
-                                                            </div>
-                                                        </a>
-                                                        <div className="prd-circle-labels">
-                                                            <a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
-                                                            <a href="#" className="circle-label-qview js-prd-quickview prd-hide-mobile" data-src="ajax/ajax-quickview.html"><i className="icon-eye" /><span>QUICK VIEW</span></a>
-                                                            <div className="colorswatch-label colorswatch-label--variants js-prd-colorswatch">
-                                                                <i className="icon-palette"><span className="path1" /><span className="path2" /><span className="path3" /><span className="path4" /><span className="path5" /><span className="path6" /><span className="path7" /><span className="path8" /><span className="path9" /><span className="path10" /></i>
-                                                                <ul>
-                                                                    <li data-image="images/skins/fashion/products/product-01-1.webp"><a className="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-orange.html" alt="" /></a></li>
-                                                                    <li data-image="images/skins/fashion/products/product-01-color-2.webp"><a className="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-black.html" alt="" /></a></li>
-                                                                    <li data-image="images/skins/fashion/products/product-01-color-3.webp"><a className="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-red.html" alt="" /></a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <ul className="list-options color-swatch">
-                                                            <li data-image="images/skins/fashion/products/product-01-1.webp" className="active"><a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-01-1.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                                                            <li data-image="images/skins/fashion/products/product-01-2.webp"><a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-01-2.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                                                            <li data-image="images/skins/fashion/products/product-01-3.webp"><a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-01-3.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div className="prd-info">
-                                                        <div className="prd-info-wrap">
-                                                            <div className="prd-info-top">
-                                                                <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                                                            </div>
-                                                            <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                                                            <div className="prd-tag"><a href="#">FOXic</a></div>
-                                                            <h2 className="prd-title"><a href="product.html">Leather Pegged Pants</a></h2>
-                                                            <div className="prd-description">
-                                                                Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed lacinia.
-                                                            </div>
-                                                            <div className="prd-action">
-                                                                <form action="#">
-                                                                    <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Leather Pegged Pants&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-01-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add To Cart</button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                        <div className="prd-hovers">
-                                                            <div className="prd-circle-labels">
-                                                                <div><a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a></div>
-                                                                <div className="prd-hide-mobile"><a href="#" className="circle-label-qview js-prd-quickview" data-src="ajax/ajax-quickview.html"><i className="icon-eye" /><span>QUICK VIEW</span></a></div>
-                                                            </div>
-                                                            <div className="prd-price">
-                                                                <div className="price-new">$ 180</div>
-                                                            </div>
-                                                            <div className="prd-action">
-                                                                <div className="prd-action-left">
-                                                                    <form action="#">
-                                                                        <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Leather Pegged Pants&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-01-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add To Cart</button>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            {data && data.map((item) => (
+                                                <ProductCard item={item}/>
+                                            ))}
                                         </div>
                                         <div className="loader-horizontal-sm js-loader-horizontal-sm d-none" data-loader-horizontal style={{ opacity: 0 }}><span /></div>
                                         <div className="circle-loader-wrap">
@@ -314,14 +255,6 @@ const Product_list = () => {
                                                 </a>
                                             </div>
                                         </div>
-                                        {/*<div class="mt-2">*/}
-                                        {/*<button class="btn" onclick="THEME.loaderHorizontalSm.open()">Show Small Loader</button>*/}
-                                        {/*<button class="btn" onclick="THEME.loaderHorizontalSm.close()">Hide Small Loader</button>*/}
-                                        {/*</div>*/}
-                                        {/*<div class="mt-2">*/}
-                                        {/*<button class="btn" onclick="THEME.loaderCategory.open()">Show Opacity</button>*/}
-                                        {/*<button class="btn" onclick="THEME.loaderCategory.close()">Hide Opacity</button>*/}
-                                        {/*</div>*/}
                                     </div>
                                 </div>
                             </div>
@@ -625,13 +558,24 @@ const Product_list = () => {
                     </div>
                 </>
             ) : (
-                <svg class="blob" id="morphing" xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
-                    <g transform="translate(50,50)">
-                        <path class="p" d="M95.9794921826895 0.14172877175545173C124.04471886463375 1.792403032758653 143.20831443717523 24.771010240645452 161.27491133040715 46.381360069730114C180.15642927132592 68.93068986358115 203.29082522703575 92.99493620510663 197.8101978375016 121.92632948860351C192.19756003276282 151.59939290707615 163.34378135586167 169.38876004304015 135.72158765836437 181.3908852923955C109.55770916315421 192.79955796276064 80.71951334940664 196.34523271693507 54.85172582472024 184.2770943596074C28.14167294976333 171.85579708144226 9.700599132761452 148.63509637822273 2.899599074849166 119.92202766318127C-3.9527642051346947 91.3862586371412 2.4063893961167544 61.337981623145346 20.40910723925645 38.163626529320496C38.62192078653844 14.699244425756026 66.38912241485366 -1.6137989241598407 95.9794921826895 0.14172877175545173Z"></path>
-                    </g>
-                </svg>
+                <div class="col-lg aside">
+                    <div class="prd-grid-wrap">
+                        <div class="page404-bg">
+                            <div class="page404-text">
+                                <div class="txt3"><i class="icon-shopping-bag"></i></div>
+                                <div class="txt4">Unfortunately, there are no products<br />matching the selection</div>
+                            </div>
+                            <svg class="blob" id="morphing" xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+                                <g transform="translate(50,50)">
+                                    <path class="p" d="M90.23231635515415 1.3590389263994358C121.43109845822381 -0.3149614411498387 154.06253803489648 4.6703084011009235 174.1944261207218 28.621865445921017C195.09411706547405 53.447257768799986 197.4757313354093 86.82079173304636 188.80216961511337 118.0662060322417C180.86920405236256 147.00882555890382 158.12784853385182 167.3856217815123 131.4981218273408 181.25565460551041C103.63168351648216 195.8072556806954 70.80444006249867 208.3814574644373 42.76494803980738 194.13733874440067C15.14371150855949 180.10671515255277 7.356456088621718 146.1989277156854 2.299134577764221 115.6330640347451C-2.2861209214248555 87.92730334242857 -0.381916484193205 59.20210477189201 16.740846628675342 36.94732812908921C34.19549968741889 14.247145185011647 61.6816247467701 2.732740373490823 90.23231635515415 1.3590389263994358Z"></path>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
             )}
         </div>
+
     )
 }
 

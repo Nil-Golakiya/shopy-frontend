@@ -31,13 +31,13 @@ const Sidebar = ({ data }) => {
                                 {
                                     data && data.map((cat) => {
                                         return (
-                                            <li key={cat._id}><a href="index.html">{cat.name}<span
-                                                className="arrow"><i className="icon-angle-right"></i></span></a>
+                                            <li key={cat._id}><Link to={`/products/${cat.name}`}>{cat.name}<span
+                                                className="arrow"><i className="icon-angle-right"></i></span></Link>
                                                 <ul className="nav-level-2">
                                                     {
                                                         cat.subcategory_details && cat.subcategory_details.map((subcat) => {
                                                             return (
-                                                                <li key={subcat._id}><a href="product.html">{subcat.name}</a></li>
+                                                                <li key={subcat._id}><Link to={`/products/${cat.name}/${subcat.name}`}>{subcat.name}</Link></li>
                                                             )
                                                         })
                                                     }
