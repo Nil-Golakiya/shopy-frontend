@@ -10,7 +10,8 @@ import Account_details from './Pages/Account_details';
 import Account_address from './Pages/Account_address';
 import Account_order from './Pages/Account_order';
 import Product_list from './Pages/Product_list';
-import Product_page from './Pages/Product_page';
+import Product_page1 from './Pages/Product_page1';
+import Cart from './Pages/Cart';
 let loaded = false;
 
 
@@ -40,8 +41,9 @@ function App() {
         <Route path="/products">
           <Route path=":category" element={<Homepage Component={Product_list} />} />
           <Route path=":category/:subcategory" element={<Homepage Component={Product_list} />} />
-          <Route path=":category/:subcategory/:id" element={<Homepage Component={Product_page} />} />
+          <Route path=":category/:subcategory/:id" element={<Homepage Component={Product_page1} />} />
         </Route>
+        <Route exact path="/cart" element={<Homepage Component={Cart} />} />
         <Route exact path="/login" element={<Login />} />
       </Routes>
     </>

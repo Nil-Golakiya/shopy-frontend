@@ -126,7 +126,7 @@ const Login = () => {
                         </div>
                     </form>
 
-                    <form className="sign-up-form" onSubmit={handleSubmit1(signupsubmithandler)}>
+                    <form className="sign-up-form loginform" onSubmit={handleSubmit1(signupsubmithandler)}>
                         <h2 className="title">Sign up</h2>
                         <div className="input-field">
                             <i className="fas fa-user"></i>

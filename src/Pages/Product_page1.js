@@ -1,16 +1,21 @@
-import axios from 'axios'
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom';
 
-const Product_page = () => {
+const Product_page1 = () => {
+
 
     const [data, setData] = useState();
+    const [count, setCount] = useState(0);
     const [colors, setColors] = useState([]);
     const [variations, setVariations] = useState([]);
     const [images, setImages] = useState([]);
     const [activeInfo, setActiveInfo] = useState({});
 
     const params = useParams();
+
+    const userData = JSON.parse(localStorage.getItem("persist:user"))
+    const userId = JSON.parse(userData.Reducer).user.user._id
 
     const fetchData = async () => {
         const { data } = await axios.get(`http://localhost:8800/product/${params.id}`)
@@ -19,14 +24,26 @@ const Product_page = () => {
         handleChangeColorSize(productData, null)
     }
 
+    const createCart = async () => {
+        const cartData = await axios.post("http://localhost:8800/cart", {
+            variation_id: activeInfo.variation_id,
+            user_id: userId,
+            subVariation: { ...activeInfo, image: images[0] },
+            cart_quantity: count
+        })
+    }
+
     const handleChangeColorSize = (data, color) => {
         const colorArray = [];
         data.variations.map((ele) => {
-            colorArray.push(ele.color);
+            colorArray.push({
+                color: ele.color,
+                image: ele.image[0]
+            });
         })
         setColors(colorArray);
         if (!color) {
-            color = colorArray[0];
+            color = colorArray[0].color;
         }
 
         const variationObj = data.variations.find((v) => v.color === color);
@@ -34,19 +51,21 @@ const Product_page = () => {
             setImages(variationObj.image);
             setVariations(variationObj.subVariation);
             const info = variationObj.subVariation[0];
-            setActiveInfo({ ...activeInfo, color, ...info });
+            setActiveInfo({ ...activeInfo, color, variation_id: variationObj._id, ...info });
         }
 
         const imageArray = []
         data.variations.map((ele) => (
             imageArray.push(ele.image)
         ))
-        console.log("data", imageArray)
+        console.log("data", data)
+        console.log("variationObj", variationObj)
 
     }
 
     console.log("activeInfo", activeInfo)
-    console.log(images)
+    console.log("images", images)
+    console.log("params", params)
 
     useEffect(() => {
         fetchData()
@@ -59,26 +78,26 @@ const Product_page = () => {
                     <ul className="breadcrumbs">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="category.html">Women</a></li>
-                        <li><span>Leather Pegged Pants</span></li>
+                        <li><span>{data && data.title}</span></li>
                     </ul>
                 </div>
             </div>
             <div className="holder">
                 <div className="container js-prd-gallery" id="prdGallery">
-                    <div className="row prd-block prd-block-under prd-block--prv-left">
+                    <div className="row prd-block prd-block-under prd-block--prv-bottom">
                         <div className="col">
                             <div className="js-prd-d-holder">
                                 <div className="prd-block_title-wrap">
                                     <div className="prd-block_reviews" data-toggle="tooltip" data-placement="top" title="Scroll To Reviews"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star" />
                                         <span className="reviews-link"><a href="#" className="js-reviews-link"> (17 reviews)</a></span>
                                     </div>
-                                    <h1 className="prd-block_title">Leather Pegged Pants</h1>
+                                    <h1 className="prd-block_title">{data && data.title}</h1>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="row prd-block prd-block--prv-left">
-                        <div className="col-md-8 col-lg-10 aside--sticky js-sticky-collision">
+                    <div className="row prd-block prd-block--prv-bottom">
+                        <div className="col-md-8 col-lg-8 col-xl-8 aside--sticky js-sticky-collision">
                             <div className="aside-content">
                                 <div className="mb-2 js-prd-m-holder" />
                                 <div className="prd-block_main-image">
@@ -88,7 +107,7 @@ const Product_page = () => {
                                                 images.map((image) => (
                                                     <div data-value="Beige">
                                                         <span className="prd-img">
-                                                            <img src={image} className="lazyload fade-up" alt="" />
+                                                            <img src={image} data-src={image} className="lazyload fade-up" alt="" />
                                                         </span>
                                                     </div>
                                                 ))
@@ -97,44 +116,37 @@ const Product_page = () => {
                                         <div className="prd-block_label-sale-squared justify-content-center align-items-center"><span>Sale</span></div>
                                     </div>
                                     <div className="prd-block_main-image-links">
-
-                                        <a data-fancybox data-width={900} href="https://www.youtube.com/watch?v=Zk3kr7J_v3Q" className="prd-block_video-link"><i className="icon-video" /></a>
-                                        <a href="images/products/product-01.html" className="prd-block_zoom-link"><i className="icon-zoom-in" /></a>
+                                        <a href="#" className="prd-block_zoom-link"><i className="icon-zoom-in" /></a>
                                     </div>
                                 </div>
                                 <div className="product-previews-wrapper">
-                                    <div className="product-previews-carousel js-product-previews-carousel" data-desktop={5} data-tablet={3}>
+                                    <div className="product-previews-carousel js-product-previews-carousel">
                                         {images.map((image) => (
                                             <a href="#">
                                                 <span className="prd-img">
-                                                    <img src={image} data-src={image} className="lazyload fade-up" alt=""/>
+                                                    <img src={image} data-src={image} className="lazyload fade-up" alt="" style={{ height: "150px", objectFit: "contain" }} />
                                                 </span>
                                             </a>
                                         ))}
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-10 col-lg-8 mt-1 mt-md-0">
+                        <div className="col-md-10 col-lg-10 col-xl-10 mt-1 mt-md-0">
                             <div className="prd-block_info prd-block_info--style1" data-prd-handle="/products/copy-of-suede-leather-mini-skirt">
                                 <div className="prd-block_info-top prd-block_info_item order-0 order-md-2">
                                     <div className="prd-block_price prd-block_price--style2">
-                                        <div className="prd-block_price--actual">₹ {activeInfo.price}</div>
+                                        <div className="prd-block_price--actual">₹ {Math.round(activeInfo.price - activeInfo.price / activeInfo.discount)}</div>
                                         <div className="prd-block_price-old-wrap">
                                             <span className="prd-block_price--old">₹ {activeInfo.price}</span>
-                                            <span className="prd-block_price--text">You Save: $131.99 (28%)</span>
-                                        </div>
-                                    </div>
-                                    <div className="prd-block_viewed-wrap d-none d-md-flex">
-                                        <div className="prd-block_viewed">
-                                            <i className="icon-time" />
-                                            <span>This product was viewed 13 times within last hour</span>
+                                            <span className="prd-block_price--text">You Save:₹ {Math.round(activeInfo.price / activeInfo.discount)} ({activeInfo.discount}%)</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="prd-block_description prd-block_info_item ">
                                     <h3>Short description</h3>
-                                    <p>{data?.sort_description}</p>
+                                    <p>{data && data.sort_description}</p>
                                     <div className="mt-1" />
                                     <div className="row vert-margin-less">
                                         <div className="col-sm">
@@ -152,46 +164,35 @@ const Product_page = () => {
                                     </div>
                                 </div>
                                 <div className="prd-progress prd-block_info_item" data-left-in-stock>
-                                    <div className="prd-progress-text">
-                                        Hurry Up! Left <span className="prd-progress-text-left js-stock-left">{activeInfo.qty}</span> in stock
-                                    </div>
+                                    {
+                                        activeInfo.qty === 0 ? <div className="prd-progress-text" style={{ color: "red" }}>
+                                            Out of stock
+                                        </div> :
+                                            <div className="prd-progress-text">
+                                                Hurry Up! Left <span className="prd-progress-text-left js-stock-left">{activeInfo.qty}</span> in stock
+                                            </div>
+                                    }
+
                                     <div className="prd-progress-text-null" />
                                     <div className="prd-progress-bar-wrap progress">
-                                        <div className="prd-progress-bar progress-bar active" data-stock="50, 10, 30, 25, 1000, 15000" style={{ width: '53%' }} />
+                                        <div className="prd-progress-bar progress-bar active" data-stock="50, 10, 30, 25, 1000, 15000" style={{ width: `${activeInfo.qty}%` }} />
                                     </div>
                                 </div>
-                                <div className="prd-block_countdown js-countdown-wrap prd-block_info_item countdown-init">
-                                    <div className="countdown-box-full-text w-md">
-                                        <div className="row no-gutters align-items-center">
-                                            <div className="col-sm-auto text-center">
-                                                <div className="countdown js-countdown" data-countdown="2021/07/01" />
-                                            </div>
-                                            <div className="col">
-                                                <div className="countdown-txt"> TIME IS RUNNING OUT!</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="prd-block_order-info prd-block_info_item " data-order-time data-locale="en">
-                                    <i className="icon-box-2" />
-                                    <div>Order in the next <span className="prd-block_order-info-time countdownCircleTimer" data-time="8:00:00, 15:30:00, 23:59:59"><span><span>04</span>:</span><span><span>46</span>:</span><span><span>24</span></span></span> to get it by <span data-date>Tuesday, September 08, 2020</span></div>
-                                </div>
-                                <div className="prd-block_info_item prd-block_info-when-arrives d-none" data-when-arrives>
+
+                                <div className={`prd-block_info_item prd-block_info-when-arrives ${activeInfo.qty === 0 ? "" : "d-none"}`} data-when-arrives>
                                     <div className="prd-block_links prd-block_links m-0 d-inline-flex">
                                         <i className="icon-email-1" />
                                         <div><a href="#" data-follow-up data-name="Oversize Cotton Dress" className="prd-in-stock" data-src="#whenArrives">Inform me when the item arrives</a></div>
                                     </div>
                                 </div>
                                 <div className="prd-block_info-box prd-block_info_item">
-                                    <div className="two-column"><p>Availability:
-                                        <span className="prd-in-stock" data-stock-status>In stock</span></p>
+                                    <div className="two-column"><p className="d-flex">Availability:
+                                        <span className="prd-in-stock" data-stock-status>{activeInfo.qty !== 0 ? "In stock" : <p style={{ color: "red" }}>Out Of stock</p>}</span></p>
                                         <p className="prd-taxes">Tax Info:
                                             <span>Tax included.</span>
                                         </p>
-                                        <p>Collection: <span> <a href="collections.html" data-toggle="tooltip" data-placement="top" data-original-title="View all">Women</a></span></p>
-                                        <p>Sku: <span data-sku>FOXic-45812</span></p>
-                                        <p>Vendor: <span>Banita</span></p>
-                                        <p>Barcode: <span>314363563</span></p></div>
+                                        <p>Collection: <span> <Link to={`/products/${params.category}`} data-toggle="tooltip" data-placement="top" data-original-title="View all">{params.category}</Link></span></p>
+                                    </div>
                                 </div>
                                 <div className="order-0 order-md-100">
                                     <form method="post" action="#">
@@ -199,16 +200,16 @@ const Product_page = () => {
                                             <div className="prd-color swatches">
                                                 <div className="option-label">Color:</div>
                                                 <select className="form-control hidden single-option-selector-modalQuickView" id="SingleOptionSelector-0" data-index="option1">
-                                                    {colors.map((color) => {
-                                                        <option value={color}>{color}</option>
+                                                    {colors.map((ele) => {
+                                                        <option value={ele.color}>{ele.color}</option>
                                                     })}
                                                 </select>
                                                 <ul className="images-list js-size-list" data-select-id="SingleOptionSelector-0">
-                                                    {colors.map((color) => (
-                                                        <li className={`${color === activeInfo.color ? "active" : ""}`} onClick={() => handleChangeColorSize(data, color)}>
-                                                            <a href="#" data-value={color} data-toggle="tooltip" data-placement="top" data-original-title={color}>
+                                                    {colors.map((ele) => (
+                                                        <li className={`${ele.color === activeInfo.color ? "active" : ""}`} onClick={() => handleChangeColorSize(data, ele.color)}>
+                                                            <a href="#" data-value={ele.color} data-toggle="tooltip" data-placement="top" data-original-title={ele.color}>
                                                                 <span className="image-container image-container--product">
-                                                                    <img src="images/skins/fashion/product-page/product-01.html" alt="" />
+                                                                    <img src={ele.image} alt="" />
                                                                 </span>
                                                             </a>
                                                         </li>
@@ -234,13 +235,15 @@ const Product_page = () => {
                                         <div className="prd-block_actions prd-block_actions--wishlist">
                                             <div className="prd-block_qty">
                                                 <div className="qty qty-changer">
-                                                    <button className="decrease js-qty-button" />
-                                                    <input type="number" className="qty-input" name="quantity" defaultValue={1} data-min={1} data-max={1000} />
-                                                    <button className="increase js-qty-button" />
+                                                    <button className="decrease" disabled={count === 0 || activeInfo.qty === 0} type='button' onClick={() => setCount(count - 1)} />
+                                                    <input type="number" className="qty-input" name="quantity" value={count} data-min={1} data-max={100} />
+                                                    <button className="increase" disabled={activeInfo.qty === count} type='button' onClick={() => setCount(count + 1)} />
                                                 </div>
                                             </div>
                                             <div className="btn-wrap">
-                                                <button className="btn btn--add-to-cart js-trigger-addtocart js-prd-addtocart" data-product="{&quot;name&quot;:  &quot;Leather Pegged Pants &quot;,  &quot;url &quot;: &quot;product.html&quot;,  &quot;path &quot;: &quot;images/skins/fashion/product-page/product-01.webp&quot;,  &quot;aspect_ratio &quot;: &quot;0.78&quot;}">Add to cart</button>
+                                                <button disabled={count === 0 || activeInfo.qty === 0} className="btn btn--add-to-cart js-trigger-addtocart js-prd-addtocart" data-product="{&quot;name&quot;:  &quot;Leather Pegged Pants &quot;,  &quot;url &quot;: &quot;product.html&quot;,  &quot;path &quot;: &quot;images/skins/fashion/product-page/product-01.webp&quot;,  &quot;aspect_ratio &quot;: &quot;0.78&quot;}">
+                                                    Add to cart
+                                                </button>
                                             </div>
                                             <div className="btn-wishlist-wrap">
                                                 <a href="#" className="btn-add-to-wishlist ml-auto btn-add-to-wishlist--add js-add-wishlist" title="Add To Wishlist"><i className="icon-heart-stroke" /></a>
@@ -255,72 +258,9 @@ const Product_page = () => {
                                 </div>
                                 <div className="prd-block_info_item">
                                     <ul className="prd-block_links list-unstyled">
-                                        <li><i className="icon-size-guide" /><a href="#" data-fancybox className="modal-info-link" data-src="#sizeGuide">Size Guide</a></li>
                                         <li><i className="icon-delivery-1" /><a href="#" data-fancybox className="modal-info-link" data-src="#deliveryInfo">Delivery and Return</a></li>
                                         <li><i className="icon-email-1" /><a href="#" data-fancybox className="modal-info-link" data-src="#contactModal">Ask about this product</a></li>
                                     </ul>
-                                    <div id="sizeGuide" style={{ display: 'none' }} className="modal-info-content modal-info-content-lg">
-                                        <div className="modal-info-heading">
-                                            <div className="mb-1"><i className="icon-size-guide" /></div>
-                                            <h2>Size Guide</h2>
-                                        </div>
-                                        <div className="table-responsive">
-                                            <table className="table table-striped table-borderless text-center">
-                                                <thead>
-                                                    <tr>
-                                                        <th>USA</th>
-                                                        <th>UK</th>
-                                                        <th>France</th>
-                                                        <th>Japanese</th>
-                                                        <th>Bust</th>
-                                                        <th>Waist</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>4</td>
-                                                        <td>8</td>
-                                                        <td>36</td>
-                                                        <td>7</td>
-                                                        <td>32"</td>
-                                                        <td>61 cm</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>6</td>
-                                                        <td>10</td>
-                                                        <td>38</td>
-                                                        <td>11</td>
-                                                        <td>34"</td>
-                                                        <td>67 cm</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>8</td>
-                                                        <td>12</td>
-                                                        <td>40</td>
-                                                        <td>15</td>
-                                                        <td>36"</td>
-                                                        <td>74 cm</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>10</td>
-                                                        <td>14</td>
-                                                        <td>42</td>
-                                                        <td>17</td>
-                                                        <td>38"</td>
-                                                        <td>79 cm</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>12</td>
-                                                        <td>16</td>
-                                                        <td>44</td>
-                                                        <td>21</td>
-                                                        <td>40"</td>
-                                                        <td>84 cm</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
                                     <div id="deliveryInfo" style={{ display: 'none' }} className="modal-info-content modal-info-content-lg">
                                         <div className="modal-info-heading">
                                             <div className="mb-1"><i className="icon-delivery-1" /></div>
@@ -366,203 +306,6 @@ const Product_page = () => {
                                     <img className="img-responsive lazyload d-sm-none" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/payment/safecheckout-m.webp" alt="" />
                                 </div>
                             </div>
-                            <div className="prd-block_info prd-block_info--style1">
-                                <div className="panel-group panel-group--style1 prd-block_accordion" id="productAccordion">
-                                    <div className="panel">
-                                        <div className="panel-heading active">
-                                            <h4 className="panel-title">
-                                                <a data-toggle="collapse" data-parent="#productAccordion" href="#collapse2">
-                                                    Description</a>
-                                                <span className="toggle-arrow"><span /><span /></span>
-                                            </h4>
-                                        </div>
-                                        <div id="collapse2" className="panel-collapse collapse show">
-                                            <div className="panel-body">
-                                                <h4>Give you a complete account of the system</h4>
-                                                <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. </p>
-                                                <div className="row mt-3">
-                                                    <div className="col-md-9">
-                                                        <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. </p>
-                                                    </div>
-                                                    <div className="col-md-9"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/product-description-01.webp" alt="" className="lazyload" /></div>
-                                                </div>
-                                                <div className="mt-3" />
-                                                <h4>List heading</h4>
-                                                <div className="row">
-                                                    <div className="col-sm-9">
-                                                        <ul className="list-unstyled list-smaller">
-                                                            <li>1. All this mistaken idea of denouncing</li>
-                                                            <li>2. Raising pain was born and give you</li>
-                                                            <li>3. Complete account of the system</li>
-                                                        </ul>
-                                                    </div>
-                                                    <div className="col-sm-9 mt-15 mt-sm-0">
-                                                        <ul className="list-unstyled list-smaller">
-                                                            <li>4. All this mistaken idea of denouncing</li>
-                                                            <li>5. Raising pain was born and give you</li>
-                                                            <li>6. Complete account of the system</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div className="row mt-3 align-items-center">
-                                                    <div className="col-md-9"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/product-description-02.webp" alt="" className="lazyload" /></div>
-                                                    <div className="col-md-9">
-                                                        <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. </p>
-                                                    </div>
-                                                </div>
-                                                <div className="mt-3">
-                                                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="panel">
-                                        <div className="panel-heading">
-                                            <h4 className="panel-title">
-                                                <a data-toggle="collapse" data-parent="#productAccordion" href="#collapse1">
-                                                    Sizing Guide</a>
-                                                <span className="toggle-arrow"><span /><span /></span>
-                                            </h4>
-                                        </div>
-                                        <div id="collapse1" className="panel-collapse collapse">
-                                            <div className="panel-body">
-                                                <table className="table table-striped">
-                                                    <tbody><tr>
-                                                        <th scope="row">US Sizes</th>
-                                                        <td>6</td>
-                                                        <td>6,5</td>
-                                                        <td>7</td>
-                                                        <td>7,5</td>
-                                                        <td>8</td>
-                                                        <td>8,5</td>
-                                                    </tr>
-                                                        <tr>
-                                                            <th scope="row">Euro Sizes</th>
-                                                            <td>39</td>
-                                                            <td>39</td>
-                                                            <td>40</td>
-                                                            <td>40-41</td>
-                                                            <td>41</td>
-                                                            <td>41-42</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">UK Sizes</th>
-                                                            <td>5,5</td>
-                                                            <td>6</td>
-                                                            <td>6,5</td>
-                                                            <td>7</td>
-                                                            <td>7,5</td>
-                                                            <td>8</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">Inches</th>
-                                                            <td>9.25"</td>
-                                                            <td>9.5"</td>
-                                                            <td>9.625"</td>
-                                                            <td>9.75"</td>
-                                                            <td>9.9375"</td>
-                                                            <td>10.125"</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">CM</th>
-                                                            <td>23,5</td>
-                                                            <td>24,1</td>
-                                                            <td>24,4</td>
-                                                            <td>24,8</td>
-                                                            <td>25,4</td>
-                                                            <td>25,7</td>
-                                                        </tr>
-                                                    </tbody></table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="panel">
-                                        <div className="panel-heading">
-                                            <h4 className="panel-title">
-                                                <a data-toggle="collapse" data-parent="#productAccordion" href="#collapse4">
-                                                    Assigned Tags</a>
-                                                <span className="toggle-arrow"><span /><span /></span>
-                                            </h4>
-                                        </div>
-                                        <div id="collapse4" className="panel-collapse collapse">
-                                            <div className="panel-body">
-                                                <ul className="tags-list">
-                                                    <li><a href="#">Jeans</a></li>
-                                                    <li><a href="#">St.Valentine’s gift</a></li>
-                                                    <li><a href="#">Sunglasses</a></li>
-                                                    <li><a href="#">Discount</a></li>
-                                                    <li><a href="#">Maxi dress</a></li>
-                                                    <li><a href="#">Underwear</a></li>
-                                                    <li><a href="#">men accessories</a></li>
-                                                    <li><a href="#">hand bags</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                    <li><a href="#">St.Valentine’s gift</a></li>
-                                                    <li><a href="#">Sunglasses</a></li>
-                                                    <li><a href="#">Discount</a></li>
-                                                    <li><a href="#">Maxi dress</a></li>
-                                                    <li><a href="#">Underwear</a></li>
-                                                    <li><a href="#">men accessories</a></li>
-                                                    <li><a href="#">hand bags</a></li>
-                                                    <li><a href="#">Discount</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                </ul>
-                                                <div className="mt-3" />
-                                                <h3>Add your tag</h3>
-                                                <form className="form--simple" action="#">
-                                                    <label>Tag<span className="required">*</span></label>
-                                                    <input className="form-control form-control--sm" />
-                                                    <button className="btn btn--md">Submit Tag</button>
-                                                    <div className="required-text">* Required Fields</div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="panel">
-                                        <div className="panel-heading">
-                                            <h4 className="panel-title">
-                                                <a data-toggle="collapse" data-parent="#productAccordion" href="#collapse5">Reviews</a>
-                                                <span className="toggle-arrow"><span /><span /></span>
-                                            </h4>
-                                        </div>
-                                        <div id="collapse5" className="panel-collapse collapse">
-                                            <div className="panel-body">
-                                                <div id="productReviews">
-                                                    <div className="row mb-2 align-items-center">
-                                                        <div className="col-sm"><h3 className="m-0">CUSTOMER REVIEWS</h3></div>
-                                                        <div className="col-sm-auto ml-auto"><a href="#" className="review-write-link"><i className="icon-pencil" />Write review</a></div>
-                                                    </div>
-                                                    <div className="review-item">
-                                                        <div className="review-item_rating">
-                                                            <i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" />
-                                                        </div>
-                                                        <div className="row align-items-center">
-                                                            <div className="col"><h5 className="review-item_author">Jaden Ngo on May 25, 2018</h5></div>
-                                                            <div className="col-auto ml-auto"><a href="#" className="review-item_report">Report as Inappropriate</a></div>
-                                                        </div>
-                                                        <div className="review-item_content">
-                                                            <h4>Good ball and company</h4>
-                                                            <p>I recently bought this ball and this is the first ball that I actually buy based on quality and material, I always been playing my friend ball and one of them recommended me this, read some review online and decided to buy it, the ball feel sticky at first but quality is nice and the hand wrote letter was awesome because it shows how much season creator actually care about their customers.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div className="review-item">
-                                                        <div className="review-item_rating">
-                                                            <i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" />
-                                                        </div>
-                                                        <div className="row align-items-center">
-                                                            <div className="col"><h5 className="review-item_author">Jaden Ngo on May 25, 2018</h5></div>
-                                                            <div className="col-auto ml-auto"><a href="#" className="review-item_report">Report as Inappropriate</a></div>
-                                                        </div>
-                                                        <div className="review-item_content">
-                                                            <h4>Good ball and company</h4>
-                                                            <p>I recently bought this ball and this is the first ball that I actually buy based on quality and material, I always been playing my friend ball and one of them recommended me this, read some review online and decided to buy it, the ball feel sticky at first but quality is nice and the hand wrote letter was awesome because it shows how much season creator actually care about their customers.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -570,9 +313,101 @@ const Product_page = () => {
             <div className="holder prd-block_links-wrap-bg d-none d-md-block">
                 <div className="prd-block_links-wrap prd-block_info_item container mt-2 mt-md-5 py-1">
                     <div className="prd-block_link"><span><i className="icon-call-center" />24/7 Support</span></div>
-                    <div className="prd-block_link">
-                        <span>Use promocode  FOXIC to get 15% discount!</span></div>
                     <div className="prd-block_link"><span><i className="icon-delivery-truck" /> Fast Shipping</span></div>
+                </div>
+            </div>
+            <div className="holder mt-3 mt-md-5">
+                <div className="container">
+                    <ul className="nav nav-tabs product-tab">
+                        <li className="nav-item"><a href="#Tab1" className="nav-link" data-toggle="tab">Description
+                            <span className="toggle-arrow"><span /><span /></span>
+                        </a></li>
+                        <li className="nav-item"><a href="#Tab5" className="nav-link" data-toggle="tab">Reviews
+                            <span className="toggle-arrow"><span /><span /></span>
+                        </a></li>
+                    </ul>
+                    <div className="tab-content">
+                        <div role="tabpanel" className="tab-pane fade" id="Tab1">
+                            <p>
+                                {data && data.long_description}
+                            </p>
+                        </div>
+                        <div role="tabpanel" className="tab-pane fade" id="Tab5">
+                            <div id="productReviews">
+                                <div className="row align-items-center">
+                                    <div className="col"><h2>CUSTOMER REVIEWS</h2></div>
+                                    <div className="col-18 col-md-auto mb-3 mb-md-0"><a href="#" className="review-write-link"><i className="icon-pencil" />Write review</a></div>
+                                </div>
+                                <div id="productReviewsBottom">
+                                    <div className="review-item">
+                                        <div className="review-item_rating">
+                                            <i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" />
+                                        </div>
+                                        <div className="review-item_top row align-items-center">
+                                            <div className="col"><h5 className="review-item_author">Jaden Ngo on May 25, 2018</h5></div>
+                                            <div className="col-auto"><a href="#" className="review-item_report">Report as Inappropriate</a></div>
+                                        </div>
+                                        <div className="review-item_content">
+                                            <h4>Good ball and company</h4>
+                                            <p>I recently bought this ball and this is the first ball that I actually buy based on quality and material, I always been playing my friend ball and one of them recommended me this, read some review online and decided to buy it, the ball feel sticky at first but quality is nice and the hand wrote letter was awesome because it shows how much season creator actually care about their customers.</p>
+                                        </div>
+                                    </div>
+                                    <div className="review-item">
+                                        <div className="review-item_rating">
+                                            <i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" />
+                                        </div>
+                                        <div className="review-item_top row align-items-center">
+                                            <div className="col"><h5 className="review-item_author">Jaden Ngo on May 25, 2018</h5></div>
+                                            <div className="col-auto"><a href="#" className="review-item_report">Report as Inappropriate</a></div>
+                                        </div>
+                                        <div className="review-item_content">
+                                            <h4>Good ball and company</h4>
+                                            <p>I recently bought this ball and this is the first ball that I actually buy based on quality and material, I always been playing my friend ball and one of them recommended me this, read some review online and decided to buy it, the ball feel sticky at first but quality is nice and the hand wrote letter was awesome because it shows how much season creator actually care about their customers.</p>
+                                        </div>
+                                    </div>
+                                    <div className="review-item">
+                                        <div className="review-item_rating">
+                                            <i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" />
+                                        </div>
+                                        <div className="review-item_top row align-items-center">
+                                            <div className="col"><h5 className="review-item_author">Jaden Ngo on May 25, 2018</h5></div>
+                                            <div className="col-auto"><a href="#" className="review-item_report">Report as Inappropriate</a></div>
+                                        </div>
+                                        <div className="review-item_content">
+                                            <h4>Good ball and company</h4>
+                                            <p>I recently bought this ball and this is the first ball that I actually buy based on quality and material, I always been playing my friend ball and one of them recommended me this, read some review online and decided to buy it, the ball feel sticky at first but quality is nice and the hand wrote letter was awesome because it shows how much season creator actually care about their customers.</p>
+                                        </div>
+                                    </div>
+                                    <div className="review-item">
+                                        <div className="review-item_rating">
+                                            <i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" />
+                                        </div>
+                                        <div className="review-item_top row align-items-center">
+                                            <div className="col"><h5 className="review-item_author">Jaden Ngo on May 25, 2018</h5></div>
+                                            <div className="col-auto"><a href="#" className="review-item_report">Report as Inappropriate</a></div>
+                                        </div>
+                                        <div className="review-item_content">
+                                            <h4>Good ball and company</h4>
+                                            <p>I recently bought this ball and this is the first ball that I actually buy based on quality and material, I always been playing my friend ball and one of them recommended me this, read some review online and decided to buy it, the ball feel sticky at first but quality is nice and the hand wrote letter was awesome because it shows how much season creator actually care about their customers.</p>
+                                        </div>
+                                    </div>
+                                    <div className="review-item">
+                                        <div className="review-item_rating">
+                                            <i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" />
+                                        </div>
+                                        <div className="review-item_top row align-items-center">
+                                            <div className="col"><h5 className="review-item_author">Jaden Ngo on May 25, 2018</h5></div>
+                                            <div className="col-auto"><a href="#" className="review-item_report">Report as Inappropriate</a></div>
+                                        </div>
+                                        <div className="review-item_content">
+                                            <h4>Good ball and company</h4>
+                                            <p>I recently bought this ball and this is the first ball that I actually buy based on quality and material, I always been playing my friend ball and one of them recommended me this, read some review online and decided to buy it, the ball feel sticky at first but quality is nice and the hand wrote letter was awesome because it shows how much season creator actually care about their customers.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="holder">
@@ -871,8 +706,66 @@ const Product_page = () => {
                     </div>
                 </div>
             </div>
+
+            <div className="fancybox-container fancybox-show-thumbs fancybox--light fancybox-is-open fancybox-is-zoomable fancybox-can-zoomIn fancybox-show-toolbar fancybox-show-infobar d-none" role="dialog" tabIndex={-1} id="fancybox-container-1" style={{ transitionDuration: '366ms' }}>
+                <div className="fancybox-bg" />
+                <div className="fancybox-inner">
+                    <div className="fancybox-infobar">
+                        <span data-fancybox-index>8
+                        </span>&nbsp;/&nbsp;
+                        <span data-fancybox-count>9</span>
+                    </div>
+                    <div className="fancybox-toolbar">
+                        <button data-fancybox-close className="fancybox-button fancybox-button--close" title="Close">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 10.6L6.6 5.2 5.2 6.6l5.4 5.4-5.4 5.4 1.4 1.4 5.4-5.4 5.4 5.4 1.4-1.4-5.4-5.4 5.4-5.4-1.4-1.4-5.4 5.4z" /></svg>
+                        </button>
+                    </div>
+                    <div className="fancybox-navigation">
+                        <button data-fancybox-prev className="fancybox-button fancybox-button--arrow_left" title="Previous">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.28 15.7l-1.34 1.37L5 12l4.94-5.07 1.34 1.38-2.68 2.72H19v1.94H8.6z" />
+                                </svg>
+                            </div>
+                        </button>
+                        <button data-fancybox-next className="fancybox-button fancybox-button--arrow_right" title="Next">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.4 12.97l-2.68 2.72 1.34 1.38L19 12l-4.94-5.07-1.34 1.38 2.68 2.72H5v1.94z" />
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                    <div className="fancybox-stage">
+                        <div className="fancybox-slide fancybox-slide--image fancybox-slide--current fancybox-slide--complete" style={{}}>
+                            <div className="fancybox-content" style={{ transform: 'translate(784px, 6px)', width: '351.014px', height: '451px' }}>
+                                {
+                                    images.map((image) => (
+                                        <img className="fancybox-image" src={image} />
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div className="fancybox-caption fancybox-caption--separate"><div className="fancybox-caption__body" />
+                    </div>
+                    <div className="fancybox-progress" />
+                </div>
+                <div className="fancybox-thumbs fancybox-thumbs-x">
+                    <div className="fancybox-thumbs__list d-flex justify-content-center">
+                        {
+                            images.map((image) => (
+                                <a href="javascript:;" tabIndex={0} data-index={1} style={{ backgroundImage: `url(${image})`, height: "150px", width: "150px" }} />
+                            ))
+                        }
+                        {/* <a href="javascript:;" tabIndex={0} data-index={0} style={{ backgroundImage: 'url(images/skins/fashion/product-page/product-01.webp)' }} className />
+
+                        <a href="javascript:;" tabIndex={0} data-index={7} style={{ backgroundImage: 'url(images/skins/fashion/product-page/product-08.webp)' }} className="fancybox-thumbs-active" /> */}
+
+                    </div>
+                </div>
+            </div>
+
         </div>
     )
 }
 
-export default Product_page
+export default Product_page1

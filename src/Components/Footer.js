@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
     return (
@@ -212,7 +213,7 @@ const Footer = () => {
                                 </div>
                             </div>
                             <div className="col-auto popup-addedtocart_actions">
-                                <span>You can continue</span> <a href="#" className="btn btn--grey btn--sm js-open-drop" data-panel="#dropdnMinicart"><i className="icon-basket" /><span>Check Cart</span></a>
+                                <span>You can continue</span> <Link to="/cart" className="btn btn--grey btn--sm"><i className="icon-basket" /><span>Check Cart</span></Link>
                                 <span>or</span> <a href="checkout.html" className="btn btn--invert btn--sm"><i className="icon-envelope-1" /><span>Check out</span></a>
                             </div>
                         </div>

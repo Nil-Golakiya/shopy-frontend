@@ -1672,6 +1672,8 @@ body.mac .custom-grid:after {
     top: 0;
     right: 0;
     left: 0;
+    height: 100%;
+    object-fit: cover;
 }
 
 .image-container .foxic-loader {
@@ -1890,7 +1892,7 @@ a {
 }
 
 a:hover {
-    color: #fff;
+    color: #17c6aa;
 }
 
 a:focus {
@@ -17054,7 +17056,6 @@ body:not(.has-sticky) .bnr-sticky {
 
     width: 100%;
     padding-right: 0;
-    padding-bottom: 128.48%;
     padding-left: 0;
 
     -ms-flex-align: start;
@@ -38637,6 +38638,7 @@ body {
     -ms-user-select: none;
     user-select: none;
 }
+
 
 .slick-slide:focus {
     outline: none;
