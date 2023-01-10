@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
-const Product_page1 = () => {
+const Product_page1 = ({ setCart, cart }) => {
 
 
     const [data, setData] = useState();
@@ -11,11 +11,23 @@ const Product_page1 = () => {
     const [variations, setVariations] = useState([]);
     const [images, setImages] = useState([]);
     const [activeInfo, setActiveInfo] = useState({});
+    const [isCart, setIsCart] = useState(false);
 
     const params = useParams();
+    const navigate = useNavigate()
 
     const userData = JSON.parse(localStorage.getItem("persist:user"))
     const userId = JSON.parse(userData.Reducer).user.user._id
+
+    useEffect(() => {
+        let isAddCart = false;
+        cart.map((ele) => {
+            if (ele.subVariation._id === activeInfo._id) {
+                isAddCart = true
+            }
+        })
+        setIsCart(isAddCart)
+    }, [activeInfo])
 
     const fetchData = async () => {
         const { data } = await axios.get(`http://localhost:8800/product/${params.id}`)
@@ -25,13 +37,21 @@ const Product_page1 = () => {
     }
 
     const createCart = async () => {
-        const cartData = await axios.post("http://localhost:8800/cart", {
+        const { data: resData } = await axios.post("http://localhost:8800/cart/", {
             variation_id: activeInfo.variation_id,
             user_id: userId,
-            subVariation: { ...activeInfo, image: images[0] },
-            cart_quantity: count
+            subVariation: { ...activeInfo, image: images[0], product_name: data.title },
+            cart_quantity: count,
         })
+        setCart([...cart, resData])
     }
+    console.log("cart", cart)
+
+    const handleGotoCart = () => {
+        navigate("/cart")
+    }
+
+
 
     const handleChangeColorSize = (data, color) => {
         const colorArray = [];
@@ -241,9 +261,14 @@ const Product_page1 = () => {
                                                 </div>
                                             </div>
                                             <div className="btn-wrap">
-                                                <button disabled={count === 0 || activeInfo.qty === 0} className="btn btn--add-to-cart js-trigger-addtocart js-prd-addtocart" data-product="{&quot;name&quot;:  &quot;Leather Pegged Pants &quot;,  &quot;url &quot;: &quot;product.html&quot;,  &quot;path &quot;: &quot;images/skins/fashion/product-page/product-01.webp&quot;,  &quot;aspect_ratio &quot;: &quot;0.78&quot;}">
-                                                    Add to cart
-                                                </button>
+                                                {isCart ?
+                                                    <button onClick={() => handleGotoCart()} className="btn btn--add-to-cart js-trigger-addtocart js-prd-addtocart" data-product="{&quot;name&quot;:  &quot;Leather Pegged Pants &quot;,  &quot;url &quot;: &quot;product.html&quot;,  &quot;path &quot;: &quot;images/skins/fashion/product-page/product-01.webp&quot;,  &quot;aspect_ratio &quot;: &quot;0.78&quot;}">
+                                                        Go to cart
+                                                    </button> :
+                                                    <button onClick={() => createCart()} disabled={count === 0 || activeInfo.qty === 0} className="btn btn--add-to-cart js-trigger-addtocart js-prd-addtocart" data-product="{&quot;name&quot;:  &quot;Leather Pegged Pants &quot;,  &quot;url &quot;: &quot;product.html&quot;,  &quot;path &quot;: &quot;images/skins/fashion/product-page/product-01.webp&quot;,  &quot;aspect_ratio &quot;: &quot;0.78&quot;}">
+                                                        Add to cart
+                                                    </button>
+                                                }
                                             </div>
                                             <div className="btn-wishlist-wrap">
                                                 <a href="#" className="btn-add-to-wishlist ml-auto btn-add-to-wishlist--add js-add-wishlist" title="Add To Wishlist"><i className="icon-heart-stroke" /></a>

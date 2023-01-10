@@ -44,6 +44,7 @@ function App() {
           <Route path=":category/:subcategory/:id" element={<Homepage Component={Product_page1} />} />
         </Route>
         <Route exact path="/cart" element={<Homepage Component={Cart} />} />
+        <Route exact path="/checkout" element={<Homepage Component={Cart} />} />
         <Route exact path="/login" element={<Login />} />
       </Routes>
     </>

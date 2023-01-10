@@ -33562,6 +33562,8 @@ body.has-round-btns .form-inline .form-control {
 
 .cart-table-prd-remove {
     font-size: 20px;
+    border: none;
+    background: #fff;
 }
 
 .cart-table-prd-remove [class*='icon'] {
@@ -35352,7 +35354,7 @@ p.countdown-box-text:not(:first-child) {
 .panel-group--style1 .panel-heading a {
     display: block;
 
-    padding: 17px 30px 17px 0;
+    padding: 17px 41px 17px 0;
 
     color: #282828;
 }

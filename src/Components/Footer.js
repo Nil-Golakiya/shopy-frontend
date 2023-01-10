@@ -1,7 +1,10 @@
+import axios from 'axios'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Footer = () => {
+
+
     return (
         <div>
             <footer className="page-footer footer-style-6 ">
