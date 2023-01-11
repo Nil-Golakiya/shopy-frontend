@@ -12,6 +12,7 @@ import Account_order from './Pages/Account_order';
 import Product_list from './Pages/Product_list';
 import Product_page1 from './Pages/Product_page1';
 import Cart from './Pages/Cart';
+import CheckOut from './Pages/CheckOut';
 let loaded = false;
 
 
@@ -44,7 +45,7 @@ function App() {
           <Route path=":category/:subcategory/:id" element={<Homepage Component={Product_page1} />} />
         </Route>
         <Route exact path="/cart" element={<Homepage Component={Cart} />} />
-        <Route exact path="/checkout" element={<Homepage Component={Cart} />} />
+        <Route exact path="/checkout" element={<Homepage Component={CheckOut} />} />
         <Route exact path="/login" element={<Login />} />
       </Routes>
     </>
