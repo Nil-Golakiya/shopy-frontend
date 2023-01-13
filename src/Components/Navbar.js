@@ -4,8 +4,23 @@ import { Link } from "react-router-dom"
 
 
 
-const Navbar = ({ data }) => {
+const Navbar = ({ data, cart }) => {
 
+    const [totalprice, setTotalPrice] = useState()
+
+    const CartTotal = () => {
+        let carttotal = 0;
+        cart?.map((ele) => {
+            carttotal += (ele.subVariation.price - (ele.subVariation.price / ele.subVariation.discount)) * ele.cart_quantity;
+        })
+        setTotalPrice(carttotal)
+    }
+
+    console.log("totalprice navbar", totalprice)
+
+    useEffect(() => {
+        CartTotal()
+    }, [cart])
 
     return (
         <>
@@ -51,8 +66,8 @@ const Navbar = ({ data }) => {
                                     <div className="dropdn dropdn_fullheight minicart">
                                         <a href="#" className="dropdn-link js-dropdn-link minicart-link only-icon" data-panel="#dropdnMinicart">
                                             <i className="icon-basket" />
-                                            <span className="minicart-qty">3</span>
-                                            <span className="minicart-total hide-mobile">$34.99</span>
+                                            <span className="minicart-qty">{cart.length}</span>
+                                            <span className="" style={{ fontWeight: "600", paddingLeft: "7px" }}>₹ {totalprice}</span>
                                         </a>
                                     </div>
                                 </div>
@@ -122,8 +137,8 @@ const Navbar = ({ data }) => {
                                         <div className="dropdn dropdn_fullheight minicart">
                                             <a href="#" className="dropdn-link js-dropdn-link minicart-link" data-panel="#dropdnMinicart">
                                                 <i className="icon-basket" />
-                                                <span className="minicart-qty">3</span>
-                                                <span className="minicart-total hide-mobile">$34.99</span>
+                                                <span className="minicart-qty">{cart.length}</span>
+                                                <span className="minicart-total hide-mobile">₹ {totalprice}</span>
                                             </a>
                                         </div>
                                     </div>

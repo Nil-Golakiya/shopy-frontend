@@ -7,6 +7,8 @@ const ProductCard = ({ item }) => {
     const [productImages, setProductImages] = useState([])
     const [displayImage, setDisplayImage] = useState(null)
     const [productPrice, setProductPrice] = useState(null)
+    const [wishlist, setWishlist] = useState([])
+
 
     useEffect(() => {
         if (item) {
@@ -33,6 +35,15 @@ const ProductCard = ({ item }) => {
         setProductPrice(data.price)
     }
 
+    const handleWishlist = (id) => {
+        const Array = wishlist;
+        Array.push(id);
+        console.log("wishlist", id)
+        setWishlist(Array)
+    }
+
+    console.log("wishlist", wishlist)
+
 
     return (
         <div className="prd prd--style2 prd-labels--max prd-labels-shadow ">
@@ -45,7 +56,8 @@ const ProductCard = ({ item }) => {
                         </div>
                     </Link>
                     <div className="prd-circle-labels">
-                        <a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
+                        <a href="#" onClick={() => handleWishlist(item._id)} className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a>
+                        <a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
                         <div className="colorswatch-label colorswatch-label--variants js-prd-colorswatch">
                             <i className="icon-palette"><span className="path1" /><span className="path2" /><span className="path3" /><span className="path4" /><span className="path5" /><span className="path6" /><span className="path7" /><span className="path8" /><span className="path9" /><span className="path10" /></i>
                             <ul>
@@ -94,7 +106,10 @@ const ProductCard = ({ item }) => {
                     </div>
                     <div className="prd-hovers">
                         <div className="prd-circle-labels">
-                            <div><a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a></div>
+                            <div>
+                                <a onClick={() => handleWishlist(item._id)} className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a>
+                                <a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
+                            </div>
                         </div>
                         <div className="prd-price">
                             <div className="price-new">{productPrice}</div>

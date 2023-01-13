@@ -10398,7 +10398,7 @@ body.boxed .dropdn.dropdn_fullheight .dropdn-content {
     display: block;
     overflow-y: auto;
 
-    width: 330px;
+    width: 485px;
     height: 100%;
     padding: 0 45px 35px;
 
@@ -10738,7 +10738,7 @@ body.boxed .dropdn.dropdn_fullheight .dropdn-content {
     font-weight: 600;
 
     position: relative;
-    top: -3px;
+    /* top: -3px; */
 }
 
 .hdr-topline .minicart-total {

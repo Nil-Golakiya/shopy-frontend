@@ -189,7 +189,7 @@ const Product_page = () => {
                                             <span>Tax included.</span>
                                         </p>
                                         <p>Collection: <span> <a href="collections.html" data-toggle="tooltip" data-placement="top" data-original-title="View all">Women</a></span></p>
-                                        <p>Sku: <span data-sku>FOXic-45812</span></p>
+                                        <p>Sku: <span data-sku>SHOPY-45812</span></p>
                                         <p>Vendor: <span>Banita</span></p>
                                         <p>Barcode: <span>314363563</span></p></div>
                                 </div>
@@ -328,7 +328,7 @@ const Product_page = () => {
                                         </div>
                                         <br />
                                         <h5>Our parcel courier service</h5>
-                                        <p>Foxic is proud to offer an exceptional international parcel shipping service. It is straightforward and very easy to organise international parcel shipping. Our customer service team works around the clock to make sure that you receive high quality courier service from start to finish.</p>
+                                        <p>SHOPY is proud to offer an exceptional international parcel shipping service. It is straightforward and very easy to organise international parcel shipping. Our customer service team works around the clock to make sure that you receive high quality courier service from start to finish.</p>
                                         <p>Sending a parcel with us is simple. To start the process you will first need to get a quote using our free online quotation service. From this, you’ll be able to navigate through the online form to book a collection date for your parcel, selecting a shipping day suitable for you.</p>
                                         <br />
                                         <h5>Shipping Time</h5>
@@ -571,7 +571,7 @@ const Product_page = () => {
                 <div className="prd-block_links-wrap prd-block_info_item container mt-2 mt-md-5 py-1">
                     <div className="prd-block_link"><span><i className="icon-call-center" />24/7 Support</span></div>
                     <div className="prd-block_link">
-                        <span>Use promocode  FOXIC to get 15% discount!</span></div>
+                        <span>Use promocode  SHOPY to get 15% discount!</span></div>
                     <div className="prd-block_link"><span><i className="icon-delivery-truck" /> Fast Shipping</span></div>
                 </div>
             </div>
@@ -674,7 +674,7 @@ const Product_page = () => {
                                             <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
                                         </div>
                                         <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                                        <div className="prd-tag"><a href="#">FOXic</a></div>
+                                        <div className="prd-tag"><a href="#">SHOPY</a></div>
                                         <h2 className="prd-title"><a href="product.html">Stand Collar Shirt</a></h2>
                                         <div className="prd-description">
                                             Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed lacinia.
@@ -730,7 +730,7 @@ const Product_page = () => {
                                             <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
                                         </div>
                                         <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                                        <div className="prd-tag"><a href="#">FOXic</a></div>
+                                        <div className="prd-tag"><a href="#">SHOPY</a></div>
                                         <h2 className="prd-title"><a href="product.html">Genuine Leather Strap Watch</a></h2>
                                         <div className="prd-description">
                                             Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed lacinia.
@@ -784,7 +784,7 @@ const Product_page = () => {
                                             <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
                                         </div>
                                         <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                                        <div className="prd-tag"><a href="#">FOXic</a></div>
+                                        <div className="prd-tag"><a href="#">SHOPY</a></div>
                                         <h2 className="prd-title"><a href="product.html">Pureboost Running Shoes</a></h2>
                                         <div className="prd-description">
                                             Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed lacinia.
@@ -838,7 +838,7 @@ const Product_page = () => {
                                             <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
                                         </div>
                                         <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                                        <div className="prd-tag"><a href="#">FOXic</a></div>
+                                        <div className="prd-tag"><a href="#">SHOPY</a></div>
                                         <h2 className="prd-title"><a href="product.html">Multiple Pocket Waist Pack</a></h2>
                                         <div className="prd-description">
                                             Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed lacinia.

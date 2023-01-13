@@ -95,11 +95,11 @@ const Footer = () => {
                                     </div>
                                     <div className="collapsed-content">
                                         <ul>
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="contact.html">Contact Us</a></li>
-                                            <li><a href="typography.html">Terms &amp; Conditions</a></li>
-                                            <li><a href="typography.html">Returns &amp; Exchanges</a></li>
-                                            <li><a href="typography.html">Shipping &amp; Delivery</a></li>
+                                            <li><Link to="/about">About Us</Link></li>
+                                            <li><Link to="/contact">Contact Us</Link></li>
+                                            <li><Link tp="/">Terms &amp; Conditions</Link></li>
+                                            <li><Link tp="/">Returns &amp; Exchanges</Link></li>
+                                            <li><Link tp="/">Shipping &amp; Delivery</Link></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -112,11 +112,11 @@ const Footer = () => {
                                     </div>
                                     <div className="collapsed-content">
                                         <ul>
-                                            <li><a href="account-details.html">My Account</a></li>
-                                            <li><a href="cart.html">View Cart</a></li>
-                                            <li><a href="account-wishlist.html">My Wishlist</a></li>
-                                            <li><a href="account-history.html">Order Status</a></li>
-                                            <li><a href="account-history.html">Track My Order</a></li>
+                                            <li><Link to="/">My Account</Link></li>
+                                            <li><Link to="/cart">View Cart</Link></li>
+                                            <li><Link to="wishlist">My Wishlist</Link></li>
+                                            <li><Link to="/">Order Status</Link></li>
+                                            <li><Link to="/">Track My Order</Link></li>
                                         </ul>
                                     </div>
                                 </div>

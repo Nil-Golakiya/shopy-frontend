@@ -45,7 +45,8 @@ const Cart = ({ cart, setCart }) => {
       })
       setCart(cartObject)
       const dataObj = cartObject.find(ele => ele._id === item._id)
-      console.log("dataObj",dataObj)
+      const data = axios.put(`http://localhost:8800/cart/${dataObj._id}`, dataObj)
+      console.log("dataObj", data)
     }
   }
 
@@ -220,7 +221,7 @@ const Cart = ({ cart, setCart }) => {
                                       <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
                                     </div>
                                     <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                                    <div className="prd-tag"><a href="#">FOXic</a></div>
+                                    <div className="prd-tag"><a href="#">SHOPY</a></div>
                                     <h2 className="prd-title"><a href="product.html">Stand Collar Shirt</a></h2>
                                     <div className="prd-description">
                                       Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed lacinia.
@@ -276,7 +277,7 @@ const Cart = ({ cart, setCart }) => {
                                       <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
                                     </div>
                                     <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                                    <div className="prd-tag"><a href="#">FOXic</a></div>
+                                    <div className="prd-tag"><a href="#">SHOPY</a></div>
                                     <h2 className="prd-title"><a href="product.html">Genuine Leather</a></h2>
                                     <div className="prd-description">
                                       Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed lacinia.
@@ -330,7 +331,7 @@ const Cart = ({ cart, setCart }) => {
                                       <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
                                     </div>
                                     <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                                    <div className="prd-tag"><a href="#">FOXic</a></div>
+                                    <div className="prd-tag"><a href="#">SHOPY</a></div>
                                     <h2 className="prd-title"><a href="product.html">Pureboost Shoes</a></h2>
                                     <div className="prd-description">
                                       Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed lacinia.
@@ -384,7 +385,7 @@ const Cart = ({ cart, setCart }) => {
                                       <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
                                     </div>
                                     <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                                    <div className="prd-tag"><a href="#">FOXic</a></div>
+                                    <div className="prd-tag"><a href="#">SHOPY</a></div>
                                     <h2 className="prd-title"><a href="product.html">Multiple Pocket</a></h2>
                                     <div className="prd-description">
                                       Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed lacinia.

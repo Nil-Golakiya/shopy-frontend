@@ -13,12 +13,32 @@ import Product_list from './Pages/Product_list';
 import Product_page1 from './Pages/Product_page1';
 import Cart from './Pages/Cart';
 import CheckOut from './Pages/CheckOut';
+import { useEffect } from 'react';
+import Contactus from './Pages/Contactus';
+import Aboutus from './Pages/Aboutus';
 let loaded = false;
 
 
 
 function App() {
 
+  useEffect(() => {
+    // const script = document.createElement("script");
+    // script.src = "/js/app.js";
+    // script.async = true;
+    // document.body.appendChild(script);
+
+    // return () => {
+    //   document.body.removeChild(script);
+    // }
+    // require("./asstes/js/vendor-special/lazysizes.min.js")
+    // require("./asstes/js/vendor-special/ls.bgset.min.js")
+    // require("./asstes/js/vendor-special/ls.aspectratio.min.js")
+    // require("./asstes/js/vendor-special/jquery.min.js")
+    // require("./asstes/js/vendor-special/jquery.ez-plus.js")
+    // require("./asstes/js/vendor/vendor.min.js")
+    // require("./asstes/js/app-html.js")
+  }, [])
 
   return (
     <>
@@ -46,6 +66,8 @@ function App() {
         </Route>
         <Route exact path="/cart" element={<Homepage Component={Cart} />} />
         <Route exact path="/checkout" element={<Homepage Component={CheckOut} />} />
+        <Route exact path="/contact" element={<Homepage Component={Contactus} />} />
+        <Route exact path="/about" element={<Homepage Component={Aboutus} />} />
         <Route exact path="/login" element={<Login />} />
       </Routes>
     </>

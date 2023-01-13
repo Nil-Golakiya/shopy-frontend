@@ -7,9 +7,10 @@ import Sidebar from '../Components/Sidebar'
 const Index = ({ Component }) => {
     const [data, setData] = useState()
     const [cart, setCart] = useState([])
+    const [wishlist, setWishlist] = useState([])
 
     const userData = JSON.parse(localStorage.getItem("persist:user"))
-    const userId = JSON.parse(userData.Reducer).user.user._id
+    const userId = JSON.parse(userData.Reducer)?.user?.user?._id
 
     const fetchData = async () => {
         const { data } = await axios.get("http://localhost:8800/category/Customercategory")
@@ -17,8 +18,11 @@ const Index = ({ Component }) => {
     }
 
     const CartData = async () => {
-        const { data } = await axios.get(`http://localhost:8800/cart/${userId}`)
-        setCart(data)
+        if (userId) {
+
+            const { data } = await axios.get(`http://localhost:8800/cart/${userId}`)
+            setCart(data)
+        }
     }
 
     useEffect(() => {
@@ -32,15 +36,17 @@ const Index = ({ Component }) => {
         document.body.appendChild(scriptTag);
     }, [])
 
+    console.log("wishlist in index", wishlist)
+
     return (
         <>
             <div className="">
                 <header className="hdr-wrap">
-                    <Navbar data={data} />
+                    <Navbar data={data} setCart={setCart} cart={cart} />
                 </header>
                 <div className="has-smround-btns has-loader-bg equal-height has-sm-container">
-                    <Sidebar data={data} />
-                    <Component setCart={setCart} cart={cart} />
+                    <Sidebar data={data} setCart={setCart} cart={cart} />
+                    <Component setCart={setCart} cart={cart} wishlist={wishlist} setWishlist={setWishlist} data={data} />
                 </div>
                 <Footer cart={cart} />
             </div>

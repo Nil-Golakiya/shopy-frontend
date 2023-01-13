@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ProductCard from '../Components/ProductCard'
 
-const Product_list = () => {
+const Product_list = ({ wishlist, setWishlist }) => {
 
     const [data, setData] = useState(null)
 
@@ -235,7 +235,7 @@ const Product_list = () => {
                                     <div className="prd-grid-wrap">
                                         <div className="prd-grid product-listing data-to-show-4 data-to-show-md-3 data-to-show-sm-2 js-category-grid" data-grid-tab-content>
                                             {data && data.map((item) => (
-                                                <ProductCard item={item}/>
+                                                <ProductCard item={item} setWishlist={setWishlist} wishlist={wishlist} />
                                             ))}
                                         </div>
                                         <div className="loader-horizontal-sm js-loader-horizontal-sm d-none" data-loader-horizontal style={{ opacity: 0 }}><span /></div>
@@ -359,7 +359,7 @@ const Product_list = () => {
                                                     <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
                                                 </div>
                                                 <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                                                <div className="prd-tag"><a href="#">FOXic</a></div>
+                                                <div className="prd-tag"><a href="#">SHOPY</a></div>
                                                 <h2 className="prd-title"><a href="product.html">Stand Collar Shirt</a></h2>
                                                 <div className="prd-description">
                                                     Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed lacinia.
@@ -415,7 +415,7 @@ const Product_list = () => {
                                                     <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
                                                 </div>
                                                 <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                                                <div className="prd-tag"><a href="#">FOXic</a></div>
+                                                <div className="prd-tag"><a href="#">SHOPY</a></div>
                                                 <h2 className="prd-title"><a href="product.html">Genuine Leather Strap Watch</a></h2>
                                                 <div className="prd-description">
                                                     Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed lacinia.
@@ -469,7 +469,7 @@ const Product_list = () => {
                                                     <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
                                                 </div>
                                                 <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                                                <div className="prd-tag"><a href="#">FOXic</a></div>
+                                                <div className="prd-tag"><a href="#">SHOPY</a></div>
                                                 <h2 className="prd-title"><a href="product.html">Pureboost Running Shoes</a></h2>
                                                 <div className="prd-description">
                                                     Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed lacinia.
@@ -523,7 +523,7 @@ const Product_list = () => {
                                                     <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
                                                 </div>
                                                 <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                                                <div className="prd-tag"><a href="#">FOXic</a></div>
+                                                <div className="prd-tag"><a href="#">SHOPY</a></div>
                                                 <h2 className="prd-title"><a href="product.html">Multiple Pocket Waist Pack</a></h2>
                                                 <div className="prd-description">
                                                     Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed lacinia.

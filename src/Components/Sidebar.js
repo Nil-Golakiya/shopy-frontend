@@ -1,18 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom"
 import { toast } from 'react-toastify';
 import "../asstes/sidebar.css"
 
-const Sidebar = ({ data }) => {
+const Sidebar = ({ data, setCart, cart }) => {
+
+    const [totalprice, setTotalPrice] = useState()
 
     const navigate = useNavigate()
     const user = localStorage.getItem("myuser");
 
     const handleLogout = async () => {
-        localStorage.removeItem("myuser");
+        localStorage.clear();
         navigate("/login")
         toast.error("Your are successfully logout..!")
     }
+
+    const CartTotal = () => {
+        let carttotal = 0;
+        cart?.map((ele) => {
+            carttotal += (ele.subVariation.price - (ele.subVariation.price / ele.subVariation.discount)) * ele.cart_quantity;
+        })
+        setTotalPrice(carttotal)
+    }
+
+    useEffect(() => {
+        CartTotal()
+    }, [cart])
+
+    console.log("sidebarcart", cart);
+    console.log("data mobie", data);
 
     return (
         <div className="header-side-panel">
@@ -29,7 +46,7 @@ const Sidebar = ({ data }) => {
                             </div>
                             <ul className="nav nav-level-1">
                                 {
-                                    data && data.map((cat) => {
+                                    data?.map((cat) => {
                                         return (
                                             <li key={cat._id}><Link to={`/products/${cat.name}`}>{cat.name}<span
                                                 className="arrow"><i className="icon-angle-right"></i></span></Link>
@@ -74,46 +91,29 @@ const Sidebar = ({ data }) => {
                 <div className="dropdn-content-block">
                     <div className="dropdn-close"><span className="js-dropdn-close">Close</span></div>
                     <div className="minicart-drop-content js-dropdn-content-scroll">
-                        <div className="minicart-prd row">
-                            <div className="minicart-prd-image image-hover-scale-circle col">
-                                <a href="product.html"><img className="lazyload fade-up"
-                                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                    data-src="images/skins/fashion/products/product-01-1.webp" alt="" /></a>
-                            </div>
-                            <div className="minicart-prd-info col">
-                                <div className="minicart-prd-tag">Shopy</div>
-                                <h2 className="minicart-prd-name"><a href="#">Leather Pegged Pants</a></h2>
-                                <div className="minicart-prd-qty"><span className="minicart-prd-qty-label">Quantity:</span><span
-                                    className="minicart-prd-qty-value">1</span></div>
-                                <div className="minicart-prd-price prd-price">
-                                    <div className="price-old">$200.00</div>
-                                    <div className="price-new">$180.00</div>
+                        {
+                            cart.map((ele) => (
+                                <div className="minicart-prd row">
+                                    <div className="minicart-prd-image image-hover-scale-circle col">
+                                        <a href="product.html"><img className="lazyload fade-up"
+                                            src={ele.subVariation.image} alt="" style={{ height: "100px", objectFit: "contain" }}/></a>
+                                    </div>
+                                    <div className="minicart-prd-info col">
+                                        <div className="minicart-prd-tag">Shopy</div>
+                                        <h2 className="minicart-prd-name"><a href="#">{ele.subVariation.product_name}</a></h2>
+                                        <div className="minicart-prd-qty"><span className="minicart-prd-qty-label">Quantity:</span><span
+                                            className="minicart-prd-qty-value">{ele.cart_quantity}</span></div>
+                                        <div className="minicart-prd-price prd-price">
+                                            <div className="price-old">₹ {ele.subVariation.price}</div>
+                                            <div className="price-new">₹ {ele.subVariation.price - ele.subVariation.price / ele.subVariation.discount}</div>
+                                        </div>
+                                    </div>
+                                    <div className="minicart-prd-action">
+                                        <a href="#" className="js-product-remove" data-line-number="1"><i className="icon-recycle"></i></a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="minicart-prd-action">
-                                <a href="#" className="js-product-remove" data-line-number="1"><i className="icon-recycle"></i></a>
-                            </div>
-                        </div>
-                        <div className="minicart-prd row">
-                            <div className="minicart-prd-image image-hover-scale-circle col">
-                                <a href="product.html"><img className="lazyload fade-up"
-                                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                    data-src="images/skins/fashion/products/product-16-1.webp" alt="" /></a>
-                            </div>
-                            <div className="minicart-prd-info col">
-                                <div className="minicart-prd-tag">Shopy</div>
-                                <h2 className="minicart-prd-name"><a href="#">Cascade Casual Shirt</a></h2>
-                                <div className="minicart-prd-qty"><span className="minicart-prd-qty-label">Quantity:</span><span
-                                    className="minicart-prd-qty-value">1</span></div>
-                                <div className="minicart-prd-price prd-price">
-                                    <div className="price-old">$200.00</div>
-                                    <div className="price-new">$180.00</div>
-                                </div>
-                            </div>
-                            <div className="minicart-prd-action">
-                                <a href="#" className="js-product-remove" data-line-number="2"><i className="icon-recycle"></i></a>
-                            </div>
-                        </div>
+                            ))
+                        }
                         <div className="minicart-empty js-minicart-empty d-none">
                             <div className="minicart-empty-text">Your cart is empty</div>
                             <div className="minicart-empty-icon">
@@ -125,33 +125,13 @@ const Sidebar = ({ data }) => {
 							</svg> */}
                             </div>
                         </div>
-                        <a href="#" className="minicart-drop-countdown mt-3">
-                            <div className="countdown-box-full">
-                                <div className="row no-gutters align-items-center">
-                                    <div className="col-auto"><i className="icon-gift icon--giftAnimate"></i></div>
-                                    <div className="col">
-                                        <div className="countdown-txt">WHEN BUYING TWO
-                                            THINGS A THIRD AS A GIFT
-                                        </div>
-                                        <div className="countdown js-countdown" data-countdown="2021/07/01"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <div className="minicart-drop-info d-none d-md-block">
-                            <div className="shop-feature-single row no-gutters align-items-center">
-                                <div className="shop-feature-icon col-auto"><i className="icon-truck"></i></div>
-                                <div className="shop-feature-text col"><b>SHIPPING!</b> Continue shopping to add more products
-                                    and receive free shipping</div>
-                            </div>
-                        </div>
                     </div>
                     <div className="minicart-drop-fixed js-hide-empty">
                         <div className="loader-horizontal-sm js-loader-horizontal-sm" data-loader-horizontal=""><span></span>
                         </div>
                         <div className="minicart-drop-total js-minicart-drop-total row no-gutters align-items-center">
                             <div className="minicart-drop-total-txt col-auto heading-font">Subtotal</div>
-                            <div className="minicart-drop-total-price col" data-header-cart-total="">$340</div>
+                            <div className="minicart-drop-total-price col" data-header-cart-total="">₹ {totalprice}</div>
                         </div>
                         <div className="minicart-drop-actions">
                             <a href="cart.html" className="btn btn--md btn--grey"><i className="icon-basket"></i><span>Cart

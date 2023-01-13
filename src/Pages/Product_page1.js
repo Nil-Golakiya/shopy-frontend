@@ -29,6 +29,13 @@ const Product_page1 = ({ setCart, cart }) => {
         setIsCart(isAddCart)
     }, [activeInfo])
 
+    useEffect(() => {
+        console.log("vghbuvfkgj")
+        const scriptTag = document.createElement('script')
+        scriptTag.src = "/js/app-html.js"
+        document.body.appendChild(scriptTag);
+    }, [])
+
     const fetchData = async () => {
         const { data } = await axios.get(`http://localhost:8800/product/${params.id}`)
         const productData = data.data[0]
@@ -97,7 +104,7 @@ const Product_page1 = ({ setCart, cart }) => {
                 <div className="container">
                     <ul className="breadcrumbs">
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="category.html">Women</a></li>
+                        <li><a href="category.html">{params.category}</a></li>
                         <li><span>{data && data.title}</span></li>
                     </ul>
                 </div>
@@ -293,7 +300,7 @@ const Product_page1 = ({ setCart, cart }) => {
                                         </div>
                                         <br />
                                         <h5>Our parcel courier service</h5>
-                                        <p>Foxic is proud to offer an exceptional international parcel shipping service. It is straightforward and very easy to organise international parcel shipping. Our customer service team works around the clock to make sure that you receive high quality courier service from start to finish.</p>
+                                        <p>SHOPY is proud to offer an exceptional international parcel shipping service. It is straightforward and very easy to organise international parcel shipping. Our customer service team works around the clock to make sure that you receive high quality courier service from start to finish.</p>
                                         <p>Sending a parcel with us is simple. To start the process you will first need to get a quote using our free online quotation service. From this, you’ll be able to navigate through the online form to book a collection date for your parcel, selecting a shipping day suitable for you.</p>
                                         <br />
                                         <h5>Shipping Time</h5>
@@ -534,7 +541,7 @@ const Product_page1 = ({ setCart, cart }) => {
                                             <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
                                         </div>
                                         <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                                        <div className="prd-tag"><a href="#">FOXic</a></div>
+                                        <div className="prd-tag"><a href="#">SHOPY</a></div>
                                         <h2 className="prd-title"><a href="product.html">Stand Collar Shirt</a></h2>
                                         <div className="prd-description">
                                             Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed lacinia.
@@ -590,7 +597,7 @@ const Product_page1 = ({ setCart, cart }) => {
                                             <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
                                         </div>
                                         <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                                        <div className="prd-tag"><a href="#">FOXic</a></div>
+                                        <div className="prd-tag"><a href="#">SHOPY</a></div>
                                         <h2 className="prd-title"><a href="product.html">Genuine Leather Strap Watch</a></h2>
                                         <div className="prd-description">
                                             Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed lacinia.
@@ -644,7 +651,7 @@ const Product_page1 = ({ setCart, cart }) => {
                                             <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
                                         </div>
                                         <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                                        <div className="prd-tag"><a href="#">FOXic</a></div>
+                                        <div className="prd-tag"><a href="#">SHOPY</a></div>
                                         <h2 className="prd-title"><a href="product.html">Pureboost Running Shoes</a></h2>
                                         <div className="prd-description">
                                             Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed lacinia.
@@ -698,7 +705,7 @@ const Product_page1 = ({ setCart, cart }) => {
                                             <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
                                         </div>
                                         <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                                        <div className="prd-tag"><a href="#">FOXic</a></div>
+                                        <div className="prd-tag"><a href="#">SHOPY</a></div>
                                         <h2 className="prd-title"><a href="product.html">Multiple Pocket Waist Pack</a></h2>
                                         <div className="prd-description">
                                             Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed lacinia.

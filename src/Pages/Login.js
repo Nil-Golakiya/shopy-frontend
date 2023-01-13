@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import "../asstes/login.css"
+import React, { useEffect, useState } from 'react'
 import signup from "../Image/signup.svg"
 import signin from "../Image/login.svg"
 import { useForm } from 'react-hook-form';
@@ -31,6 +30,10 @@ const Login = () => {
         email: yup.string().email().required(),
         password: yup.string().required()
     })
+
+    useEffect(() => {
+        require("../asstes/login.css")
+    }, [])
 
     const {
         register,
@@ -103,7 +106,7 @@ const Login = () => {
             <div className="forms-container">
                 <div className="signin-signup">
 
-                    <form className="sign-in-form" onSubmit={handleSubmit(signinsubmithandler)}>
+                    <form className="sign-in-form loginform" onSubmit={handleSubmit(signinsubmithandler)}>
                         <h2 className="title">Sign in</h2>
                         <div className="input-field">
                             <i className="fas fa-user"></i>

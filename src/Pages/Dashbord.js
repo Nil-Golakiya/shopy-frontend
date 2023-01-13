@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
+import { Link } from "react-router-dom"
 
-const Dashbord = () => {
+const Dashbord = ({ data }) => {
 
   useEffect(() => {
     console.log("vghbuvfkgj")
@@ -8,6 +9,8 @@ const Dashbord = () => {
     scriptTag.src = "/js/app-html.js"
     document.body.appendChild(scriptTag);
   }, [])
+
+  console.log("data Dashboard", data)
 
   return (
     <div className="page-content">
@@ -27,9 +30,9 @@ const Dashbord = () => {
                         <div className="bnslider-text order-2 mt-sm bnslider-text--xs text-center data-ini" data-animation="fadeInUp" data-animation-delay={1000} data-fontcolor="#7c7c7c" data-fontweight={400} data-fontline="1.5">
                           eCommerce HTML Template</div>
                         <div className="btn-wrap text-center  order-4 mt-md" data-animation="fadeIn" data-animation-delay={2000} style={{ opacity: 1 }}>
-                          <a href="https://bit.ly/3eJX5XE" target="_blank" className="btn">
+                          <Link to="/products/Woman" className="btn">
                             Shop now
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -48,9 +51,9 @@ const Dashbord = () => {
                         <div className="bnslider-text order-2 mt-sm bnslider-text--xs text-center data-ini" data-animation="fadeInUp" data-animation-delay={1000} data-fontcolor="#7c7c7c" data-fontweight={400} data-fontline="1.5">
                           eCommerce HTML Template</div>
                         <div className="btn-wrap text-center  order-4 mt-md" data-animation="fadeIn" data-animation-delay={2000} style={{ opacity: 1 }}>
-                          <a href="https://bit.ly/3eJX5XE" target="_blank" className="btn">
+                          <Link to="/products/Man" className="btn">
                             Shop now
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -74,9 +77,9 @@ const Dashbord = () => {
                         <div className="bnslider-text order-1 mt-sm bnslider-text--md text-center data-ini" data-animation="fadeInUp" data-animation-delay={800} data-fontcolor="#282828" data-fontweight={700} data-fontline="1.5">Live
                           life in Comfort</div>
                         <div className="btn-wrap text-center  order-4 mt-md" data-animation="fadeIn" data-animation-delay={2000} style={{ opacity: 1 }}>
-                          <a href="#" target="_self" className="btn">
+                          <Link to="/products/Electronic" className="btn">
                             Shop now
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -94,29 +97,87 @@ const Dashbord = () => {
       <div className="holder holder-mt-xsmall">
         <div className="container">
           <div className="row vert-margin-small">
-            <div className="col-sm">
+            {/* <div className="col-sm">
               <a href="category.html" className="collection-grid-3-item image-hover-scale">
                 <div className="collection-grid-3-item-img image-container" style={{ paddingBottom: '93.68%' }}>
                   <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/banner-fashion-2-02.webp" className="lazyload fade-up" alt="Banner" />
                   <div className="foxic-loader" />
                 </div>
                 <div className="collection-grid-3-caption-bg">
-                  <h3 className="collection-grid-3-title">Accessories</h3>
+                  <h3 className="collection-grid-3-title">Fashion</h3>
                   <h4 className="collection-grid-3-subtitle">The&nbsp;Best&nbsp;Look&nbsp;Anywhere</h4>
                 </div>
               </a>
-            </div>
-            <div className="col-sm">
-              <a href="category.html" className="collection-grid-3-item image-hover-scale">
-                <div className="collection-grid-3-item-img image-container" style={{ paddingBottom: '93.68%' }}>
-                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/banner-fashion-2-04.webp" className="lazyload fade-up" alt="Banner" />
-                  <div className="foxic-loader" />
+            </div> */}
+            <div className="holder">
+              <div className="container">
+                <div className="title-wrap text-center">
+                  <h2 className="h1-style">You may also like</h2>
+                  <div className="carousel-arrows carousel-arrows--center" />
                 </div>
-                <div className="collection-grid-3-caption-bg">
-                  <h3 className="collection-grid-3-title">Fashion</h3>
-                  <h4 className="collection-grid-3-subtitle">Live&nbsp;According&nbsp;to&nbsp;Fashion</h4>
+                <div className="prd-grid prd-carousel js-prd-carousel slick-arrows-aside-simple slick-arrows-mobile-lg data-to-show-4 data-to-show-md-3 data-to-show-sm-3 data-to-show-xs-2" data-slick="{&quot;slidesToShow&quot;: 4, &quot;slidesToScroll&quot;: 2, &quot;responsive&quot;: [{&quot;breakpoint&quot;: 992,&quot;settings&quot;: {&quot;slidesToShow&quot;: 3, &quot;slidesToScroll&quot;: 1}},{&quot;breakpoint&quot;: 768,&quot;settings&quot;: {&quot;slidesToShow&quot;: 2, &quot;slidesToScroll&quot;: 1}},{&quot;breakpoint&quot;: 480,&quot;settings&quot;: {&quot;slidesToShow&quot;: 2, &quot;slidesToScroll&quot;: 1}}]}">
+                  <div className="col-sm">
+                    <a href="category.html" className="collection-grid-3-item image-hover-scale">
+                      <div className="collection-grid-3-item-img image-container" style={{ paddingBottom: '93.68%' }}>
+                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/banner-fashion-2-02.webp" className="lazyload fade-up" alt="Banner" />
+                        <div className="foxic-loader" />
+                      </div>
+                      <div className="collection-grid-3-caption-bg" style={{ borderRadius: "50%" }}>
+                        <h3 className="collection-grid-3-title">Fashion</h3>
+                        <h4 className="collection-grid-3-subtitle">The&nbsp;Best&nbsp;Look&nbsp;Anywhere</h4>
+                      </div>
+                    </a>
+                  </div>
+                  <div className="col-sm">
+                    <a href="category.html" className="collection-grid-3-item image-hover-scale">
+                      <div className="collection-grid-3-item-img image-container" style={{ paddingBottom: '93.68%' }}>
+                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/banner-fashion-2-02.webp" className="lazyload fade-up" alt="Banner" />
+                        <div className="foxic-loader" />
+                      </div>
+                      <div className="collection-grid-3-caption-bg">
+                        <h3 className="collection-grid-3-title">Fashion</h3>
+                        <h4 className="collection-grid-3-subtitle">The&nbsp;Best&nbsp;Look&nbsp;Anywhere</h4>
+                      </div>
+                    </a>
+                  </div>
+                  <div className="col-sm">
+                    <a href="category.html" className="collection-grid-3-item image-hover-scale">
+                      <div className="collection-grid-3-item-img image-container" style={{ paddingBottom: '93.68%' }}>
+                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/banner-fashion-2-02.webp" className="lazyload fade-up" alt="Banner" />
+                        <div className="foxic-loader" />
+                      </div>
+                      <div className="collection-grid-3-caption-bg">
+                        <h3 className="collection-grid-3-title">Fashion</h3>
+                        <h4 className="collection-grid-3-subtitle">The&nbsp;Best&nbsp;Look&nbsp;Anywhere</h4>
+                      </div>
+                    </a>
+                  </div>
+                  <div className="col-sm">
+                    <a href="category.html" className="collection-grid-3-item image-hover-scale">
+                      <div className="collection-grid-3-item-img image-container" style={{ paddingBottom: '93.68%' }}>
+                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/banner-fashion-2-02.webp" className="lazyload fade-up" alt="Banner" />
+                        <div className="foxic-loader" />
+                      </div>
+                      <div className="collection-grid-3-caption-bg">
+                        <h3 className="collection-grid-3-title">Fashion</h3>
+                        <h4 className="collection-grid-3-subtitle">The&nbsp;Best&nbsp;Look&nbsp;Anywhere</h4>
+                      </div>
+                    </a>
+                  </div>
+                  <div className="col-sm">
+                    <a href="category.html" className="collection-grid-3-item image-hover-scale">
+                      <div className="collection-grid-3-item-img image-container" style={{ paddingBottom: '93.68%' }}>
+                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/banner-fashion-2-02.webp" className="lazyload fade-up" alt="Banner" />
+                        <div className="foxic-loader" />
+                      </div>
+                      <div className="collection-grid-3-caption-bg">
+                        <h3 className="collection-grid-3-title">Fashion</h3>
+                        <h4 className="collection-grid-3-subtitle">The&nbsp;Best&nbsp;Look&nbsp;Anywhere</h4>
+                      </div>
+                    </a>
+                  </div>
                 </div>
-              </a>
+              </div>
             </div>
           </div>
         </div>
@@ -127,15 +188,13 @@ const Dashbord = () => {
             <h2 className="h1-style">Collections</h2>
             <div className="title-wrap title-tabs-wrap text-center js-title-tabs">
               <div className="title-tabs">
-                <h2 className="h3-style">
-                  <a href="ajax/ajax-product-tab-01.json" data-total={8} data-loaded={4} data-grid-tab-title><span className="title-tabs-text theme-font">Women</span></a>
-                </h2>
-                <h2 className="h3-style">
-                  <a href="ajax/ajax-product-tab-02.json" data-total={8} data-loaded={4} data-grid-tab-title><span className="title-tabs-text theme-font">Men</span></a>
-                </h2>
-                <h2 className="h3-style">
-                  <a href="ajax/ajax-product-tab-03.json" data-total={8} data-loaded={4} data-grid-tab-title><span className="title-tabs-text theme-font">Accessories</span></a>
-                </h2>
+                {
+                  data && data.map((ele) => (
+                    <h2 className="h3-style">
+                      <Link to={`/products/${ele.name}`} data-total={8} data-loaded={4} data-grid-tab-title><span className="title-tabs-text theme-font">{ele.name}</span></Link>
+                    </h2>
+                  ))
+                }
               </div>
             </div>
           </div>
@@ -187,7 +246,7 @@ const Dashbord = () => {
       <div className="holder">
         <div className="container">
           <div className="title-wrap text-center">
-            <h2 className="h1-style">New arrival</h2>
+            <h2 className="h1-style">Trending product</h2>
             <div className="h-sub maxW-825">Hurry up! Limited</div>
           </div>
           <div className="prd-grid-wrap position-relative">

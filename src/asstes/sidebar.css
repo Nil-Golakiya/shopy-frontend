@@ -7,6 +7,7 @@
 .sidebar_ul i {
     width: 30px !important;
     font-size: 18px !important;
+    padding-right: 13px;
 }
 
 .closebtn:hover {
