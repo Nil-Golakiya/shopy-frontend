@@ -1,16 +1,45 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
+import axios from 'axios'
+import ProductCard from '../Components/ProductCard'
+
 
 const Dashbord = ({ data }) => {
 
+  const [trandingData, setTrandingData] = useState()
+  const [featuredData, setFeaturedData] = useState()
+  // const [wishlist, setWishlist] = useState([])
+
+
+
+  const TrandingProduct = async () => {
+    const { data } = await axios.get("http://localhost:8800/product?type=tranding")
+    const TrandingProductData = data.data;
+    setTrandingData(TrandingProductData)
+  }
+
+  const FeaturedProduct = async () => {
+    const { data } = await axios.get("http://localhost:8800/product?type=featured")
+    const FeaturedProductData = data.data;
+    setFeaturedData(FeaturedProductData)
+  }
+
   useEffect(() => {
-    console.log("vghbuvfkgj")
-    const scriptTag = document.createElement('script')
-    scriptTag.src = "/js/app-html.js"
-    document.body.appendChild(scriptTag);
+    TrandingProduct()
+    FeaturedProduct()
   }, [])
 
+  useEffect(() => {
+    // console.log("vghbuvfkgj")
+    // const scriptTag = document.createElement('script')
+    // scriptTag.src = "/js/app-html.js"
+    // document.body.appendChild(scriptTag);
+  }, [])
+
+
+
   console.log("data Dashboard", data)
+  console.log("featuredData", featuredData)
 
   return (
     <div className="page-content">
@@ -251,593 +280,24 @@ const Dashbord = ({ data }) => {
           </div>
           <div className="prd-grid-wrap position-relative">
             <div className="prd-grid data-to-show-4 data-to-show-lg-4 data-to-show-md-3 data-to-show-sm-2 data-to-show-xs-2 js-category-grid" data-grid-tab-content>
-              <div className="prd prd--style2 prd-labels--max prd-labels-shadow ">
-                <div className="prd-inside">
-                  <div className="prd-img-area">
-                    <a href="product.html" className="prd-img image-hover-scale image-container">
-                      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-03-1.webp" alt="Oversized Cotton Blouse" className="js-prd-img lazyload fade-up" />
-                      <div className="foxic-loader" />
-                      <div className="prd-big-squared-labels">
-                        <div className="label-new"><span>New</span></div>
-                        <div className="label-sale"><span>-10% <span className="sale-text">Sale</span></span>
-                          <div className="countdown-circle">
-                            <div className="countdown js-countdown" data-countdown="2021/07/01">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                    <div className="prd-circle-labels">
-                      <a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
-                      <a href="#" className="circle-label-qview js-prd-quickview prd-hide-mobile" data-src="ajax/ajax-quickview.html"><i className="icon-eye" /><span>QUICK
-                        VIEW</span></a>
-                    </div>
-                    <ul className="list-options color-swatch">
-                      <li data-image="images/skins/fashion/products/product-03-1.webp" className="active">
-                        <a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-03-1.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                      <li data-image="images/skins/fashion/products/product-03-2.webp"><a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-03-2.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                      <li data-image="images/skins/fashion/products/product-03-3.webp"><a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-03-3.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                    </ul>
-                  </div>
-                  <div className="prd-info">
-                    <div className="prd-info-wrap">
-                      <div className="prd-info-top">
-                        <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" />
-                        </div>
-                      </div>
-                      <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                      <div className="prd-tag"><a href="#">Banita</a></div>
-                      <h2 className="prd-title"><a href="product.html">Oversized Cotton Blouse</a></h2>
-                      <div className="prd-description">
-                        Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora
-                        torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed
-                        lacinia.
-                      </div>
-                      <div className="prd-action">
-                        <form action="#">
-                          <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Oversized Cotton Blouse&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-03-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add
-                            To Cart</button>
-                        </form>
-                      </div>
-                    </div>
-                    <div className="prd-hovers">
-                      <div className="prd-circle-labels">
-                        <div><a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
-                        </div>
-                        <div className="prd-hide-mobile"><a href="#" className="circle-label-qview js-prd-quickview" data-src="ajax/ajax-quickview.html"><i className="icon-eye" /><span>QUICK VIEW</span></a></div>
-                      </div>
-                      <div className="prd-price">
-                        <div className="price-old">$ 200</div>
-                        <div className="price-new">$ 180</div>
-                      </div>
-                      <div className="prd-action">
-                        <div className="prd-action-left">
-                          <form action="#">
-                            <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Oversized Cotton Blouse&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-03-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add
-                              To Cart</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="prd prd--style2 prd-labels--max prd-labels-shadow ">
-                <div className="prd-inside">
-                  <div className="prd-img-area">
-                    <a href="product.html" className="prd-img image-hover-scale image-container">
-                      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-06-1.webp" alt="Midi Dress with Belt" className="js-prd-img lazyload fade-up" />
-                      <div className="foxic-loader" />
-                      <div className="prd-big-squared-labels">
-                      </div>
-                    </a>
-                    <div className="prd-circle-labels">
-                      <a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
-                      <a href="#" className="circle-label-qview js-prd-quickview prd-hide-mobile" data-src="ajax/ajax-quickview.html"><i className="icon-eye" /><span>QUICK
-                        VIEW</span></a>
-                      <div className="colorswatch-label colorswatch-label--variants js-prd-colorswatch">
-                        <i className="icon-palette"><span className="path1" /><span className="path2" /><span className="path3" /><span className="path4" /><span className="path5" /><span className="path6" /><span className="path7" /><span className="path8" /><span className="path9" /><span className="path10" /></i>
-                        <ul>
-                          <li data-image="images/skins/fashion/products/product-06-1.webp"><a className="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-grey.html" alt="" /></a></li>
-                          <li data-image="images/skins/fashion/products/product-06-color-2.webp">
-                            <a className="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-green.html" alt="" /></a></li>
-                          <li data-image="images/skins/fashion/products/product-06-color-3.webp">
-                            <a className="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-black.html" alt="" /></a></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <ul className="list-options color-swatch">
-                      <li data-image="images/skins/fashion/products/product-06-1.webp" className="active">
-                        <a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-06-1.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                      <li data-image="images/skins/fashion/products/product-06-2.webp"><a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-06-2.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                      <li data-image="images/skins/fashion/products/product-06-3.webp"><a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-06-3.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                    </ul>
-                  </div>
-                  <div className="prd-info">
-                    <div className="prd-info-wrap">
-                      <div className="prd-info-top">
-                        <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" />
-                        </div>
-                      </div>
-                      <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                      <div className="prd-tag"><a href="#">Seiko</a></div>
-                      <h2 className="prd-title"><a href="product.html">Midi Dress with Belt</a></h2>
-                      <div className="prd-description">
-                        Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora
-                        torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed
-                        lacinia.
-                      </div>
-                      <div className="prd-action">
-                        <form action="#">
-                          <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Midi Dress with Belt&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-06-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add
-                            To Cart</button>
-                        </form>
-                      </div>
-                    </div>
-                    <div className="prd-hovers">
-                      <div className="prd-circle-labels">
-                        <div><a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
-                        </div>
-                        <div className="prd-hide-mobile"><a href="#" className="circle-label-qview js-prd-quickview" data-src="ajax/ajax-quickview.html"><i className="icon-eye" /><span>QUICK VIEW</span></a></div>
-                      </div>
-                      <div className="prd-price">
-                        <div className="price-new">$ 180</div>
-                      </div>
-                      <div className="prd-action">
-                        <div className="prd-action-left">
-                          <form action="#">
-                            <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Midi Dress with Belt&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-06-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add
-                              To Cart</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="prd prd--style2 prd-labels--max prd-labels-shadow ">
-                <div className="prd-inside">
-                  <div className="prd-img-area">
-                    <a href="product.html" className="prd-img image-hover-scale image-container">
-                      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-10-1.webp" alt="Short Sleeve Blouse" className="js-prd-img lazyload fade-up" />
-                      <div className="foxic-loader" />
-                      <div className="prd-big-squared-labels">
-                        <div className="label-sale"><span>-10% <span className="sale-text">Sale</span></span>
-                          <div className="countdown-circle">
-                            <div className="countdown js-countdown" data-countdown="2021/07/01">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                    <div className="prd-circle-labels">
-                      <a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
-                      <a href="#" className="circle-label-qview js-prd-quickview prd-hide-mobile" data-src="ajax/ajax-quickview.html"><i className="icon-eye" /><span>QUICK
-                        VIEW</span></a>
-                    </div>
-                    <ul className="list-options color-swatch">
-                      <li data-image="images/skins/fashion/products/product-10-1.webp" className="active">
-                        <a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-10-1.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                      <li data-image="images/skins/fashion/products/product-10-2.webp"><a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-10-2.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                      <li data-image="images/skins/fashion/products/product-10-3.webp"><a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-10-3.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                    </ul>
-                  </div>
-                  <div className="prd-info">
-                    <div className="prd-info-wrap">
-                      <div className="prd-info-top">
-                        <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" />
-                        </div>
-                      </div>
-                      <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                      <div className="prd-tag"><a href="#">Shopy</a></div>
-                      <h2 className="prd-title"><a href="product.html">Short Sleeve Blouse</a></h2>
-                      <div className="prd-description">
-                        Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora
-                        torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed
-                        lacinia.
-                      </div>
-                      <div className="prd-action">
-                        <form action="#">
-                          <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Short Sleeve Blouse&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-10-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add
-                            To Cart</button>
-                        </form>
-                      </div>
-                    </div>
-                    <div className="prd-hovers">
-                      <div className="prd-circle-labels">
-                        <div><a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
-                        </div>
-                        <div className="prd-hide-mobile"><a href="#" className="circle-label-qview js-prd-quickview" data-src="ajax/ajax-quickview.html"><i className="icon-eye" /><span>QUICK VIEW</span></a></div>
-                      </div>
-                      <div className="prd-price">
-                        <div className="price-old">$ 200</div>
-                        <div className="price-new">$ 180</div>
-                      </div>
-                      <div className="prd-action">
-                        <div className="prd-action-left">
-                          <form action="#">
-                            <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Short Sleeve Blouse&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-10-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add
-                              To Cart</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="prd prd--style2 prd-labels--max prd-labels-shadow ">
-                <div className="prd-inside">
-                  <div className="prd-img-area">
-                    <a href="product.html" className="prd-img image-hover-scale image-container">
-                      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-13-1.webp" alt="Peg Cropped Cuffed Pants" className="js-prd-img lazyload fade-up" />
-                      <div className="foxic-loader" />
-                      <div className="prd-big-squared-labels">
-                        <div className="label-new"><span>New</span></div>
-                      </div>
-                    </a>
-                    <div className="prd-circle-labels">
-                      <a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
-                      <a href="#" className="circle-label-qview js-prd-quickview prd-hide-mobile" data-src="ajax/ajax-quickview.html"><i className="icon-eye" /><span>QUICK
-                        VIEW</span></a>
-                    </div>
-                    <ul className="list-options color-swatch">
-                      <li data-image="images/skins/fashion/products/product-13-1.webp" className="active">
-                        <a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-13-1.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                      <li data-image="images/skins/fashion/products/product-13-2.webp"><a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-13-2.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                      <li data-image="images/skins/fashion/products/product-13-3.webp"><a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-13-3.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                    </ul>
-                  </div>
-                  <div className="prd-info">
-                    <div className="prd-info-wrap">
-                      <div className="prd-info-top">
-                        <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" />
-                        </div>
-                      </div>
-                      <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                      <div className="prd-tag"><a href="#">Shopy</a></div>
-                      <h2 className="prd-title"><a href="product.html">Peg Cropped Cuffed Pants</a></h2>
-                      <div className="prd-description">
-                        Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora
-                        torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed
-                        lacinia.
-                      </div>
-                      <div className="prd-action">
-                        <form action="#">
-                          <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Peg Cropped Cuffed Pants&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-13-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add
-                            To Cart</button>
-                        </form>
-                      </div>
-                    </div>
-                    <div className="prd-hovers">
-                      <div className="prd-circle-labels">
-                        <div><a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
-                        </div>
-                        <div className="prd-hide-mobile"><a href="#" className="circle-label-qview js-prd-quickview" data-src="ajax/ajax-quickview.html"><i className="icon-eye" /><span>QUICK VIEW</span></a></div>
-                      </div>
-                      <div className="prd-price">
-                        <div className="price-new">$ 180</div>
-                      </div>
-                      <div className="prd-action">
-                        <div className="prd-action-left">
-                          <form action="#">
-                            <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Peg Cropped Cuffed Pants&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-13-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add
-                              To Cart</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="prd prd--style2 prd-labels--max prd-labels-shadow ">
-                <div className="prd-inside">
-                  <div className="prd-img-area">
-                    <a href="product.html" className="prd-img image-hover-scale image-container">
-                      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-16-1.webp" alt="Cascade Casual Shirt" className="js-prd-img lazyload fade-up" />
-                      <div className="foxic-loader" />
-                      <div className="prd-big-squared-labels">
-                      </div>
-                    </a>
-                    <div className="prd-circle-labels">
-                      <a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
-                      <a href="#" className="circle-label-qview js-prd-quickview prd-hide-mobile" data-src="ajax/ajax-quickview.html"><i className="icon-eye" /><span>QUICK
-                        VIEW</span></a>
-                      <div className="colorswatch-label colorswatch-label--variants js-prd-colorswatch">
-                        <i className="icon-palette"><span className="path1" /><span className="path2" /><span className="path3" /><span className="path4" /><span className="path5" /><span className="path6" /><span className="path7" /><span className="path8" /><span className="path9" /><span className="path10" /></i>
-                        <ul>
-                          <li data-image="images/skins/fashion/products/product-16-1.webp"><a className="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-grey.html" alt="" /></a></li>
-                          <li data-image="images/skins/fashion/products/product-16-color-2.webp">
-                            <a className="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-green.html" alt="" /></a></li>
-                          <li data-image="images/skins/fashion/products/product-16-color-3.webp">
-                            <a className="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-black.html" alt="" /></a></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <ul className="list-options color-swatch">
-                      <li data-image="images/skins/fashion/products/product-16-1.webp" className="active">
-                        <a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-16-1.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                      <li data-image="images/skins/fashion/products/product-16-2.webp"><a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-16-2.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                      <li data-image="images/skins/fashion/products/product-16-3.webp"><a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-16-3.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                    </ul>
-                  </div>
-                  <div className="prd-info">
-                    <div className="prd-info-wrap">
-                      <div className="prd-info-top">
-                        <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" />
-                        </div>
-                      </div>
-                      <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                      <div className="prd-tag"><a href="#">Shopy</a></div>
-                      <h2 className="prd-title"><a href="product.html">Cascade Casual Shirt</a></h2>
-                      <div className="prd-description">
-                        Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora
-                        torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed
-                        lacinia.
-                      </div>
-                      <div className="prd-action">
-                        <form action="#">
-                          <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Cascade Casual Shirt&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-16-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add
-                            To Cart</button>
-                        </form>
-                      </div>
-                    </div>
-                    <div className="prd-hovers">
-                      <div className="prd-circle-labels">
-                        <div><a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
-                        </div>
-                        <div className="prd-hide-mobile"><a href="#" className="circle-label-qview js-prd-quickview" data-src="ajax/ajax-quickview.html"><i className="icon-eye" /><span>QUICK VIEW</span></a></div>
-                      </div>
-                      <div className="prd-price">
-                        <div className="price-new">$ 180</div>
-                      </div>
-                      <div className="prd-action">
-                        <div className="prd-action-left">
-                          <form action="#">
-                            <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Cascade Casual Shirt&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-16-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add
-                              To Cart</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="prd prd--style2 prd-labels--max prd-labels-shadow prd-outstock">
-                <div className="prd-inside">
-                  <div className="prd-img-area">
-                    <a href="product.html" className="prd-img image-hover-scale image-container">
-                      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-18-1.webp" alt="Sport Cotton T-shirt" className="js-prd-img lazyload fade-up" />
-                      <div className="foxic-loader" />
-                      <div className="prd-big-squared-labels">
-                        <div className="label-new"><span>New</span></div>
-                        <div className="label-outstock"><span>Sold Out</span></div>
-                      </div>
-                    </a>
-                    <div className="prd-circle-labels">
-                      <a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
-                      <a href="#" className="circle-label-qview js-prd-quickview prd-hide-mobile" data-src="ajax/ajax-quickview.html"><i className="icon-eye" /><span>QUICK
-                        VIEW</span></a>
-                    </div>
-                  </div>
-                  <div className="prd-info">
-                    <div className="prd-info-wrap">
-                      <div className="prd-info-top">
-                        <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" />
-                        </div>
-                      </div>
-                      <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                      <div className="prd-tag"><a href="#">Shopy</a></div>
-                      <h2 className="prd-title"><a href="product.html">Sport Cotton T-shirt</a></h2>
-                      <div className="prd-description">
-                        Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora
-                        torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed
-                        lacinia.
-                      </div>
-                      <div className="prd-action">
-                        <form action="#">
-                          <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Sport Cotton T-shirt&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-18-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add
-                            To Cart</button>
-                        </form>
-                      </div>
-                    </div>
-                    <div className="prd-hovers">
-                      <div className="prd-circle-labels">
-                        <div><a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
-                        </div>
-                        <div className="prd-hide-mobile"><a href="#" className="circle-label-qview js-prd-quickview" data-src="ajax/ajax-quickview.html"><i className="icon-eye" /><span>QUICK VIEW</span></a></div>
-                      </div>
-                      <div className="prd-price">
-                        <div className="price-new">$ 180</div>
-                      </div>
-                      <div className="prd-action">
-                        <div className="prd-action-left">
-                          <form action="#">
-                            <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Sport Cotton T-shirt&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-18-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add
-                              To Cart</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="prd prd--style2 prd-labels--max prd-labels-shadow ">
-                <div className="prd-inside">
-                  <div className="prd-img-area">
-                    <a href="product.html" className="prd-img image-hover-scale image-container">
-                      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-21-1.webp" alt="Genuine Leather Strap Watch" className="js-prd-img lazyload fade-up" />
-                      <div className="foxic-loader" />
-                      <div className="prd-big-squared-labels">
-                        <div className="label-sale"><span>-10% <span className="sale-text">Sale</span></span>
-                          <div className="countdown-circle">
-                            <div className="countdown js-countdown" data-countdown="2021/07/01">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                    <div className="prd-circle-labels">
-                      <a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
-                      <a href="#" className="circle-label-qview js-prd-quickview prd-hide-mobile" data-src="ajax/ajax-quickview.html"><i className="icon-eye" /><span>QUICK
-                        VIEW</span></a>
-                    </div>
-                    <ul className="list-options color-swatch">
-                      <li data-image="images/skins/fashion/products/product-21-1.webp" className="active">
-                        <a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-21-1.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                      <li data-image="images/skins/fashion/products/product-21-2.webp"><a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-21-2.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                      <li data-image="images/skins/fashion/products/product-21-3.webp"><a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-21-3.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                    </ul>
-                  </div>
-                  <div className="prd-info">
-                    <div className="prd-info-wrap">
-                      <div className="prd-info-top">
-                        <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" />
-                        </div>
-                      </div>
-                      <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                      <div className="prd-tag"><a href="#">Shopy</a></div>
-                      <h2 className="prd-title"><a href="product.html">Genuine Leather Strap Watch</a>
-                      </h2>
-                      <div className="prd-description">
-                        Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora
-                        torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed
-                        lacinia.
-                      </div>
-                      <div className="prd-action">
-                        <form action="#">
-                          <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Genuine Leather Strap Watch&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-21-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add
-                            To Cart</button>
-                        </form>
-                      </div>
-                    </div>
-                    <div className="prd-hovers">
-                      <div className="prd-circle-labels">
-                        <div><a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
-                        </div>
-                        <div className="prd-hide-mobile"><a href="#" className="circle-label-qview js-prd-quickview" data-src="ajax/ajax-quickview.html"><i className="icon-eye" /><span>QUICK VIEW</span></a></div>
-                      </div>
-                      <div className="prd-price">
-                        <div className="price-old">$ 200</div>
-                        <div className="price-new">$ 180</div>
-                      </div>
-                      <div className="prd-action">
-                        <div className="prd-action-left">
-                          <form action="#">
-                            <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Genuine Leather Strap Watch&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-21-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add
-                              To Cart</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="prd prd--style2 prd-labels--max prd-labels-shadow ">
-                <div className="prd-inside">
-                  <div className="prd-img-area">
-                    <a href="product.html" className="prd-img image-hover-scale image-container">
-                      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-25-1.webp" alt="Fashion Waist Bag" className="js-prd-img lazyload fade-up" />
-                      <div className="foxic-loader" />
-                      <div className="prd-big-squared-labels">
-                      </div>
-                    </a>
-                    <div className="prd-circle-labels">
-                      <a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
-                      <a href="#" className="circle-label-qview js-prd-quickview prd-hide-mobile" data-src="ajax/ajax-quickview.html"><i className="icon-eye" /><span>QUICK
-                        VIEW</span></a>
-                    </div>
-                    <ul className="list-options color-swatch">
-                      <li data-image="images/skins/fashion/products/product-25-1.webp" className="active">
-                        <a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-25-1.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                      <li data-image="images/skins/fashion/products/product-25-2.webp"><a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-25-2.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                      <li data-image="images/skins/fashion/products/product-25-3.webp"><a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-25-3.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                    </ul>
-                  </div>
-                  <div className="prd-info">
-                    <div className="prd-info-wrap">
-                      <div className="prd-info-top">
-                        <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" />
-                        </div>
-                      </div>
-                      <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                      <div className="prd-tag"><a href="#">Shopy</a></div>
-                      <h2 className="prd-title"><a href="product.html">Fashion Waist Bag</a></h2>
-                      <div className="prd-description">
-                        Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora
-                        torquent per conubia nostra, per inceptos himenaeos. Nam nec ante sed
-                        lacinia.
-                      </div>
-                      <div className="prd-action">
-                        <form action="#">
-                          <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Fashion Waist Bag&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-25-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add
-                            To Cart</button>
-                        </form>
-                      </div>
-                    </div>
-                    <div className="prd-hovers">
-                      <div className="prd-circle-labels">
-                        <div><a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a><a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
-                        </div>
-                        <div className="prd-hide-mobile"><a href="#" className="circle-label-qview js-prd-quickview" data-src="ajax/ajax-quickview.html"><i className="icon-eye" /><span>QUICK VIEW</span></a></div>
-                      </div>
-                      <div className="prd-price">
-                        <div className="price-new">$ 180</div>
-                      </div>
-                      <div className="prd-action">
-                        <div className="prd-action-left">
-                          <form action="#">
-                            <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Fashion Waist Bag&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-25-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add
-                              To Cart</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {trandingData && trandingData.map((item) => (
+                <ProductCard item={item} />
+              ))}
             </div>
           </div>
         </div>
       </div>
-      <div className="holder holder-mt-medium">
+      <div className="holder">
         <div className="container">
-          <div className="title-wrap text-center ">
-            <h2 className="h1-style text-center"><a href="blog.html" title="View all">Latest From Blog</a></h2>
-            <div className="carousel-arrows" style={{ margin: '0 auto 65px', width: '50px' }} />
+          <div className="title-wrap text-center">
+            <h2 className="h1-style">Featured product</h2>
+            <div className="h-sub maxW-825">Hurry up! Limited</div>
           </div>
-          <div className="post-prws post-prws-carousel post-prws--row js-post-prws-carousel" data-slick="{&quot;slidesToShow&quot;: 3, &quot;responsive&quot;: [{&quot;breakpoint&quot;: 992,&quot;settings&quot;: {&quot;slidesToShow&quot;: 2 }},{&quot;breakpoint&quot;: 480,&quot;settings&quot;: {&quot;slidesToShow&quot;: 1 }}]}">
-            <div className="post-prw-vert col">
-              <a href="blog-post.html" className="post-prw-img image-hover-scale image-container" style={{ paddingBottom: '54.44%' }}>
-                <img className="fade-up w-100 lazyload" alt="The High-Street Brand Fashion" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/blog/blog-fashion-02.webp" />
-              </a>
-              <h4 className="post-prw-title"><a href="blog-post.html">The High-Street Brand Fashion</a></h4>
-              <div className="post-prw-links">
-                <div className="post-prw-date"><i className="icon-calendar1" />
-                  June 9, 2020
-                </div>
-              </div>
-            </div>
-            <div className="post-prw-vert col">
-              <a href="blog-post.html" className="post-prw-img image-hover-scale image-container" style={{ paddingBottom: '54.44%' }}>
-                <img className="fade-up w-100 lazyload" alt="The High-Street Brand Fashion" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/blog/blog-fashion-03.webp" />
-              </a>
-              <h4 className="post-prw-title"><a href="blog-post.html">Trends to Try This Season</a></h4>
-              <div className="post-prw-links">
-                <div className="post-prw-date"><i className="icon-calendar1" />
-                  June 3, 2020
-                </div>
-              </div>
-            </div>
-            <div className="post-prw-vert col">
-              <a href="blog-post.html" className="post-prw-img image-hover-scale image-container" style={{ paddingBottom: '54.44%' }}>
-                <img className="fade-up w-100 lazyload" alt="The High-Street Brand Fashion" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/blog/blog-fashion-04.webp" />
-              </a>
-              <h4 className="post-prw-title"><a href="blog-post.html">Working From Home</a></h4>
-              <div className="post-prw-links">
-                <div className="post-prw-date"><i className="icon-calendar1" />
-                  June 1, 2020
-                </div>
-              </div>
+          <div className="prd-grid-wrap position-relative">
+            <div className="prd-grid data-to-show-4 data-to-show-lg-4 data-to-show-md-3 data-to-show-sm-2 data-to-show-xs-2 js-category-grid" data-grid-tab-content>
+              {featuredData && featuredData.map((item) => (
+                <ProductCard item={item} />
+              ))}
             </div>
           </div>
         </div>

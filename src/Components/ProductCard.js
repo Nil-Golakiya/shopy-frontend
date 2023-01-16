@@ -42,7 +42,7 @@ const ProductCard = ({ item }) => {
         setWishlist(Array)
     }
 
-    console.log("wishlist", wishlist)
+    console.log("item", item)
 
 
     return (
@@ -94,14 +94,9 @@ const ProductCard = ({ item }) => {
                             <div className="prd-rating"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
                         </div>
                         <div className="prd-rating justify-content-center"><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /><i className="icon-star-fill fill" /></div>
-                        <h2 className="prd-title"><a href="product.html">{item.title}</a></h2>
+                        <h2 className="prd-title"><Link to={`/products/${item.categories[0].name}/${item.subcategories[0].name}/${item._id}`}>{item.title}</Link></h2>
                         <div className="prd-description">
                             {item.shortDescription}
-                        </div>
-                        <div className="prd-action">
-                            <form action="#">
-                                <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Leather Pegged Pants&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-01-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add To Cart</button>
-                            </form>
                         </div>
                     </div>
                     <div className="prd-hovers">
@@ -113,13 +108,6 @@ const ProductCard = ({ item }) => {
                         </div>
                         <div className="prd-price">
                             <div className="price-new">{productPrice}</div>
-                        </div>
-                        <div className="prd-action">
-                            <div className="prd-action-left">
-                                <form action="#">
-                                    <button className="btn js-prd-addtocart" data-product="{&quot;name&quot;: &quot;Leather Pegged Pants&quot;, &quot;path&quot;:&quot;images/skins/fashion/products/product-01-1.webp&quot;, &quot;url&quot;:&quot;product.html&quot;, &quot;aspect_ratio&quot;:0.778}">Add To Cart</button>
-                                </form>
-                            </div>
                         </div>
                     </div>
                 </div>

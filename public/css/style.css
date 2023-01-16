@@ -17069,7 +17069,7 @@ body:not(.has-sticky) .bnr-sticky {
 
     transition: opacity .2s;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .prd-img img+img {

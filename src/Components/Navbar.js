@@ -22,6 +22,11 @@ const Navbar = ({ data, cart }) => {
         CartTotal()
     }, [cart])
 
+    useEffect(() => {
+        const list = document.getElementById("navbarList")
+        console.log("list", list)
+    }, [])
+
     return (
         <>
             <div>
@@ -55,7 +60,7 @@ const Navbar = ({ data, cart }) => {
                                     </div>
                                     <div className="dropdn dropdn_wishlist">
                                         <Link to="/wishlist" className="dropdn-link only-icon wishlist-link ">
-                                            <i className="icon-heart" /><span className="dropdn-link-txt">Wishlist</span><span className="wishlist-qty">3</span>
+                                            <i className="icon-heart" /><span className="dropdn-link-txt">Wishlist</span><span className="wishlist-qty">5</span>
                                         </Link>
                                     </div>
                                     <div className="hdr_container_desktop">
@@ -86,9 +91,10 @@ const Navbar = ({ data, cart }) => {
                                     <Link to="/" className="logo"><img srcSet={logo} height="54px" alt="Logo" /></Link>
                                 </div>
                                 <div className="hdr-nav hide-mobile nav-holder justify-content-center px-4">
-                                    <ul className="mmenu mmenu-js">
+                                    <ul className="mmenu mmenu-js" id="navbarList">
                                         {
                                             data && data.map((cat) => {
+                                                console.log("fbdihubi7uyfv")
                                                 return (
                                                     <li className="mmenu-item--simple" key={cat._id}><Link to={`/products/${cat.name}`}>{cat.name}</Link>
                                                         <div className="mmenu-submenu">
@@ -126,7 +132,7 @@ const Navbar = ({ data, cart }) => {
                                         </div>
                                         <div className="dropdn dropdn_wishlist">
                                             <Link to="/wishlist" className="dropdn-link only-icon wishlist-link ">
-                                                <i className="icon-heart" /><span className="dropdn-link-txt">Wishlist</span><span className="wishlist-qty">3</span>
+                                                <i className="icon-heart" /><span className="dropdn-link-txt">Wishlist</span><span className="wishlist-qty">4</span>
                                             </Link>
                                         </div>
                                         <div className="hdr_container_desktop">

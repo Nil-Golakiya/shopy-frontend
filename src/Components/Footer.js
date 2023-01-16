@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React from 'react'
+import logo from "../Image/logo.jpeg"
 import { Link } from 'react-router-dom'
 
 const Footer = () => {
@@ -51,7 +52,9 @@ const Footer = () => {
                             <div className="col-lg col-xl last-mobile">
                                 <div className="footer-block">
                                     <div className="footer-logo">
-                                        <a href="index.html"><img className="lazyload fade-up" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-srcset="images/logo-footer.webp 1x, images/logo-footer2x.webp 2x" alt="Logo" /></a>
+                                        <Link to="/" onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }) }}>
+                                            <img className="lazyload fade-up" src={logo} alt="Logo" />
+                                        </Link>
                                     </div>
                                     <div className="collapsed-content">
                                         <ul>

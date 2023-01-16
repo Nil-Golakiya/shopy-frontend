@@ -31,9 +31,9 @@ const Index = ({ Component }) => {
     }, [])
 
     useEffect(() => {
-        const scriptTag = document.createElement('script')
-        scriptTag.src = "/js/app-html.js"
-        document.body.appendChild(scriptTag);
+        // const scriptTag = document.createElement('script')
+        // scriptTag.src = "/js/app-html.js"
+        // document.body.appendChild(scriptTag);
     }, [])
 
     console.log("wishlist in index", wishlist)

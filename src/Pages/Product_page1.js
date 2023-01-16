@@ -30,10 +30,10 @@ const Product_page1 = ({ setCart, cart }) => {
     }, [activeInfo])
 
     useEffect(() => {
-        console.log("vghbuvfkgj")
-        const scriptTag = document.createElement('script')
-        scriptTag.src = "/js/app-html.js"
-        document.body.appendChild(scriptTag);
+        // console.log("vghbuvfkgj")
+        // const scriptTag = document.createElement('script')
+        // scriptTag.src = "/js/app-html.js"
+        // document.body.appendChild(scriptTag);
     }, [])
 
     const fetchData = async () => {
