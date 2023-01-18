@@ -1,9 +1,10 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom"
 import { toast } from 'react-toastify';
 import "../asstes/sidebar.css"
 
-const Sidebar = ({ data, setCart, cart }) => {
+const Sidebar = ({ categoryData, setCart, cart }) => {
 
     const [totalprice, setTotalPrice] = useState()
 
@@ -24,12 +25,17 @@ const Sidebar = ({ data, setCart, cart }) => {
         setTotalPrice(carttotal)
     }
 
+    const handleDelete = async (id) => {
+        const deleteProduct = await axios.delete(`http://localhost:8800/cart/${id}`)
+        setCart(cart.filter((item) => item._id !== id));
+    }
+
     useEffect(() => {
         CartTotal()
     }, [cart])
 
     console.log("sidebarcart", cart);
-    console.log("data mobie", data);
+    console.log("data mobie", categoryData);
 
     return (
         <div className="header-side-panel">
@@ -46,7 +52,7 @@ const Sidebar = ({ data, setCart, cart }) => {
                             </div>
                             <ul className="nav nav-level-1">
                                 {
-                                    data?.map((cat) => {
+                                    categoryData?.map((cat) => {
                                         return (
                                             <li key={cat._id}><Link to={`/products/${cat.name}`}>{cat.name}<span
                                                 className="arrow"><i className="icon-angle-right"></i></span></Link>
@@ -96,7 +102,7 @@ const Sidebar = ({ data, setCart, cart }) => {
                                 <div className="minicart-prd row">
                                     <div className="minicart-prd-image image-hover-scale-circle col">
                                         <a href="product.html"><img className="lazyload fade-up"
-                                            src={ele.subVariation.image} alt="" style={{ height: "100px", objectFit: "contain" }}/></a>
+                                            src={ele.subVariation.image} alt="" style={{ height: "100px", objectFit: "contain" }} /></a>
                                     </div>
                                     <div className="minicart-prd-info col">
                                         <div className="minicart-prd-tag">Shopy</div>
@@ -109,7 +115,7 @@ const Sidebar = ({ data, setCart, cart }) => {
                                         </div>
                                     </div>
                                     <div className="minicart-prd-action">
-                                        <a href="#" className="js-product-remove" data-line-number="1"><i className="icon-recycle"></i></a>
+                                        <a href="#" className="js-product-remove" data-line-number="1"><i className="icon-recycle" onClick={() => handleDelete(ele._id)}></i></a>
                                     </div>
                                 </div>
                             ))

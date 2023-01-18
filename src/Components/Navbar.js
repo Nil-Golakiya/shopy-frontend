@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 
 
-const Navbar = ({ data, cart }) => {
+const Navbar = ({ categoryData, cart }) => {
 
     const [totalprice, setTotalPrice] = useState()
 
@@ -93,7 +93,7 @@ const Navbar = ({ data, cart }) => {
                                 <div className="hdr-nav hide-mobile nav-holder justify-content-center px-4">
                                     <ul className="mmenu mmenu-js" id="navbarList">
                                         {
-                                            data && data.map((cat) => {
+                                            categoryData && categoryData.map((cat) => {
                                                 console.log("fbdihubi7uyfv")
                                                 return (
                                                     <li className="mmenu-item--simple" key={cat._id}><Link to={`/products/${cat.name}`}>{cat.name}</Link>

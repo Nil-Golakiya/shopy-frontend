@@ -23,10 +23,24 @@ let loaded = false;
 function App() {
 
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "/js/app.js";
-    script.async = true;
-    document.body.appendChild(script);
+
+    const LoadExternalScript = () => {
+      const externalScript = document.createElement("script");
+      // externalScript.onerror = loadError;
+      externalScript.id = "external";
+      externalScript.async = true;
+      externalScript.type = "text/javascript";
+      externalScript.setAttribute("crossorigin", "anonymous");
+      document.body.appendChild(externalScript);
+      externalScript.src = '/js/app-html.js';
+    };
+
+    LoadExternalScript()
+
+    // const script = document.createElement("script");
+    // script.src = "/js/app.js";
+    // script.async = true;
+    // document.body.appendChild(script);
 
     // return () => {
     //   document.body.removeChild(script);

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 const CheckOut = ({ cart }) => {
 
     const [totalprice, setTotalPrice] = useState()
+    const user = localStorage.getItem("myuser");
 
     const CartTotal = () => {
         let carttotal = 0;
@@ -55,7 +57,9 @@ const CheckOut = ({ cart }) => {
                             <div className="tab-content">
                                 <div className="tab-pane fade show active" id="step1">
                                     <div className="tab-pane-inside">
-                                        <p><a href="account-create.html">Login</a> or <a href="account-create.html">Register</a> for faster payment.</p>
+                                        {
+                                            user ? "" : <p><Link to="/login">Login</Link> or <Link to="/login">Register</Link> for faster payment.</p>
+                                        }
                                         <div className="row mt-2">
                                             <div className="col-sm-9">
                                                 <label>First Name:</label>
@@ -70,43 +74,21 @@ const CheckOut = ({ cart }) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="mt-2" />
-                                        <label>Country:</label>
-                                        <div className="form-group select-wrapper">
-                                            <select className="form-control form-control--sm">
-                                                <option value="United States">United States</option>
-                                                <option value="Canada">Canada</option>
-                                                <option value="China">China</option>
-                                                <option value="India">India</option>
-                                                <option value="Italy">Italy</option>
-                                                <option value="Mexico">Mexico</option>
-                                            </select>
+                                        <div className="mt-1" />
+                                        <label>Address 1:</label>
+                                        <div className="form-group">
+                                            <input type="text" className="form-control form-control--sm" />
+                                        </div>
+                                        <div className="mt-1" />
+                                        <label>Address 2:</label>
+                                        <div className="form-group">
+                                            <input type="text" className="form-control form-control--sm" />
                                         </div>
                                         <div className="row">
                                             <div className="col-sm-9">
-                                                <label>State:</label>
-                                                <div className="form-group select-wrapper">
-                                                    <select className="form-control form-control--sm">
-                                                        <option value="AL">Alabama</option>
-                                                        <option value="AK">Alaska</option>
-                                                        <option value="AZ">Arizona</option>
-                                                        <option value="AR">Arkansas</option>
-                                                        <option value="CA">California</option>
-                                                        <option value="CO">Colorado</option>
-                                                        <option value="CT">Connecticut</option>
-                                                        <option value="DE">Delaware</option>
-                                                        <option value="DC">District Of Columbia</option>
-                                                        <option value="FL">Florida</option>
-                                                        <option value="GA">Georgia</option>
-                                                        <option value="HI">Hawaii</option>
-                                                        <option value="ID">Idaho</option>
-                                                        <option value="IL">Illinois</option>
-                                                        <option value="IN">Indiana</option>
-                                                        <option value="IA">Iowa</option>
-                                                        <option value="KS">Kansas</option>
-                                                        <option value="KY">Kentucky</option>
-                                                        <option value="LA">Louisiana</option>
-                                                    </select>
+                                                <label>Phone No:</label>
+                                                <div className="form-group">
+                                                    <input type="text" className="form-control form-control--sm" />
                                                 </div>
                                             </div>
                                             <div className="col-sm-9">
@@ -115,11 +97,6 @@ const CheckOut = ({ cart }) => {
                                                     <input type="text" className="form-control form-control--sm" />
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className="mt-2" />
-                                        <label>Address 1:</label>
-                                        <div className="form-group">
-                                            <input type="text" className="form-control form-control--sm" />
                                         </div>
                                         <div className="clearfix">
                                             <input id="formcheckoutCheckbox1" name="checkbox1" type="checkbox" />

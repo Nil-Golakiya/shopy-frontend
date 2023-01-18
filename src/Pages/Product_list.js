@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ProductCard from '../Components/ProductCard'
 
-const Product_list = ({ wishlist, setWishlist }) => {
+const Product_list = ({ setWishlist, wishlist }) => {
 
     const [data, setData] = useState(null)
 
@@ -22,12 +22,14 @@ const Product_list = ({ wishlist, setWishlist }) => {
 
         const { data } = await axios.get("http://localhost:8800/product/categorywiseproduct", { params: getparams });
         setData(data)
-        console.log("data", data)
+        console.log("productlistData", data)
     }
 
     useEffect(() => {
         fetchData()
     }, [params])
+
+    console.log("data", data)
 
     return (
         <div className="page-content">
