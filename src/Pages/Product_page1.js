@@ -13,28 +13,13 @@ const Product_page1 = ({ setCart, cart }) => {
     const [activeInfo, setActiveInfo] = useState({});
     const [isCart, setIsCart] = useState(false);
 
+
     const params = useParams();
     const navigate = useNavigate()
 
     const userData = JSON.parse(localStorage.getItem("persist:user"))
     const userId = JSON.parse(userData.Reducer).user.user._id
 
-    useEffect(() => {
-        let isAddCart = false;
-        cart.map((ele) => {
-            if (ele.subVariation._id === activeInfo._id) {
-                isAddCart = true
-            }
-        })
-        setIsCart(isAddCart)
-    }, [activeInfo])
-
-    useEffect(() => {
-        // console.log("vghbuvfkgj")
-        // const scriptTag = document.createElement('script')
-        // scriptTag.src = "/js/app-html.js"
-        // document.body.appendChild(scriptTag);
-    }, [])
 
     const fetchData = async () => {
         const { data } = await axios.get(`http://localhost:8800/product/${params.id}`)
@@ -57,8 +42,6 @@ const Product_page1 = ({ setCart, cart }) => {
     const handleGotoCart = () => {
         navigate("/cart")
     }
-
-
 
     const handleChangeColorSize = (data, color) => {
         const colorArray = [];
@@ -96,6 +79,24 @@ const Product_page1 = ({ setCart, cart }) => {
 
     useEffect(() => {
         fetchData()
+    }, [])
+
+
+    useEffect(() => {
+        let isAddCart = false;
+        cart.map((ele) => {
+            if (ele.subVariation._id === activeInfo._id) {
+                isAddCart = true
+            }
+        })
+        setIsCart(isAddCart)
+    }, [activeInfo])
+
+    useEffect(() => {
+        // console.log("vghbuvfkgj")
+        // const scriptTag = document.createElement('script')
+        // scriptTag.src = "/js/app-html.js"
+        // document.body.appendChild(scriptTag);
     }, [])
 
     return (
@@ -276,10 +277,6 @@ const Product_page1 = ({ setCart, cart }) => {
                                                         Add to cart
                                                     </button>
                                                 }
-                                            </div>
-                                            <div className="btn-wishlist-wrap">
-                                                <a href="#" className="btn-add-to-wishlist ml-auto btn-add-to-wishlist--add js-add-wishlist" title="Add To Wishlist"><i className="icon-heart-stroke" /></a>
-                                                <a href="#" className="btn-add-to-wishlist ml-auto btn-add-to-wishlist--off js-remove-wishlist" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
                                             </div>
                                         </div>
                                     </form>

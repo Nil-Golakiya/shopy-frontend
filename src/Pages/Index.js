@@ -9,6 +9,12 @@ const Index = ({ Component }) => {
     const [cart, setCart] = useState([])
     const [wishlist, setWishlist] = useState([])
 
+    const fetchWishlistData = async () => {
+        const { data } = await axios.get(`http://localhost:8800/wishlist/${userId}`)
+        setWishlist(data)
+    }
+    console.log("wishlistData", wishlist)
+
 
     const userData = JSON.parse(localStorage.getItem("persist:user"))
     const userId = JSON.parse(userData.Reducer)?.user?.user?._id
@@ -29,6 +35,7 @@ const Index = ({ Component }) => {
     useEffect(() => {
         fetchData()
         CartData()
+        fetchWishlistData()
     }, [])
 
     useEffect(() => {
@@ -42,7 +49,7 @@ const Index = ({ Component }) => {
         <>
             <div className="">
                 <header className="hdr-wrap">
-                    <Navbar categoryData={categoryData} setCart={setCart} cart={cart} />
+                    <Navbar categoryData={categoryData} setCart={setCart} cart={cart} setWishlist={setWishlist} wishlist={wishlist} />
                 </header>
                 <div className="has-smround-btns has-loader-bg equal-height has-sm-container">
                     <Sidebar categoryData={categoryData} setCart={setCart} cart={cart} />

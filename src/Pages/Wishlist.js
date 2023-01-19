@@ -4,20 +4,9 @@ import { Link } from 'react-router-dom'
 import Account_sidebar from '../Components/Account_sidebar'
 import ProductCard from '../Components/ProductCard'
 
-const Wishlist = () => {
+const Wishlist = ({ wishlist, setWishlist }) => {
 
-    const [data, setData] = useState()
-
-    const fetchData = async () => {
-        const { data } = await axios.get("http://localhost:8800/wishlist")
-        setData(data)
-        console.log("data", data)
-    }
-
-    useEffect(() => {
-        fetchData()
-    }, [])
-
+    console.log("wishlist", wishlist)
 
     return (
         <div className="page-content">
@@ -35,8 +24,8 @@ const Wishlist = () => {
                             </div>
                             <div className="prd-grid-wrap position-relative">
                                 <div className="prd-grid prd-grid--wishlist data-to-show-3 data-to-show-lg-3 data-to-show-md-2 data-to-show-sm-2 data-to-show-xs-1">
-                                    {data && data.map((item) => (
-                                        <ProductCard item={item} />
+                                    {wishlist && wishlist.map((item) => (
+                                        <ProductCard item={item} wishlist={wishlist} setWishlist={setWishlist} />
                                     ))}
                                 </div>
                             </div>

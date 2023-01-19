@@ -8,9 +8,35 @@ const ProductCard = ({ item, setWishlist, wishlist }) => {
     const [productImages, setProductImages] = useState([])
     const [displayImage, setDisplayImage] = useState(null)
     const [productPrice, setProductPrice] = useState(null)
+    const [isWishlist, setIsWishlist] = useState(false)
 
     const userData = JSON.parse(localStorage.getItem("persist:user"))
     const userId = JSON.parse(userData.Reducer)?.user?.user?._id
+
+    const handleChangeColorImages = (data) => {
+        setProductImages(data.image)
+        setDisplayImage(data.image?.[0])
+        setProductPrice(data.price)
+    }
+
+    const handleWishlist = async (id) => {
+        const data = await axios.post("http://localhost:8800/wishlist", {
+            product_id: id,
+            user_id: userId
+        })
+
+        const Array = [];
+        Array.push(data.data);
+        setWishlist(Array.concat(wishlist))
+        setIsWishlist(data.data._id)
+        console.log("wishlistData", data)
+    }
+
+    const handleRemoveWishlist = async (id) => {
+        setIsWishlist(false)
+        const data = await axios.delete(`http://localhost:8800/wishlist/${id}`)
+        setWishlist(wishlist.filter((e) => e.wishlist_id !== id || e._id !== id))
+    }
 
     useEffect(() => {
         if (item) {
@@ -31,30 +57,13 @@ const ProductCard = ({ item, setWishlist, wishlist }) => {
         }
     }, [])
 
-    const handleChangeColorImages = (data) => {
-        setProductImages(data.image)
-        setDisplayImage(data.image?.[0])
-        setProductPrice(data.price)
-    }
-
-    const handleWishlist = async (id) => {
-        const data = await axios.post("http://localhost:8800/wishlist", {
-            product_id: id,
-            user_id: userId
-        })
-        const Array = [];
-        Array.push(id);
-        setWishlist(Array.concat(wishlist))
-        console.log("wishlistData", data)
-    }
-
-    const handleRemoveWishlist = (id) => {
-        setWishlist(wishlist.filter((e) => e !== id))
-    }
-
     useEffect(() => {
-        console.log("##############")
-    }, [wishlist])
+        wishlist?.map((ele) => {
+            if (ele._id === item._id) {
+                setIsWishlist(ele.wishlist_id)
+            }
+        })
+    }, [])
 
     // console.log("item", item)
     console.log("wishlist", wishlist)
@@ -70,8 +79,12 @@ const ProductCard = ({ item, setWishlist, wishlist }) => {
                         </div>
                     </Link>
                     <div className="prd-circle-labels">
-                        <Link to="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" onClick={() => handleWishlist(item._id)} /></Link>
-                        <a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" onClick={() => handleRemoveWishlist(item._id)} /></a>
+                        {
+                            isWishlist ?
+                                <Link to="#" className="circle-label-compare mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" onClick={() => handleRemoveWishlist(isWishlist)} /></Link>
+                                :
+                                <Link to="#" className="circle-label-compare mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" onClick={() => handleWishlist(item._id)} /></Link>
+                        }
                         <div className="colorswatch-label colorswatch-label--variants js-prd-colorswatch">
                             <i className="icon-palette"><span className="path1" /><span className="path2" /><span className="path3" /><span className="path4" /><span className="path5" /><span className="path6" /><span className="path7" /><span className="path8" /><span className="path9" /><span className="path10" /></i>
                             <ul>
@@ -116,8 +129,12 @@ const ProductCard = ({ item, setWishlist, wishlist }) => {
                     <div className="prd-hovers">
                         <div className="prd-circle-labels">
                             <div>
-                                <a href="#" className="circle-label-compare circle-label-wishlist--add js-add-wishlist mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" /></a>
-                                <a href="#" className="circle-label-compare circle-label-wishlist--off js-remove-wishlist mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" /></a>
+                                {
+                                    isWishlist ?
+                                        <Link to="#" className="circle-label-compare mt-0" title="Remove From Wishlist"><i className="icon-heart-hover" onClick={() => handleRemoveWishlist(isWishlist)} /></Link>
+                                        :
+                                        <Link to="#" className="circle-label-compare mt-0" title="Add To Wishlist"><i className="icon-heart-stroke" onClick={() => handleWishlist(item._id)} /></Link>
+                                }
                             </div>
                         </div>
                         <div className="prd-price">

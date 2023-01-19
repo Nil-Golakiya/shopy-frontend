@@ -29,6 +29,18 @@ const Product_list = ({ setWishlist, wishlist }) => {
         fetchData()
     }, [params])
 
+    // useEffect(() => {
+    //     const scriptTag = document.createElement('script')
+    //     scriptTag.src = "/js/app-html.js"
+    //     document.body.appendChild(scriptTag);
+
+    //     return () => {
+    //         document.body.removeChild(scriptTag)
+    //     }
+    // }, [])
+
+
+
     console.log("data", data)
 
     return (

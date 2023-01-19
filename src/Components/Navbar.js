@@ -4,8 +4,9 @@ import { Link } from "react-router-dom"
 
 
 
-const Navbar = ({ categoryData, cart }) => {
+const Navbar = ({ categoryData, cart, wishlist }) => {
 
+    console.log("wishlist.length", wishlist.length)
     const [totalprice, setTotalPrice] = useState()
 
     const CartTotal = () => {
@@ -60,7 +61,7 @@ const Navbar = ({ categoryData, cart }) => {
                                     </div>
                                     <div className="dropdn dropdn_wishlist">
                                         <Link to="/wishlist" className="dropdn-link only-icon wishlist-link ">
-                                            <i className="icon-heart" /><span className="dropdn-link-txt">Wishlist</span><span className="wishlist-qty">5</span>
+                                            <i className="icon-heart" /><span className="dropdn-link-txt">Wishlist</span><span className="wishlist-qty">{wishlist.length}</span>
                                         </Link>
                                     </div>
                                     <div className="hdr_container_desktop">
@@ -132,7 +133,7 @@ const Navbar = ({ categoryData, cart }) => {
                                         </div>
                                         <div className="dropdn dropdn_wishlist">
                                             <Link to="/wishlist" className="dropdn-link only-icon wishlist-link ">
-                                                <i className="icon-heart" /><span className="dropdn-link-txt">Wishlist</span><span className="wishlist-qty">4</span>
+                                                <i className="icon-heart" /><span className="dropdn-link-txt">Wishlist</span><span className="wishlist-qty">{wishlist.length}</span>
                                             </Link>
                                         </div>
                                         <div className="hdr_container_desktop">

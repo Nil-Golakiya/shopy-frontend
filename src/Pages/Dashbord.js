@@ -4,7 +4,7 @@ import axios from 'axios'
 import ProductCard from '../Components/ProductCard'
 
 
-const Dashbord = ({ categoryData }) => {
+const Dashbord = ({ categoryData, setWishlist, wishlist }) => {
 
   const [trandingData, setTrandingData] = useState()
   const [featuredData, setFeaturedData] = useState()
@@ -41,12 +41,14 @@ const Dashbord = ({ categoryData }) => {
   }, [])
 
   useEffect(() => {
-    // console.log("vghbuvfkgj")
-    // const scriptTag = document.createElement('script')
-    // scriptTag.src = "/js/app-html.js"
-    // document.body.appendChild(scriptTag);
-  }, [])
+    const scriptTag = document.createElement('script')
+    scriptTag.src = "/js/app-html.js"
+    document.body.appendChild(scriptTag);
 
+    return () => {
+        document.body.removeChild(scriptTag)
+    }
+}, [])
 
 
   console.log("categoryData", categoryData)
@@ -177,7 +179,7 @@ const Dashbord = ({ categoryData }) => {
           <div className="prd-grid-wrap">
             <div class="prd-grid data-to-show-4 data-to-show-md-3 data-to-show-sm-2 data-to-show-xs-2" data-grid-tab-content>
               {collectionData && collectionData.map((item) => (
-                <ProductCard item={item} />
+                <ProductCard item={item} setWishlist={setWishlist} wishlist={wishlist} />
               ))}
             </div>
             <div className="loader-horizontal-sm js-loader-horizontal-sm d-none" data-loader-horizontal style={{ opacity: 0 }}><span /></div>
@@ -232,7 +234,7 @@ const Dashbord = ({ categoryData }) => {
           <div className="prd-grid-wrap position-relative">
             <div className="prd-grid data-to-show-4 data-to-show-lg-4 data-to-show-md-3 data-to-show-sm-2 data-to-show-xs-2 js-category-grid" data-grid-tab-content>
               {trandingData && trandingData.map((item) => (
-                <ProductCard item={item} />
+                <ProductCard item={item} setWishlist={setWishlist} wishlist={wishlist} />
               ))}
             </div>
           </div>
@@ -247,7 +249,7 @@ const Dashbord = ({ categoryData }) => {
           <div className="prd-grid-wrap position-relative">
             <div className="prd-grid data-to-show-4 data-to-show-lg-4 data-to-show-md-3 data-to-show-sm-2 data-to-show-xs-2 js-category-grid" data-grid-tab-content>
               {featuredData && featuredData.map((item) => (
-                <ProductCard item={item} />
+                <ProductCard item={item} setWishlist={setWishlist} wishlist={wishlist} />
               ))}
             </div>
           </div>
