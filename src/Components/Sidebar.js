@@ -140,10 +140,10 @@ const Sidebar = ({ categoryData, setCart, cart }) => {
                             <div className="minicart-drop-total-price col" data-header-cart-total="">₹ {totalprice}</div>
                         </div>
                         <div className="minicart-drop-actions">
-                            <a href="cart.html" className="btn btn--md btn--grey"><i className="icon-basket"></i><span>Cart
-                                Page</span></a>
-                            <a href="checkout.html" className="btn btn--md"><i className="icon-checkout"></i><span>Check
-                                out</span></a>
+                            <Link to="/cart" className="btn btn--md btn--grey"><i className="icon-basket"></i><span>Cart
+                                Page</span></Link>
+                            <Link to="/checkout" className="btn btn--md"><i className="icon-checkout"></i><span>Check
+                                out</span></Link>
                         </div>
                         <ul className="payment-link mb-2">
                             <li><i className="icon-amazon-logo"></i></li>

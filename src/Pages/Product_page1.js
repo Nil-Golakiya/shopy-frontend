@@ -29,6 +29,7 @@ const Product_page1 = ({ setCart, cart }) => {
     }
 
     const createCart = async () => {
+        localStorage.setItem('cartItem', JSON.stringify(activeInfo))
         const { data: resData } = await axios.post("http://localhost:8800/cart/", {
             variation_id: activeInfo.variation_id,
             user_id: userId,
@@ -37,7 +38,7 @@ const Product_page1 = ({ setCart, cart }) => {
         })
         setCart([...cart, resData])
     }
-    console.log("cart", cart)
+    console.log("cart----------", activeInfo)
 
     const handleGotoCart = () => {
         navigate("/cart")
@@ -61,7 +62,7 @@ const Product_page1 = ({ setCart, cart }) => {
             setImages(variationObj.image);
             setVariations(variationObj.subVariation);
             const info = variationObj.subVariation[0];
-            setActiveInfo({ ...activeInfo, color, variation_id: variationObj._id, ...info });
+            setActiveInfo({ ...activeInfo, color, variation_id: variationObj._id, ...info, product_name: data.title });
         }
 
         const imageArray = []
@@ -93,10 +94,13 @@ const Product_page1 = ({ setCart, cart }) => {
     }, [activeInfo])
 
     useEffect(() => {
-        // console.log("vghbuvfkgj")
-        // const scriptTag = document.createElement('script')
-        // scriptTag.src = "/js/app-html.js"
-        // document.body.appendChild(scriptTag);
+        const scriptTag = document.createElement('script')
+        scriptTag.src = "/js/app-html.js"
+        document.body.appendChild(scriptTag);
+
+        return () => {
+            document.body.removeChild(scriptTag)
+        }
     }, [])
 
     return (
@@ -273,7 +277,7 @@ const Product_page1 = ({ setCart, cart }) => {
                                                     <button onClick={() => handleGotoCart()} className="btn btn--add-to-cart js-trigger-addtocart js-prd-addtocart" data-product="{&quot;name&quot;:  &quot;Leather Pegged Pants &quot;,  &quot;url &quot;: &quot;product.html&quot;,  &quot;path &quot;: &quot;images/skins/fashion/product-page/product-01.webp&quot;,  &quot;aspect_ratio &quot;: &quot;0.78&quot;}">
                                                         Go to cart
                                                     </button> :
-                                                    <button onClick={() => createCart()} disabled={count === 0 || activeInfo.qty === 0} className="btn btn--add-to-cart js-trigger-addtocart js-prd-addtocart" data-product="{&quot;name&quot;:  &quot;Leather Pegged Pants &quot;,  &quot;url &quot;: &quot;product.html&quot;,  &quot;path &quot;: &quot;images/skins/fashion/product-page/product-01.webp&quot;,  &quot;aspect_ratio &quot;: &quot;0.78&quot;}">
+                                                    <button type="button" onClick={() => createCart()} disabled={count === 0 || activeInfo.qty === 0} className="btn btn--add-to-cart js-trigger-addtocart js-prd-addtocart" data-product="{&quot;name&quot;:  &quot;Leather Pegged Pants &quot;,  &quot;url &quot;: &quot;product.html&quot;,  &quot;path &quot;: &quot;images/skins/fashion/product-page/product-01.webp&quot;,  &quot;aspect_ratio &quot;: &quot;0.78&quot;}">
                                                         Add to cart
                                                     </button>
                                                 }

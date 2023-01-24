@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Footer from '../Components/Footer'
+import Loader from '../Components/Loader'
 import Navbar from '../Components/Navbar'
 import Sidebar from '../Components/Sidebar'
 
@@ -8,10 +9,13 @@ const Index = ({ Component }) => {
     const [categoryData, setCategoryData] = useState()
     const [cart, setCart] = useState([])
     const [wishlist, setWishlist] = useState([])
+    const [loading, setLoading] = useState(false)
+
 
     const fetchWishlistData = async () => {
         const { data } = await axios.get(`http://localhost:8800/wishlist/${userId}`)
         setWishlist(data)
+        console.log("1")
     }
     console.log("wishlistData", wishlist)
 
@@ -20,23 +24,34 @@ const Index = ({ Component }) => {
     const userId = JSON.parse(userData.Reducer)?.user?.user?._id
 
     const fetchData = async () => {
+        setLoading(true)
         const { data } = await axios.get("http://localhost:8800/category/Customercategory")
         setCategoryData(data)
+        console.log("2")
+
     }
 
     const CartData = async () => {
         if (userId) {
-
             const { data } = await axios.get(`http://localhost:8800/cart/${userId}`)
             setCart(data)
+            console.log("3")
+
         }
     }
 
     useEffect(() => {
-        fetchData()
-        CartData()
-        fetchWishlistData()
-    }, [])
+        const Runallfunction = async () => {
+            setLoading(true)
+            await fetchData()
+            await CartData()
+            await fetchWishlistData()
+            setTimeout(() => {
+                setLoading(false)
+            }, 3000);
+        }
+        Runallfunction()
+    }, [Component])
 
     useEffect(() => {
         // const scriptTag = document.createElement('script')
@@ -47,13 +62,14 @@ const Index = ({ Component }) => {
 
     return (
         <>
+            {loading ? <Loader /> : ""}
             <div className="">
                 <header className="hdr-wrap">
                     <Navbar categoryData={categoryData} setCart={setCart} cart={cart} setWishlist={setWishlist} wishlist={wishlist} />
                 </header>
                 <div className="has-smround-btns has-loader-bg equal-height has-sm-container">
                     <Sidebar categoryData={categoryData} setCart={setCart} cart={cart} />
-                    <Component setCart={setCart} cart={cart} categoryData={categoryData} setWishlist={setWishlist} wishlist={wishlist} />
+                    <Component setCart={setCart} cart={cart} categoryData={categoryData} setWishlist={setWishlist} wishlist={wishlist} setLoading={setLoading} />
                 </div>
                 <Footer cart={cart} />
             </div>

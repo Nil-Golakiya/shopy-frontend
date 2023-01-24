@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom'
 
 const Footer = () => {
 
+    const cartItem = JSON.parse(localStorage.getItem("cartItem"));
+    console.log("cartItem-------------", cartItem)
+
 
     return (
         <div>
@@ -156,7 +159,7 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
-            <div className="footer-sticky">
+            {/* <div className="footer-sticky">
                 <div className="sticky-addcart js-stickyAddToCart closed">
                     <div className="container">
                         <div className="row">
@@ -166,7 +169,7 @@ const Footer = () => {
                                 </a>
                             </div>
                             <div className="col col-sm-5 col-lg-4 col-xl-5 sticky-addcart_info">
-                                <h1 className="sticky-addcart_title">Leather Pegged Pants</h1>
+                                <h1 className="sticky-addcart_title">{cartItem.product_name}</h1>
                                 <div className="sticky-addcart_price">
                                     <span className="sticky-addcart_price--actual">$180.00</span>
                                     <span className="sticky-addcart_price--old">$210.00</span>
@@ -212,7 +215,7 @@ const Footer = () => {
                                         </span>
                                     </a>
                                     <div className="col popup-addedtocart_text">
-                                        <a href="product.html" className="popup-addedtocart_title" />
+                                        <a href="product.html" />
                                         <span className="popup-addedtocart_message">Added to <a href="cart.html" className="underline">Cart</a></span>
                                         <span className="popup-addedtocart_error_message" />
                                     </div>
@@ -276,7 +279,8 @@ const Footer = () => {
                 </div>
             </div>
             <div className="footer-sticky">
-                <div className="payment-notification-wrap js-pn" data-visible-time={3000} data-hidden-time={3000} data-delay={500} data-from="Aberdeen,Bakersfield,Birmingham,Cambridge,Youngstown" data-products="[{&quot;productname&quot;:&quot;Leather Pegged Pants&quot;, &quot;productlink&quot;:&quot;product.html&quot;,&quot;productimage&quot;:&quot;images/skins/fashion/products/product-01-1.webp&quot;},{&quot;productname&quot;:&quot;Black Fabric Backpack&quot;, &quot;productlink&quot;:&quot;product.html&quot;,&quot;productimage&quot;:&quot;images/skins/fashion/products/product-28-1.webp&quot;},{&quot;productname&quot;:&quot;Combined Chunky Sneakers&quot;, &quot;productlink&quot;:&quot;product.html&quot;,&quot;productimage&quot;:&quot;images/skins/fashion/products/product-23-1.webp&quot;}]">
+                <div className="payment-notification-wrap js-pn" data-visible-time={3000} data-hidden-time={3000} data-delay={500} data-from="Aberdeen,Bakersfield,Birmingham,Cambridge,Youngstown"
+                    data-products={`[{&quot;productname&quot;:&quot;${cartItem.product_name}&quot;, &quot;productlink&quot;:&quot;product.html&quot;,&quot;productimage&quot;:&quot;images/skins/fashion/products/product-01-1.webp&quot;},{&quot;productname&quot;:&quot;Black Fabric Backpack&quot;, &quot;productlink&quot;:&quot;product.html&quot;,&quot;productimage&quot;:&quot;images/skins/fashion/products/product-28-1.webp&quot;},{&quot;productname&quot;:&quot;Combined Chunky Sneakers&quot;, &quot;productlink&quot;:&quot;product.html&quot;,&quot;productimage&quot;:&quot;images/skins/fashion/products/product-23-1.webp&quot;}]`}>
                     <div className="payment-notification payment-notification--squared">
                         <div className="payment-notification-inside">
                             <div className="payment-notification-container">
@@ -300,7 +304,7 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

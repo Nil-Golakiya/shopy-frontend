@@ -17068,7 +17068,7 @@ body:not(.has-sticky) .bnr-sticky {
     width: 100%;
 
     transition: opacity .2s;
-    height: 100%;
+    height: 648px;
     object-fit: contain;
 }
 

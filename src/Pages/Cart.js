@@ -54,6 +54,16 @@ const Cart = ({ cart, setCart }) => {
     CartTotal()
   }, [cart])
 
+  useEffect(() => {
+    const scriptTag = document.createElement('script')
+    scriptTag.src = "/js/app-html.js"
+    document.body.appendChild(scriptTag);
+
+    return () => {
+      document.body.removeChild(scriptTag)
+    }
+  }, [])
+
   return (
     <>
       {

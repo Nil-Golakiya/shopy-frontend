@@ -18,6 +18,16 @@ const CheckOut = ({ cart }) => {
         CartTotal()
     }, [cart])
 
+    useEffect(() => {
+        const scriptTag = document.createElement('script')
+        scriptTag.src = "/js/app-html.js"
+        document.body.appendChild(scriptTag);
+
+        return () => {
+            document.body.removeChild(scriptTag)
+        }
+    }, [])
+
 
     console.log(cart)
     return (
@@ -46,13 +56,13 @@ const CheckOut = ({ cart }) => {
                                     <li className="nav-item">
                                         <a className="nav-link" data-toggle="tab" href="#step3" data-step={3}><span>03.</span><span>Delivery Method</span></a>
                                     </li>
-                                    <li className="nav-item">
+                                    {/* <li className="nav-item">
                                         <a className="nav-link" data-toggle="tab" href="#step4" data-step={4}><span>04.</span><span>Payment Method</span></a>
-                                    </li>
+                                    </li> */}
                                 </ul>
-                                <div className="progress">
-                                    <div className="progress-bar progress-bar-success" role="progressbar" aria-valuenow={1} aria-valuemin={1} aria-valuemax={5} style={{ width: '25%' }} />
-                                </div>
+                                {/* <div className="progress">
+                                    <div className="progress-bar progress-bar-success" role="progressbar" aria-valuenow={1} aria-valuemin={1} aria-valuemax={3} style={{ width: '25%' }} />
+                                </div> */}
                             </div>
                             <div className="tab-content">
                                 <div className="tab-pane fade show active" id="step1">
@@ -98,10 +108,11 @@ const CheckOut = ({ cart }) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="clearfix">
+                                        {/* <div className="clearfix">
                                             <input id="formcheckoutCheckbox1" name="checkbox1" type="checkbox" />
                                             <label htmlFor="formcheckoutCheckbox1">Save address to my account</label>
-                                        </div>
+                                        </div> */}
+                                        <div className="mt-2" />
                                         <div className="text-right">
                                             <button type="button" className="btn btn-sm step-next">Continue</button>
                                         </div>
@@ -109,62 +120,30 @@ const CheckOut = ({ cart }) => {
                                 </div>
                                 <div className="tab-pane fade" id="step2">
                                     <div className="tab-pane-inside">
-                                        <div className="clearfix">
-                                            <input id="formcheckoutCheckbox2" name="checkbox2" type="checkbox" />
-                                            <label htmlFor="formcheckoutCheckbox2">The same as shipping address</label>
-                                        </div>
                                         <div className="mt-2" />
-                                        <label>Country:</label>
-                                        <div className="form-group select-wrapper">
-                                            <select className="form-control form-control--sm">
-                                                <option value="United States">United States</option>
-                                                <option value="Canada">Canada</option>
-                                                <option value="China">China</option>
-                                                <option value="India">India</option>
-                                                <option value="Italy">Italy</option>
-                                                <option value="Mexico">Mexico</option>
-                                            </select>
-                                        </div>
                                         <div className="row">
                                             <div className="col-sm-9">
-                                                <label>State:</label>
-                                                <div className="form-group select-wrapper">
-                                                    <select className="form-control form-control--sm">
-                                                        <option value="AL">Alabama</option>
-                                                        <option value="AK">Alaska</option>
-                                                        <option value="AZ">Arizona</option>
-                                                        <option value="AR">Arkansas</option>
-                                                        <option value="CA">California</option>
-                                                        <option value="CO">Colorado</option>
-                                                        <option value="CT">Connecticut</option>
-                                                        <option value="DE">Delaware</option>
-                                                        <option value="DC">District Of Columbia</option>
-                                                        <option value="FL">Florida</option>
-                                                        <option value="GA">Georgia</option>
-                                                        <option value="HI">Hawaii</option>
-                                                        <option value="ID">Idaho</option>
-                                                        <option value="IL">Illinois</option>
-                                                        <option value="IN">Indiana</option>
-                                                        <option value="IA">Iowa</option>
-                                                        <option value="KS">Kansas</option>
-                                                        <option value="KY">Kentucky</option>
-                                                        <option value="LA">Louisiana</option>
-                                                    </select>
+                                                <label>Country:</label>
+                                                <div className="form-group">
+                                                    <input type="text" className="form-control form-control--sm" />
                                                 </div>
                                             </div>
                                             <div className="col-sm-9">
-                                                <label>zip/postal code:</label>
+                                                <label>state:</label>
                                                 <div className="form-group">
                                                     <input type="text" className="form-control form-control--sm" />
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="mt-2" />
-                                        <label>Address 1:</label>
-                                        <div className="form-group">
-                                            <input type="text" className="form-control form-control--sm" />
+                                        <div className="row">
+                                            <div className="col-sm-9">
+                                                <label>city:</label>
+                                                <div className="form-group">
+                                                    <input type="text" className="form-control form-control--sm" />
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="mt-2" />
                                         <div className="text-right">
                                             <button type="button" className="btn btn-sm step-next">Continue</button>
                                         </div>
@@ -189,7 +168,7 @@ const CheckOut = ({ cart }) => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="tab-pane fade" id="step4">
+                                {/* <div className="tab-pane fade" id="step4">
                                     <div className="tab-pane-inside">
                                         <div className="clearfix">
                                             <input id="formcheckoutRadio4" defaultValue name="radio2" type="radio" className="radio" defaultChecked="checked" />
@@ -247,7 +226,7 @@ const CheckOut = ({ cart }) => {
                                     <div className="clearfix mt-1 mt-md-2">
                                         <button type="submit" className="btn btn--lg w-100">Place Order</button>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <div className="col-md-8 pl-lg-8 mt-2 mt-md-0">

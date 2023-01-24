@@ -13,46 +13,47 @@ import Product_list from './Pages/Product_list';
 import Product_page1 from './Pages/Product_page1';
 import Cart from './Pages/Cart';
 import CheckOut from './Pages/CheckOut';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Contactus from './Pages/Contactus';
 import Aboutus from './Pages/Aboutus';
+import Loader from './Components/Loader';
 let loaded = false;
 
 
 
 function App() {
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    const LoadExternalScript = () => {
-      const externalScript = document.createElement("script");
-      // externalScript.onerror = loadError;
-      externalScript.id = "external";
-      externalScript.async = true;
-      externalScript.type = "text/javascript";
-      externalScript.setAttribute("crossorigin", "anonymous");
-      document.body.appendChild(externalScript);
-      externalScript.src = '/js/app-html.js';
-    };
+  //   const LoadExternalScript = () => {
+  //     const externalScript = document.createElement("script");
+  //     // externalScript.onerror = loadError;
+  //     externalScript.id = "external";
+  //     externalScript.async = true;
+  //     externalScript.type = "text/javascript";
+  //     externalScript.setAttribute("crossorigin", "anonymous");
+  //     document.body.appendChild(externalScript);
+  //     externalScript.src = '/js/app-html.js';
+  //   };
 
-    LoadExternalScript()
+  //   LoadExternalScript()
 
-    // const script = document.createElement("script");
-    // script.src = "/js/app.js";
-    // script.async = true;
-    // document.body.appendChild(script);
+  //   // const script = document.createElement("script");
+  //   // script.src = "/js/app.js";
+  //   // script.async = true;
+  //   // document.body.appendChild(script);
 
-    // return () => {
-    //   document.body.removeChild(script);
-    // }
-    // require("./asstes/js/vendor-special/lazysizes.min.js")
-    // require("./asstes/js/vendor-special/ls.bgset.min.js")
-    // require("./asstes/js/vendor-special/ls.aspectratio.min.js")
-    // require("./asstes/js/vendor-special/jquery.min.js")
-    // require("./asstes/js/vendor-special/jquery.ez-plus.js")
-    // require("./asstes/js/vendor/vendor.min.js")
-    // require("./asstes/js/app-html.js")
-  }, [])
+  //   // return () => {
+  //   //   document.body.removeChild(script);
+  //   // }
+  //   // require("./asstes/js/vendor-special/lazysizes.min.js")
+  //   // require("./asstes/js/vendor-special/ls.bgset.min.js")
+  //   // require("./asstes/js/vendor-special/ls.aspectratio.min.js")
+  //   // require("./asstes/js/vendor-special/jquery.min.js")
+  //   // require("./asstes/js/vendor-special/jquery.ez-plus.js")
+  //   // require("./asstes/js/vendor/vendor.min.js")
+  //   // require("./asstes/js/app-html.js")
+  // }, [])
 
   return (
     <>
