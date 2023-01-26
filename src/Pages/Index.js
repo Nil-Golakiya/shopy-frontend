@@ -19,6 +19,9 @@ const Index = ({ Component }) => {
     }
     console.log("wishlistData", wishlist)
 
+    const clearCart = async () => {
+        const { data } = await axios.delete(`http://localhost:8800/cart/deltemany/${userId}`)
+    }
 
     const userData = JSON.parse(localStorage.getItem("persist:user"))
     const userId = JSON.parse(userData.Reducer)?.user?.user?._id
@@ -69,7 +72,7 @@ const Index = ({ Component }) => {
                 </header>
                 <div className="has-smround-btns has-loader-bg equal-height has-sm-container">
                     <Sidebar categoryData={categoryData} setCart={setCart} cart={cart} />
-                    <Component setCart={setCart} cart={cart} categoryData={categoryData} setWishlist={setWishlist} wishlist={wishlist} setLoading={setLoading} />
+                    <Component setCart={setCart} cart={cart} categoryData={categoryData} setWishlist={setWishlist} wishlist={wishlist} setLoading={setLoading} clearCart={clearCart} />
                 </div>
                 <Footer cart={cart} />
             </div>
