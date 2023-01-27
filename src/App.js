@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom"
 import Homepage from "./Pages/Index"
 import Dashboard from './Pages/Dashbord';
 import Login from './Pages/Login';
-import { toast, ToastContainer } from "react-toastify";
+import { Flip, toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Wishlist from './Pages/Wishlist';
 import Account_details from './Pages/Account_details';
@@ -60,7 +60,7 @@ function App() {
       <ToastContainer
         position="top-right"
         autoClose={5000}
-        hideProgressBar={true}
+        hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
         rtl={false}

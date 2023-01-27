@@ -11,8 +11,15 @@ import { toast, ToastContainer } from "react-toastify";
 const CheckOut = ({ cart, clearCart }) => {
 
     const [totalprice, setTotalPrice] = useState(0)
+    const [priceInfo, setPriceInfo] = useState({
+        totalprice: 0,
+        discount: 0,
+        shippingcharge: 40,
+    })
+    const [removeDiscountPrice, setRemoveDiscountPrice] = useState(0)
     const [finalPrice, setFinalPrice] = useState(0)
-    const [fromdata, setFormData] = useState()
+    const [coupon, setCoupon] = useState()
+    const [isValid, setIsValid] = useState(true)
     const user = localStorage.getItem("myuser");
 
     const Schema = yup.object().shape({
@@ -37,13 +44,45 @@ const CheckOut = ({ cart, clearCart }) => {
         resolver: yupResolver(Schema)
     });
 
+
+    const handleCoupon = async () => {
+        const couponData = await axios.get(`http://localhost:8800/coupon/${coupon}`);
+        console.log("couponData", couponData)
+        if (couponData.data.is_active === false) {
+            toast.error("Coupon Is Expire");
+        } else {
+            if (couponData.data.amount === null) {
+                if (couponData.data.min_amount < priceInfo.totalprice) {
+                    let checkDiscount = (priceInfo.totalprice * couponData.data.discount) / 100
+                    if (checkDiscount > couponData.data.max_discount_amount) {
+                        checkDiscount = couponData.data.max_discount_amount
+                    }
+                    checkDiscount = Math.round(checkDiscount)
+                    setPriceInfo({ ...priceInfo, discount: checkDiscount })
+                    setFinalPrice(finalPrice - checkDiscount)
+                    toast.success("Coupon Applied Successfully");
+                    setIsValid(false)
+                } else {
+                    toast.error("Coupon Is Invalid");
+                }
+            } else {
+                if (couponData.data.min_amount < priceInfo.totalprice) {
+                    setFinalPrice(finalPrice - couponData.data.amount)
+                    setIsValid(false)
+                }
+                toast.error("Coupon Is Invalid");
+            }
+        }
+    }
+
     const CartTotal = () => {
         let carttotal = 0;
         cart?.map((ele) => {
             carttotal += Math.round((ele.subVariation.price - (ele.subVariation.price / ele.subVariation.discount)) * ele.cart_quantity);
         })
-        setFinalPrice(carttotal + 40)
-        setTotalPrice(carttotal)
+        setRemoveDiscountPrice(carttotal + priceInfo.shippingcharge)
+        setFinalPrice(carttotal + priceInfo.shippingcharge)
+        setPriceInfo({ ...priceInfo, totalprice: carttotal })
     }
 
     console.log("errors---", errors)
@@ -52,21 +91,12 @@ const CheckOut = ({ cart, clearCart }) => {
 
     const handleErrors = () => {
         if (errors) {
-            toast.error("Please fill all details", {
-                position: "top-left",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error("Please fill all details");
             console.log("errors")
         }
     }
 
     const submitHandler = async (data) => {
-        console.log("#########")
         let oid = Math.floor(Math.random() * Date.now());
         const contact_info = {
             email: data.email,
@@ -86,10 +116,10 @@ const CheckOut = ({ cart, clearCart }) => {
                 "root": "",
                 "flow": "DEFAULT",
                 "data": {
-                    "orderId": oid, /* update order id */
-                    "token": txnToken, /* update token value */
+                    "orderId": oid,
+                    "token": txnToken,
                     "tokenType": "TXN_TOKEN",
-                    "amount": finalPrice /* update amount */
+                    "amount": finalPrice
                 },
                 "handler": {
                     "notifyMerchant": function (eventName, data) {
@@ -112,24 +142,27 @@ const CheckOut = ({ cart, clearCart }) => {
             if (txnData.cartClear) {
                 clearCart()
             }
-            toast.error(txnData.error, {
-                position: "top-left",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error(txnData.error);
         }
     }
 
-    const handleCoupon = () => {
-        const discount = 25;
-        
+    const handleChange = (e) => {
+        if (e.target.name == "coupon") {
+            setCoupon(e.target.value)
+        }
     }
 
-    // console.log(user_id)
+    const handleRemoveCoupon = () => {
+        setCoupon("")
+        setIsValid(true)
+        setFinalPrice(finalPrice + priceInfo.discount)
+        setIsValid(true)
+    }
+
+    console.log("priceInfo", priceInfo)
+
+
+    console.log("totalprice", priceInfo.totalprice)
 
 
     useEffect(() => {
@@ -161,8 +194,6 @@ const CheckOut = ({ cart, clearCart }) => {
     return (
         <div className="page-content">
             <head><meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" /></head>
-            {/* <script type="application/javascript" crossOrigin="anonymous"
-                src= /> */}
             <div className="holder breadcrumbs-wrap mt-0">
                 <div className="container">
                     <ul className="breadcrumbs">
@@ -246,10 +277,6 @@ const CheckOut = ({ cart, clearCart }) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            {/* <div className="clearfix">
-                                            <input id="formcheckoutCheckbox1" name="checkbox1" type="checkbox" />
-                                            <label htmlFor="formcheckoutCheckbox1">Save address to my account</label>
-                                        </div> */}
                                             <div className="mt-2" />
                                             <div className="text-right">
                                                 <button type="button" className="btn btn-sm step-next">Continue</button>
@@ -300,15 +327,15 @@ const CheckOut = ({ cart, clearCart }) => {
                                     <div className="tab-pane fade" id="step3">
                                         <div className="tab-pane-inside">
                                             <div className="clearfix">
-                                                <input id="formcheckoutRadio1" defaultValue name="radio1" type="radio" className="radio" defaultChecked="checked" onChange={() => setFinalPrice(totalprice + 40)} />
+                                                <input id="formcheckoutRadio1" defaultValue name="radio1" type="radio" className="radio" defaultChecked="checked" onChange={() => { setFinalPrice(priceInfo.totalprice + 40); setPriceInfo({ ...priceInfo, shippingcharge: 40 }) }} />
                                                 <label htmlFor="formcheckoutRadio1">Normal Delivery ₹ 40 (3-5 days)</label>
                                             </div>
                                             <div className="clearfix">
-                                                <input id="formcheckoutRadio2" defaultValue name="radio1" type="radio" className="radio" onChange={() => setFinalPrice(totalprice + 80)} />
+                                                <input id="formcheckoutRadio2" defaultValue name="radio1" type="radio" className="radio" onChange={() => { setFinalPrice(priceInfo.totalprice + 80); setPriceInfo({ ...priceInfo, shippingcharge: 80 }) }} />
                                                 <label htmlFor="formcheckoutRadio2">Express Delivery ₹80 (1-2 days)</label>
                                             </div>
                                             <div className="clearfix">
-                                                <input id="formcheckoutRadio3" defaultValue name="radio1" type="radio" className="radio" onChange={() => setFinalPrice(totalprice + 150)} />
+                                                <input id="formcheckoutRadio3" defaultValue name="radio1" type="radio" className="radio" onChange={() => { setFinalPrice(priceInfo.totalprice + 150); setPriceInfo({ ...priceInfo, shippingcharge: 150 }) }} />
                                                 <label htmlFor="formcheckoutRadio3">Same-Day ₹ 150 (Evening Delivery)</label>
                                             </div>
                                             <div className="text-right">
@@ -316,65 +343,6 @@ const CheckOut = ({ cart, clearCart }) => {
                                             </div>
                                         </div>
                                     </div>
-                                    {/* <div className="tab-pane fade" id="step4">
-                                    <div className="tab-pane-inside">
-                                        <div className="clearfix">
-                                            <input id="formcheckoutRadio4" defaultValue name="radio2" type="radio" className="radio" defaultChecked="checked" />
-                                            <label htmlFor="formcheckoutRadio4">Credit Card</label>
-                                        </div>
-                                        <div className="clearfix">
-                                            <input id="formcheckoutRadio5" defaultValue name="radio2" type="radio" className="radio" />
-                                            <label htmlFor="formcheckoutRadio5">Paypal</label>
-                                        </div>
-                                        <div className="mt-2" />
-                                        <label>Cart Number</label>
-                                        <div className="form-group">
-                                            <input type="text" className="form-control form-control--sm" />
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-sm-9">
-                                                <label>Month:</label>
-                                                <div className="form-group select-wrapper">
-                                                    <select className="form-control form-control--sm">
-                                                        <option selected value={1}>January</option>
-                                                        <option value={2}>February</option>
-                                                        <option value={3}>March</option>
-                                                        <option value={4}>April</option>
-                                                        <option value={5}>May</option>
-                                                        <option value={6}>June</option>
-                                                        <option value={7}>July</option>
-                                                        <option value={8}>August</option>
-                                                        <option value={9}>September</option>
-                                                        <option value={10}>October</option>
-                                                        <option value={11}>November</option>
-                                                        <option value={12}>December</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-9">
-                                                <label>Year:</label>
-                                                <div className="form-group select-wrapper">
-                                                    <select className="form-control form-control--sm">
-                                                        <option value={2019}>2019</option>
-                                                        <option value={2020}>2020</option>
-                                                        <option value={2021}>2021</option>
-                                                        <option value={2022}>2022</option>
-                                                        <option value={2023}>2023</option>
-                                                        <option value={2024}>2024</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="mt-2" />
-                                        <label>CVV Code</label>
-                                        <div className="form-group">
-                                            <input type="text" className="form-control form-control--sm" />
-                                        </div>
-                                    </div>
-                                    <div className="clearfix mt-1 mt-md-2">
-                                        <button type="submit" className="btn btn--lg w-100">Place Order</button>
-                                    </div>
-                                </div> */}
                                 </div>
                             </div>
                             <div className="col-md-8 pl-lg-8 mt-2 mt-md-0">
@@ -419,15 +387,20 @@ const CheckOut = ({ cart, clearCart }) => {
                                         <h3>Apply Promocode</h3>
                                         <p>Got a promo code? Then you're a few randomly combined numbers &amp; letters away from fab savings!</p>
                                         <div className="form-inline mt-2">
-                                            <input type="text" className="form-control form-control--sm" placeholder="Promotion/Discount Code" />
-                                            <button type="button" className="btn" onClick={() => handleCoupon()}>Apply</button>
+                                            <input type="text" className="form-control form-control--sm" disabled={!isValid} placeholder="Promotion/Discount Code" name="coupon" onChange={(e) => { handleChange(e) }} value={coupon} />
+                                            {
+                                                isValid ?
+                                                    <button type="button" className="btn" onClick={() => handleCoupon()}>Apply</button>
+                                                    :
+                                                    <button type="button" className="btn" onClick={() => handleRemoveCoupon()}>Remove</button>
+                                            }
                                         </div>
                                     </div>
                                 </div>
                                 <div className="mt-2" />
                                 <div className="cart-total-sm">
                                     <span>Subtotal</span>
-                                    <span className="card-total-price">₹ {finalPrice}</span>
+                                    <span className="card-total-price">₹ {Math.round(finalPrice)}</span>
                                 </div>
                                 <div className="mt-2" />
                             </div>
