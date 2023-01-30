@@ -1,7 +1,28 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import Account_sidebar from '../Components/Account_sidebar'
+import moment from "moment"
 
 const Account_order = () => {
+
+    const [orderData, setOrderData] = useState()
+
+    const userData = JSON.parse(localStorage.getItem("persist:user"))
+    const userId = JSON.parse(userData.Reducer).user.user._id
+
+    console.log("Account_order----", userId)
+
+
+    const fetchData = async () => {
+        const { data } = await axios.get(`http://localhost:8800/order/${userId}`)
+        setOrderData(data)
+        console.log("orderData", orderData)
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
     return (
         <div className="page-content">
             <div className="holder breadcrumbs-wrap mt-0">
@@ -31,62 +52,18 @@ const Account_order = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><b>175525</b> <a href="cart.html" className="ml-1">View Details</a></td>
-                                            <td>01.02.2017</td>
-                                            <td>Shipped</td>
-                                            <td><span className="color">$1252.00</span></td>
-                                            <td><a href="#" className="btn btn--grey btn--sm">REORDER</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td><b>189067</b> <a href="cart.html" className="ml-1">View Details</a></td>
-                                            <td>12.02.2017</td>
-                                            <td>Shipped</td>
-                                            <td><span className="color">$367.00</span></td>
-                                            <td><a href="#" className="btn btn--grey btn--sm">REORDER</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td><b>186543</b> <a href="cart.html" className="ml-1">View Details</a></td>
-                                            <td>03.04.2017</td>
-                                            <td>Shipped</td>
-                                            <td><span className="color">$587.00</span></td>
-                                            <td><a href="#" className="btn btn--grey btn--sm">REORDER</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td><b>209876</b> <a href="cart.html" className="ml-1">View Details</a></td>
-                                            <td>05.06.2017</td>
-                                            <td>Shipped</td>
-                                            <td><span className="color">$3654.00</span></td>
-                                            <td><a href="#" className="btn btn--grey btn--sm">REORDER</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td><b>215879</b> <a href="cart.html" className="ml-1">View Details</a></td>
-                                            <td>06.07.2017</td>
-                                            <td>Shipped</td>
-                                            <td><span className="color">$258.00</span></td>
-                                            <td><a href="#" className="btn btn--grey btn--sm">REORDER</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td><b>229876</b> <a href="cart.html" className="ml-1">View Details</a></td>
-                                            <td>12.08.2017</td>
-                                            <td>Shipped</td>
-                                            <td><span className="color">$314.00</span></td>
-                                            <td><a href="#" className="btn btn--grey btn--sm">REORDER</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td><b>268745</b> <a href="cart.html" className="ml-1">View Details</a></td>
-                                            <td>01.09.2017</td>
-                                            <td>Shipped</td>
-                                            <td><span className="color">$522.00</span></td>
-                                            <td><a href="#" className="btn btn--grey btn--sm">REORDER</a></td>
-                                        </tr>
+                                        {
+                                            orderData.map((ele) => (
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td><b>{ele.order_id}</b> <Link to="l" className="ml-1">View Details</Link></td>
+                                                    <td>{moment(ele.date).format('MMMM Do YYYY, h:mm:ss a')}</td>
+                                                    <td>{ele.status}</td>
+                                                    <td><span className="color">₹ {ele.total_price}</span></td>
+                                                    <td><a href="#" className="btn btn--grey btn--sm">REORDER</a></td>
+                                                </tr>
+                                            ))
+                                        }
                                     </tbody>
                                 </table>
                             </div>

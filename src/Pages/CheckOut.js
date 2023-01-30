@@ -10,17 +10,20 @@ import { toast, ToastContainer } from "react-toastify";
 
 const CheckOut = ({ cart, clearCart }) => {
 
-    const [totalprice, setTotalPrice] = useState(0)
+    const user = localStorage.getItem("myuser");
+
     const [priceInfo, setPriceInfo] = useState({
         totalprice: 0,
         discount: 0,
         shippingcharge: 40,
     })
-    const [removeDiscountPrice, setRemoveDiscountPrice] = useState(0)
     const [finalPrice, setFinalPrice] = useState(0)
     const [coupon, setCoupon] = useState()
     const [isValid, setIsValid] = useState(true)
-    const user = localStorage.getItem("myuser");
+    const [couponCode, setCouponCode] = useState()
+    const [productId, setProductId] = useState([])
+
+
 
     const Schema = yup.object().shape({
         first_name: yup.string().required(),
@@ -47,7 +50,7 @@ const CheckOut = ({ cart, clearCart }) => {
 
     const handleCoupon = async () => {
         const couponData = await axios.get(`http://localhost:8800/coupon/${coupon}`);
-        console.log("couponData", couponData)
+        console.log("couponData", couponData.data)
         if (couponData.data.is_active === false) {
             toast.error("Coupon Is Expire");
         } else {
@@ -62,15 +65,18 @@ const CheckOut = ({ cart, clearCart }) => {
                     setFinalPrice(finalPrice - checkDiscount)
                     toast.success("Coupon Applied Successfully");
                     setIsValid(false)
+                    setCouponCode(couponData.data.code)
                 } else {
                     toast.error("Coupon Is Invalid");
                 }
             } else {
                 if (couponData.data.min_amount < priceInfo.totalprice) {
                     setFinalPrice(finalPrice - couponData.data.amount)
+                    setPriceInfo({ ...priceInfo, discount: couponData.data.amount })
                     setIsValid(false)
+                    setCouponCode(couponData.data.code)
                 }
-                toast.error("Coupon Is Invalid");
+                toast.error("Coupon Is Invalid----------");
             }
         }
     }
@@ -80,20 +86,35 @@ const CheckOut = ({ cart, clearCart }) => {
         cart?.map((ele) => {
             carttotal += Math.round((ele.subVariation.price - (ele.subVariation.price / ele.subVariation.discount)) * ele.cart_quantity);
         })
-        setRemoveDiscountPrice(carttotal + priceInfo.shippingcharge)
         setFinalPrice(carttotal + priceInfo.shippingcharge)
         setPriceInfo({ ...priceInfo, totalprice: carttotal })
     }
 
+    const GetProductId = () => {
+        const Array = [];
+        cart?.map((ele) => {
+            Array.push(ele.variation_id.product_id)
+            setProductId(Array.concat(productId))
+        })
+    }
+
     console.log("errors---", errors)
+    console.log("couponCode---", couponCode)
+    console.log("cart---", cart)
+    console.log("cart---", productId)
 
     const user_id = cart[0]?.user_id;
 
     const handleErrors = () => {
-        if (errors) {
+        if (Object.keys(errors).length > 0) {
             toast.error("Please fill all details");
             console.log("errors")
         }
+    }
+
+    const discount = {
+        code: couponCode,
+        amount: priceInfo.discount
     }
 
     const submitHandler = async (data) => {
@@ -103,7 +124,7 @@ const CheckOut = ({ cart, clearCart }) => {
             phone_no: data.phone_no
         }
 
-        const ApiData = { oid, user_id, finalPrice, contact_info, data }
+        const ApiData = { oid, user_id, finalPrice, contact_info, data, discount, productId, cart }
         let a = await axios.post(`${process.env.REACT_APP_HOST}/api/pretransaction`, ApiData)
         console.log("ApiData", a)
         let txnData = await a.data;
@@ -129,7 +150,7 @@ const CheckOut = ({ cart, clearCart }) => {
                     }
                 }
             };
-            console.log("config", config)
+            console.log("############", data)
 
             console.log("window.Paytm.CheckoutJS", window.Paytm)
             window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
@@ -138,6 +159,7 @@ const CheckOut = ({ cart, clearCart }) => {
             }).catch(function onError(error) {
                 console.log("error => ", error);
             });
+            clearCart()
         } else {
             if (txnData.cartClear) {
                 clearCart()
@@ -157,6 +179,7 @@ const CheckOut = ({ cart, clearCart }) => {
         setIsValid(true)
         setFinalPrice(finalPrice + priceInfo.discount)
         setIsValid(true)
+        setCouponCode("")
     }
 
     console.log("priceInfo", priceInfo)
@@ -167,6 +190,10 @@ const CheckOut = ({ cart, clearCart }) => {
 
     useEffect(() => {
         CartTotal()
+    }, [cart])
+
+    useEffect(() => {
+        GetProductId()
     }, [cart])
 
     useEffect(() => {
