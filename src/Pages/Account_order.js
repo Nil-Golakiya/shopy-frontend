@@ -17,7 +17,7 @@ const Account_order = () => {
     const fetchData = async () => {
         const { data } = await axios.get(`http://localhost:8800/order/${userId}`)
         setOrderData(data)
-        console.log("orderData", orderData)
+        console.log("orderData", data)
     }
 
     useEffect(() => {
@@ -53,10 +53,10 @@ const Account_order = () => {
                                     </thead>
                                     <tbody>
                                         {
-                                            orderData.map((ele) => (
+                                            orderData?.map((ele) => (
                                                 <tr>
                                                     <td>1</td>
-                                                    <td><b>{ele.order_id}</b> <Link to="l" className="ml-1">View Details</Link></td>
+                                                    <td><b>{ele.order_id}</b> <Link to={`/account-order/${ele._id}`} className="ml-1">View Details</Link></td>
                                                     <td>{moment(ele.date).format('MMMM Do YYYY, h:mm:ss a')}</td>
                                                     <td>{ele.status}</td>
                                                     <td><span className="color">₹ {ele.total_price}</span></td>

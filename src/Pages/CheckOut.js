@@ -98,11 +98,6 @@ const CheckOut = ({ cart, clearCart }) => {
         })
     }
 
-    console.log("errors---", errors)
-    console.log("couponCode---", couponCode)
-    console.log("cart---", cart)
-    console.log("cart---", productId)
-
     const user_id = cart[0]?.user_id;
 
     const handleErrors = () => {
@@ -124,12 +119,12 @@ const CheckOut = ({ cart, clearCart }) => {
             phone_no: data.phone_no
         }
 
-        const ApiData = { oid, user_id, finalPrice, contact_info, data, discount, productId, cart }
+        const shippingCharge = priceInfo.shippingcharge;
+
+        const ApiData = { oid, user_id, finalPrice, contact_info, data, discount, productId, cart, shippingCharge }
         let a = await axios.post(`${process.env.REACT_APP_HOST}/api/pretransaction`, ApiData)
         console.log("ApiData", a)
         let txnData = await a.data;
-        // const test = JSON.parse(txnData.myr);
-        console.log("txnData", txnData)
         if (txnData.success) {
             let txnToken = await txnData.myr.txnToken;
             console.log("txnToken", txnToken)
@@ -150,11 +145,7 @@ const CheckOut = ({ cart, clearCart }) => {
                     }
                 }
             };
-            console.log("############", data)
-
-            console.log("window.Paytm.CheckoutJS", window.Paytm)
             window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
-                // after successfully updating configuration, invoke JS Checkout
                 window.Paytm.CheckoutJS.invoke();
             }).catch(function onError(error) {
                 console.log("error => ", error);
@@ -181,12 +172,6 @@ const CheckOut = ({ cart, clearCart }) => {
         setIsValid(true)
         setCouponCode("")
     }
-
-    console.log("priceInfo", priceInfo)
-
-
-    console.log("totalprice", priceInfo.totalprice)
-
 
     useEffect(() => {
         CartTotal()
@@ -217,7 +202,6 @@ const CheckOut = ({ cart, clearCart }) => {
     }, [])
 
 
-    console.log(cart)
     return (
         <div className="page-content">
             <head><meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" /></head>

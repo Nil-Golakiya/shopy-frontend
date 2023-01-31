@@ -17,6 +17,7 @@ import { useEffect, useState } from 'react';
 import Contactus from './Pages/Contactus';
 import Aboutus from './Pages/Aboutus';
 import Loader from './Components/Loader';
+import Order_details from './Pages/Order_details';
 let loaded = false;
 
 
@@ -74,6 +75,7 @@ function App() {
         <Route exact path="/account-details" element={<Homepage Component={Account_details} />} />
         <Route exact path="/account-address" element={<Homepage Component={Account_address} />} />
         <Route exact path="/account-order" element={<Homepage Component={Account_order} />} />
+        <Route exact path="/account-order/:id" element={<Homepage Component={Order_details} />} />
         <Route path="/products">
           <Route path=":category" element={<Homepage Component={Product_list} />} />
           <Route path=":category/:subcategory" element={<Homepage Component={Product_list} />} />
