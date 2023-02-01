@@ -91,7 +91,7 @@ const Order_details = () => {
                             <div className="row justify-content-between">
                                 <div className="col-auto"><p className="mb-1 text-dark"><b>Order Details</b></p></div>
                                 <div className="flex-sm-col text-right col"> <p className="mb-1"><b>Total</b></p> </div>
-                                <div className="flex-sm-col col-auto"> <p className="mb-1">₹ {orderData?.total_price}</p> </div>
+                                <div className="flex-sm-col col-auto"> <p className="mb-1">₹ {orderData?.total_price - orderData?.shippingCharge + (orderData?.discount?.amount)}</p> </div>
                             </div>
                             <div className="row justify-content-between">
                                 <div className="flex-sm-col text-right col"><p className="mb-1"> <b>Discount</b></p> </div>
@@ -112,7 +112,7 @@ const Order_details = () => {
                         <div className="row justify-content-between ">
                             <div className="col-sm-auto col-auto my-auto"><img className="img-fluid my-auto align-self-center " src={logo} width={115} height={115} /></div>
                             <div className="col-auto my-auto "><h2 className="mb-0 font-weight-bold">TOTAL PAID</h2></div>
-                            <div className="col-auto my-auto ml-auto"><h1 className="display-3" style={{ margin: "22px", fontSize: "3rem" }}>₹ {orderData?.total_price + orderData?.shippingCharge - (orderData?.discount?.amount)}</h1></div>
+                            <div className="col-auto my-auto ml-auto"><h1 className="display-3" style={{ margin: "22px", fontSize: "3rem" }}>₹ {orderData?.total_price}</h1></div>
                         </div>
                     </div>
                 </div>
