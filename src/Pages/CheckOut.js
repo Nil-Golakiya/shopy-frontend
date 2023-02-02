@@ -112,6 +112,8 @@ const CheckOut = ({ cart, clearCart }) => {
         amount: priceInfo.discount
     }
 
+    console.log("finalPrice",finalPrice)
+
     const submitHandler = async (data) => {
         let oid = Math.floor(Math.random() * Date.now());
         const contact_info = {
