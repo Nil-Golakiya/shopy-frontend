@@ -11346,12 +11346,8 @@ body.boxed .dropdn.dropdn_fullheight .dropdn-content {
 
 .minicart-empty-icon [class*='icon'] {
     font-size: 215px;
-
-    position: absolute;
     top: 50%;
     left: 50%;
-
-    transform: translate(-50%, -50%);
 }
 
 .minicart-empty-icon>svg {

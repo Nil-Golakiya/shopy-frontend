@@ -18,6 +18,7 @@ import Contactus from './Pages/Contactus';
 import Aboutus from './Pages/Aboutus';
 import Loader from './Components/Loader';
 import Order_details from './Pages/Order_details';
+import Error_page from './Pages/Error_page';
 let loaded = false;
 
 
@@ -85,6 +86,7 @@ function App() {
         <Route exact path="/checkout" element={<Homepage Component={CheckOut} />} />
         <Route exact path="/contact" element={<Homepage Component={Contactus} />} />
         <Route exact path="/about" element={<Homepage Component={Aboutus} />} />
+        <Route exact path="*" element={<Homepage Component={Error_page} />} />
         <Route exact path="/login" element={<Login />} />
       </Routes>
     </>

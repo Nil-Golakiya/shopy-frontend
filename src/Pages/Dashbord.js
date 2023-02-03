@@ -46,9 +46,9 @@ const Dashbord = ({ categoryData, setWishlist, wishlist }) => {
     document.body.appendChild(scriptTag);
 
     return () => {
-        document.body.removeChild(scriptTag)
+      document.body.removeChild(scriptTag)
     }
-}, [])
+  }, [])
 
 
   console.log("categoryData", categoryData)
@@ -138,23 +138,67 @@ const Dashbord = ({ categoryData, setWishlist, wishlist }) => {
       </div>
       <div class="holder holder-mt-xsmall">
         <div class="container">
-          <div class="row vert-margin-small">
-            {
-              categoryData && categoryData.map((ele) => (
-                <div class="col-sm">
-                  <a href="category.html" class="collection-grid-3-item image-hover-scale">
-                    <div class="collection-grid-3-item-img image-container" style={{ paddingBottom: "93.68%" }}>
-                      <img src={ele.img} class="lazyload fade-up rounded-circle" alt="Banner" />
-                      <div class="foxic-loader"></div>
-                    </div>
-                    <div class="collection-grid-3-caption-bg">
-                      <h3 class="collection-grid-3-title">{ele.name}</h3>
-                      <h4 class="collection-grid-3-subtitle">The&nbsp;Best&nbsp;Look&nbsp;Anywhere</h4>
-                    </div>
-                  </a>
+          <div className="row vert-margin-small">
+            <div className="col-sm">
+              <a href="category.html" className="collection-grid-3-item image-hover-scale">
+                <div className="collection-grid-3-item-img image-container" style={{ paddingBottom: '93.68%' }}>
+                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/banner-fashion-2-02.webp" className="lazyload fade-up" alt="Banner" />
+                  <div className="foxic-loader" />
                 </div>
-              ))
-            }
+                <div className="collection-grid-3-caption-bg">
+                  <h3 className="collection-grid-3-title">Accessories</h3>
+                  <h4 className="collection-grid-3-subtitle">The&nbsp;Best&nbsp;Look&nbsp;Anywhere</h4>
+                </div>
+              </a>
+            </div>
+            <div className="col-sm">
+              <a href="category.html" className="collection-grid-3-item image-hover-scale">
+                <div className="collection-grid-3-item-img image-container" style={{ paddingBottom: '93.68%' }}>
+                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/banner-fashion-2-02.webp" className="lazyload fade-up" alt="Banner" />
+                  <div className="foxic-loader" />
+                </div>
+                <div className="collection-grid-3-caption-bg">
+                  <h3 className="collection-grid-3-title">Accessories</h3>
+                  <h4 className="collection-grid-3-subtitle">The&nbsp;Best&nbsp;Look&nbsp;Anywhere</h4>
+                </div>
+              </a>
+            </div>
+            <div className="col-sm">
+              <a href="category.html" className="collection-grid-3-item image-hover-scale">
+                <div className="collection-grid-3-item-img image-container" style={{ paddingBottom: '93.68%' }}>
+                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/banner-fashion-2-02.webp" className="lazyload fade-up" alt="Banner" />
+                  <div className="foxic-loader" />
+                </div>
+                <div className="collection-grid-3-caption-bg">
+                  <h3 className="collection-grid-3-title">Accessories</h3>
+                  <h4 className="collection-grid-3-subtitle">The&nbsp;Best&nbsp;Look&nbsp;Anywhere</h4>
+                </div>
+              </a>
+            </div>
+            <div className="col-sm">
+              <a href="category.html" className="collection-grid-3-item image-hover-scale">
+                <div className="collection-grid-3-item-img image-container" style={{ paddingBottom: '93.68%' }}>
+                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/banner-fashion-2-02.webp" className="lazyload fade-up" alt="Banner" />
+                  <div className="foxic-loader" />
+                </div>
+                <div className="collection-grid-3-caption-bg">
+                  <h3 className="collection-grid-3-title">Accessories</h3>
+                  <h4 className="collection-grid-3-subtitle">The&nbsp;Best&nbsp;Look&nbsp;Anywhere</h4>
+                </div>
+              </a>
+            </div>
+            <div className="col-sm">
+              <a href="category.html" className="collection-grid-3-item image-hover-scale">
+                <div className="collection-grid-3-item-img image-container" style={{ paddingBottom: '93.68%' }}>
+                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/banner-fashion-2-04.webp" className="lazyload fade-up" alt="Banner" />
+                  <div className="foxic-loader" />
+                </div>
+                <div className="collection-grid-3-caption-bg">
+                  <h3 className="collection-grid-3-title">Fashion</h3>
+                  <h4 className="collection-grid-3-subtitle">Live&nbsp;According&nbsp;to&nbsp;Fashion</h4>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       </div>

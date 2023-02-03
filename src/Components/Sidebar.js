@@ -98,39 +98,38 @@ const Sidebar = ({ categoryData, setCart, cart }) => {
                     <div className="dropdn-close"><span className="js-dropdn-close">Close</span></div>
                     <div className="minicart-drop-content js-dropdn-content-scroll">
                         {
-                            cart.map((ele) => (
-                                <div className="minicart-prd row">
-                                    <div className="minicart-prd-image image-hover-scale-circle col">
-                                        <a href="product.html"><img className="lazyload fade-up"
-                                            src={ele.subVariation.image} alt="" style={{ height: "100px", objectFit: "contain" }} /></a>
-                                    </div>
-                                    <div className="minicart-prd-info col">
-                                        <div className="minicart-prd-tag">Shopy</div>
-                                        <h2 className="minicart-prd-name"><a href="#">{ele.subVariation.product_name}</a></h2>
-                                        <div className="minicart-prd-qty"><span className="minicart-prd-qty-label">Quantity:</span><span
-                                            className="minicart-prd-qty-value">{ele.cart_quantity}</span></div>
-                                        <div className="minicart-prd-price prd-price">
-                                            <div className="price-old">₹ {ele.subVariation.price}</div>
-                                            <div className="price-new">₹ {ele.subVariation.price - ele.subVariation.price / ele.subVariation.discount}</div>
+                            cart && cart.length > 0 ?
+                                (
+                                    cart.map((ele) => (
+                                        <div className="minicart-prd row">
+                                            <div className="minicart-prd-image image-hover-scale-circle col">
+                                                <a href="product.html"><img className="lazyload fade-up"
+                                                    src={ele.subVariation.image} alt="" style={{ height: "100px", objectFit: "contain" }} /></a>
+                                            </div>
+                                            <div className="minicart-prd-info col">
+                                                <div className="minicart-prd-tag">Shopy</div>
+                                                <h2 className="minicart-prd-name"><a href="#">{ele.subVariation.product_name}</a></h2>
+                                                <div className="minicart-prd-qty"><span className="minicart-prd-qty-label">Quantity:</span><span
+                                                    className="minicart-prd-qty-value">{ele.cart_quantity}</span></div>
+                                                <div className="minicart-prd-price prd-price">
+                                                    <div className="price-old">₹ {ele.subVariation.price}</div>
+                                                    <div className="price-new">₹ {ele.subVariation.price - ele.subVariation.price / ele.subVariation.discount}</div>
+                                                </div>
+                                            </div>
+                                            <div className="minicart-prd-action">
+                                                <a href="#" className="js-product-remove" data-line-number="1"><i className="icon-recycle" onClick={() => handleDelete(ele._id)}></i></a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="minicart-prd-action">
-                                        <a href="#" className="js-product-remove" data-line-number="1"><i className="icon-recycle" onClick={() => handleDelete(ele._id)}></i></a>
+                                    ))
+                                ) :
+                                <div className="minicart-empty js-minicart-empty">
+                                    <div className="minicart-empty-text">Your cart is empty</div>
+                                    <div className="minicart-empty-icon">
+                                        <i className="icon-shopping-bag"></i>
                                     </div>
                                 </div>
-                            ))
                         }
-                        <div className="minicart-empty js-minicart-empty d-none">
-                            <div className="minicart-empty-text">Your cart is empty</div>
-                            <div className="minicart-empty-icon">
-                                <i className="icon-shopping-bag"></i>
-                                {/* <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 306 262"
-								style="enable-background:new 0 0 306 262;" xml:space="preserve">
-								<path className="st0"
-									d="M78.1,59.5c0,0-37.3,22-26.7,85s59.7,237,142.7,283s193,56,313-84s21-206-69-240s-249.4-67-309-60C94.6,47.6,78.1,59.5,78.1,59.5z" />
-							</svg> */}
-                            </div>
-                        </div>
+
                     </div>
                     <div className="minicart-drop-fixed js-hide-empty">
                         <div className="loader-horizontal-sm js-loader-horizontal-sm" data-loader-horizontal=""><span></span>
