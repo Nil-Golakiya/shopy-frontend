@@ -17663,10 +17663,10 @@ body:not(.has-sticky) .bnr-sticky {
         overflow: visible;
     }
 
-    .prd.hovered:not(.prd--action-off) .prd-price,
+    /* .prd.hovered:not(.prd--action-off) .prd-price,
     .prd.hovered:not(.prd--action-off) .prd-action {
         transform: translateY(-43px);
-    }
+    } */
 
     .prd.hovered .countdown-box {
         transform: scale(.5);
