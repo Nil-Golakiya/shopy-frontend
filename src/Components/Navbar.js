@@ -91,7 +91,6 @@ const Navbar = ({ categoryData, cart, wishlist }) => {
                                     <ul className="mmenu mmenu-js" id="navbarList">
                                         {
                                             categoryData && categoryData.map((cat) => {
-                                                console.log("fbdihubi7uyfv")
                                                 return (
                                                     <li className="mmenu-item--simple" key={cat._id}><Link to={`/products/${cat.name}`}>{cat.name}</Link>
                                                         <div className="mmenu-submenu">

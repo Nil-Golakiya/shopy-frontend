@@ -16,9 +16,6 @@ const Wishlist = ({ wishlist, setWishlist }) => {
             document.body.removeChild(scriptTag)
         }
     }, [])
-
-    console.log("wishlist", wishlist)
-
     return (
         <div className="page-content">
             <div className="holder">

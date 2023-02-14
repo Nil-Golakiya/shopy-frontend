@@ -86,7 +86,6 @@ const Login = () => {
                     password: formdata1.password,
                     roles: "user"
                 })
-                console.log("signupData", signupData)
                 const userData = signupData.data;
                 if (userData.status) {
                     toast.success(userData.message);

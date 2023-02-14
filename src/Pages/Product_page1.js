@@ -68,14 +68,7 @@ const Product_page1 = ({ setCart, cart }) => {
         data.variations.map((ele) => (
             imageArray.push(ele.image)
         ))
-        console.log("data", data)
-        console.log("variationObj", variationObj)
-
     }
-
-    console.log("activeInfo", activeInfo)
-    console.log("images", images)
-    console.log("params", params)
 
     useEffect(() => {
         fetchData()

@@ -30,7 +30,8 @@ const Dashbord = ({ categoryData, setWishlist, wishlist }) => {
     const getparams = {}
     getparams.category_id = name;
     const { data } = await axios.get("http://localhost:8800/product/categorywiseproduct", { params: getparams });
-    setCollectionData(data)
+    const Data = data.data;
+    setCollectionData(Data)
   }
 
 
@@ -49,10 +50,6 @@ const Dashbord = ({ categoryData, setWishlist, wishlist }) => {
       document.body.removeChild(scriptTag)
     }
   }, [])
-
-
-  console.log("categoryData", categoryData)
-  console.log("featuredData", featuredData)
 
   return (
     <div className="page-content">
@@ -222,7 +219,7 @@ const Dashbord = ({ categoryData, setWishlist, wishlist }) => {
           </div>
           <div className="prd-grid-wrap">
             <div class="prd-grid data-to-show-4 data-to-show-md-3 data-to-show-sm-2 data-to-show-xs-2" data-grid-tab-content>
-              {collectionData && collectionData.map((item) => (
+              {collectionData && collectionData?.map((item) => (
                 <ProductCard item={item} setWishlist={setWishlist} wishlist={wishlist} />
               ))}
             </div>

@@ -21,7 +21,8 @@ const Product_list = ({ setWishlist, wishlist }) => {
         }
 
         const { data } = await axios.get("http://localhost:8800/product/categorywiseproduct", { params: getparams });
-        setData(data)
+        const Data = data.data;
+        setData(Data)
     }
 
     useEffect(() => {
@@ -32,7 +33,7 @@ const Product_list = ({ setWishlist, wishlist }) => {
         const scriptTag = document.createElement('script')
         scriptTag.src = "/js/app-html.js"
         document.body.appendChild(scriptTag);
-    
+
         return () => {
             document.body.removeChild(scriptTag)
         }

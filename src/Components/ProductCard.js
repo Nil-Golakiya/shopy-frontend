@@ -30,13 +30,11 @@ const ProductCard = ({ item, setWishlist, wishlist }) => {
         Array.push(data.data);
         setWishlist(Array.concat(wishlist))
         setIsWishlist(data.data._id)
-        console.log("wishlistData", data)
     }
 
     const handleRemoveWishlist = async (id) => {
         setIsWishlist(false)
         const data = await axios.delete(`http://localhost:8800/wishlist/${id}`)
-        console.log("id----", id)
         setWishlist(wishlist.filter((e) => e.wishlist_id !== id))
     }
 

@@ -50,7 +50,6 @@ const CheckOut = ({ cart, clearCart }) => {
 
     const handleCoupon = async () => {
         const couponData = await axios.get(`http://localhost:8800/coupon/${coupon}`);
-        console.log("couponData", couponData.data)
         if (couponData.data.is_active === false) {
             toast.error("Coupon Is Expire");
         } else {
@@ -122,11 +121,9 @@ const CheckOut = ({ cart, clearCart }) => {
 
         const ApiData = { oid, user_id, finalPrice, contact_info, data, discount, productId, cart, shippingCharge }
         let a = await axios.post(`${process.env.REACT_APP_HOST}/api/pretransaction`, ApiData)
-        console.log("ApiData", a)
         let txnData = await a.data;
         if (txnData.success) {
             let txnToken = await txnData.myr.txnToken;
-            console.log("txnToken", txnToken)
             var config = {
                 "root": "",
                 "flow": "DEFAULT",

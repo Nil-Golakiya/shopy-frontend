@@ -14,10 +14,9 @@ const Index = ({ Component }) => {
 
     const fetchWishlistData = async () => {
         const { data } = await axios.get(`http://localhost:8800/wishlist/${userId}`)
-        setWishlist(data)
-        console.log("1")
+        const Data = data.data;
+        setWishlist(Data)
     }
-    console.log("wishlistData", wishlist)
 
     const clearCart = async () => {
         const { data } = await axios.delete(`http://localhost:8800/cart/deltemany/${userId}`)
@@ -30,7 +29,6 @@ const Index = ({ Component }) => {
         setLoading(true)
         const { data } = await axios.get("http://localhost:8800/category/Customercategory")
         setCategoryData(data)
-        console.log("2")
 
     }
 
@@ -38,8 +36,6 @@ const Index = ({ Component }) => {
         if (userId) {
             const { data } = await axios.get(`http://localhost:8800/cart/${userId}`)
             setCart(data)
-            console.log("3")
-
         }
     }
 
