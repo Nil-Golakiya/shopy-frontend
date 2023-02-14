@@ -11,19 +11,21 @@ const Index = ({ Component }) => {
     const [wishlist, setWishlist] = useState([])
     const [loading, setLoading] = useState(false)
 
+    const userData = JSON.parse(localStorage.getItem("persist:user"))
+    const userId = JSON.parse(userData?.Reducer)?.user?.user?._id
+
 
     const fetchWishlistData = async () => {
-        const { data } = await axios.get(`http://localhost:8800/wishlist/${userId}`)
-        const Data = data.data;
-        setWishlist(Data)
+        if (userId) {
+            const { data } = await axios.get(`http://localhost:8800/wishlist/${userId}`)
+            const Data = data.data;
+            setWishlist(Data)
+        }
     }
 
     const clearCart = async () => {
         const { data } = await axios.delete(`http://localhost:8800/cart/deltemany/${userId}`)
     }
-
-    const userData = JSON.parse(localStorage.getItem("persist:user"))
-    const userId = JSON.parse(userData.Reducer)?.user?.user?._id
 
     const fetchData = async () => {
         setLoading(true)

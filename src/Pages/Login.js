@@ -11,7 +11,6 @@ import { LoginStart, LoginFailure, LoginSuccess } from '../Redux/Action'
 import { useSelector, useDispatch } from "react-redux";
 
 
-
 const Login = () => {
 
     const [classList, setClassList] = useState('')
@@ -78,18 +77,22 @@ const Login = () => {
     }
 
     const signupsubmithandler = async (formdata1) => {
+        console.log("formdata1", formdata1)
         try {
             if (formdata1.password === formdata1.confirmpassword) {
                 const signupData = await axios.post("http://localhost:8800/auth/signup", {
+                    first_name: formdata1.first_name,
+                    last_name: formdata1.last_name,
                     user_name: formdata1.user_name,
                     email: formdata1.email,
+                    phone: formdata1.phone,
                     password: formdata1.password,
                     roles: "user"
                 })
                 const userData = signupData.data;
                 if (userData.status) {
                     toast.success(userData.message);
-                    navigate("/")
+                    setClassList("")
                 } else {
                     toast.error(userData.message)
                 }
@@ -97,7 +100,6 @@ const Login = () => {
         } catch (error) {
             toast.error("Invalid Credentials");
         }
-
     }
 
     return (
@@ -132,7 +134,19 @@ const Login = () => {
                         <h2 className="title">Sign up</h2>
                         <div className="input-field">
                             <i className="fas fa-user"></i>
+                            <input type="text" name="first_name" placeholder="First name" {...register1('first_name', { required: true })} />
+                        </div>
+                        <div className="input-field">
+                            <i className="fas fa-user"></i>
+                            <input type="text" name="last_name" placeholder="Last Name" {...register1('last_name', { required: true })} />
+                        </div>
+                        <div className="input-field">
+                            <i className="fas fa-user"></i>
                             <input type="text" name="user_name" placeholder="username" {...register1('user_name', { required: true })} />
+                        </div>
+                        <div className="input-field">
+                            <i className="fas fa-user"></i>
+                            <input type="text" name="phone" placeholder="Phone" {...register1('phone', { required: true })} />
                         </div>
                         <div className="input-field">
                             <i className="fas fa-envelope"></i>
