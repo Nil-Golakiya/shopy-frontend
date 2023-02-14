@@ -6,7 +6,6 @@ import { Link } from "react-router-dom"
 
 const Navbar = ({ categoryData, cart, wishlist }) => {
 
-    console.log("wishlist.length", wishlist.length)
     const [totalprice, setTotalPrice] = useState()
 
     const CartTotal = () => {
@@ -17,15 +16,12 @@ const Navbar = ({ categoryData, cart, wishlist }) => {
         setTotalPrice(carttotal)
     }
 
-    console.log("totalprice navbar", totalprice)
-
     useEffect(() => {
         CartTotal()
     }, [cart])
 
     useEffect(() => {
         const list = document.getElementById("navbarList")
-        console.log("list", list)
     }, [])
 
     return (

@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom'
 const Footer = () => {
 
     const cartItem = JSON.parse(localStorage.getItem("cartItem"));
-    console.log("cartItem-------------", cartItem)
-
 
     return (
         <div>

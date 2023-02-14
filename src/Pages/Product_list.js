@@ -22,7 +22,6 @@ const Product_list = ({ setWishlist, wishlist }) => {
 
         const { data } = await axios.get("http://localhost:8800/product/categorywiseproduct", { params: getparams });
         setData(data)
-        console.log("productlistData", data)
     }
 
     useEffect(() => {
@@ -38,10 +37,6 @@ const Product_list = ({ setWishlist, wishlist }) => {
             document.body.removeChild(scriptTag)
         }
     }, [])
-
-
-
-    console.log("data", data)
 
     return (
         <div className="page-content">

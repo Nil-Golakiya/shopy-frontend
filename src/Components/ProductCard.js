@@ -67,8 +67,6 @@ const ProductCard = ({ item, setWishlist, wishlist }) => {
         })
     }, [])
 
-    // console.log("item", item)
-    console.log("wishlist", wishlist)
 
     return (
         <div className="prd prd--style2 prd-labels--max prd-labels-shadow ">
@@ -99,8 +97,6 @@ const ProductCard = ({ item, setWishlist, wishlist }) => {
                                         </li>
                                     ))
                                 }
-                                {/* <li data-image="images/skins/fashion/products/product-01-color-2.webp"><a className="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-black.html" alt="" /></a></li>
-                                <li data-image="images/skins/fashion/products/product-01-color-3.webp"><a className="js-color-toggle" data-toggle="tooltip" data-placement="left" title="Color Name"><img src="images/colorswatch/color-red.html" alt="" /></a></li> */}
                             </ul>
                         </div>
                     </div>
@@ -112,9 +108,6 @@ const ProductCard = ({ item, setWishlist, wishlist }) => {
                                 </a>
                             </li>
                         )}
-
-                        {/* <li data-image="images/skins/fashion/products/product-01-2.webp"><a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-01-2.webp" className="lazyload fade-up" alt="Color Name" /></a></li>
-                        <li data-image="images/skins/fashion/products/product-01-3.webp"><a href="#" className="js-color-toggle" data-toggle="tooltip" data-placement="right" title="Color Name"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/products/product-01-3.webp" className="lazyload fade-up" alt="Color Name" /></a></li> */}
                     </ul>
                 </div>
                 <div className="prd-info">

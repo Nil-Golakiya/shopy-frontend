@@ -34,9 +34,6 @@ const Sidebar = ({ categoryData, setCart, cart }) => {
         CartTotal()
     }, [cart])
 
-    console.log("sidebarcart", cart);
-    console.log("data mobie", categoryData);
-
     return (
         <div className="header-side-panel">
             <div className="mobilemenu js-push-mbmenu">

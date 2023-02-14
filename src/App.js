@@ -13,13 +13,11 @@ import Product_list from './Pages/Product_list';
 import Product_page1 from './Pages/Product_page1';
 import Cart from './Pages/Cart';
 import CheckOut from './Pages/CheckOut';
-import { useEffect, useState } from 'react';
 import Contactus from './Pages/Contactus';
 import Aboutus from './Pages/Aboutus';
-import Loader from './Components/Loader';
 import Order_details from './Pages/Order_details';
 import Error_page from './Pages/Error_page';
-let loaded = false;
+
 
 
 

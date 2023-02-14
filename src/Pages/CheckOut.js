@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from 'axios'
-import { toast, ToastContainer } from "react-toastify";
+import { toast} from "react-toastify";
 
 
 
@@ -103,7 +103,6 @@ const CheckOut = ({ cart, clearCart }) => {
     const handleErrors = () => {
         if (Object.keys(errors).length > 0) {
             toast.error("Please fill all details");
-            console.log("errors")
         }
     }
 
@@ -111,8 +110,6 @@ const CheckOut = ({ cart, clearCart }) => {
         code: couponCode,
         amount: priceInfo.discount
     }
-
-    console.log("finalPrice",finalPrice)
 
     const submitHandler = async (data) => {
         let oid = Math.floor(Math.random() * Date.now());

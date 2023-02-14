@@ -38,7 +38,6 @@ const Product_page1 = ({ setCart, cart }) => {
         })
         setCart([...cart, resData])
     }
-    console.log("cart----------", activeInfo)
 
     const handleGotoCart = () => {
         navigate("/cart")

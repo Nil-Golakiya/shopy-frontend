@@ -8,9 +8,6 @@ const Cart = ({ cart, setCart }) => {
   const [totalprice, setTotalPrice] = useState()
   const navigate = useNavigate()
 
-
-  console.log("CartPage", cart)
-
   const CartTotal = () => {
     let carttotal = 0;
     cart?.map((ele) => {
@@ -46,7 +43,6 @@ const Cart = ({ cart, setCart }) => {
       setCart(cartObject)
       const dataObj = cartObject.find(ele => ele._id === item._id)
       const data = axios.put(`http://localhost:8800/cart/${dataObj._id}`, dataObj)
-      console.log("dataObj", data)
     }
   }
 

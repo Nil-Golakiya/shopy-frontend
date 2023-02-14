@@ -9,15 +9,11 @@ const Account_order = () => {
     const [orderData, setOrderData] = useState()
 
     const userData = JSON.parse(localStorage.getItem("persist:user"))
-    const userId = JSON.parse(userData.Reducer).user.user._id
-
-    console.log("Account_order----", userId)
-
+    const userId = JSON.parse(userData.Reducer).user.user._id;
 
     const fetchData = async () => {
         const { data } = await axios.get(`http://localhost:8800/order/${userId}`)
         setOrderData(data)
-        console.log("orderData", data)
     }
 
     useEffect(() => {

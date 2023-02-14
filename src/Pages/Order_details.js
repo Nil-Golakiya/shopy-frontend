@@ -12,7 +12,6 @@ const Order_details = () => {
     const [orderDetails, setOrderDetails] = useState()
 
     const params = useParams()
-    console.log("params", params.id)
 
     const userData = JSON.parse(localStorage.getItem("persist:user"))
     const userName = JSON.parse(userData.Reducer).user.user.user_name
@@ -20,7 +19,6 @@ const Order_details = () => {
     const fetchData = async () => {
         const { data } = await axios.get(`http://localhost:8800/order/orderdetils/${params.id}`)
         setOrderData(data)
-        console.log("orderData", data)
         setPaymentInfo(JSON.parse(data.paymentInfo))
         getOrderDetails(data)
     }
@@ -30,13 +28,9 @@ const Order_details = () => {
 
         data.order_details_id?.map((element) => {
             Array.push(element)
-            console.log("data------", Array)
         })
         setOrderDetails(Array)
     }
-
-    console.log("orderDetails", orderDetails)
-    console.log("paymentInfo", paymentInfo)
 
     useEffect(() => {
         fetchData()
