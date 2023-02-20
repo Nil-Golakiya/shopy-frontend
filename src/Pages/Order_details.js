@@ -32,15 +32,33 @@ const Order_details = () => {
         setOrderDetails(Array)
     }
 
+    const printDiv = (divName) => {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+
     useEffect(() => {
         fetchData()
     }, [params])
+
+    useEffect(() => {
+        const scriptTag = document.createElement('script')
+        scriptTag.src = "/js/app-html.js"
+        document.body.appendChild(scriptTag);
+
+        return () => {
+            document.body.removeChild(scriptTag)
+        }
+    }, [])
 
 
 
     return (
         <div className="container-fluid my-5  d-flex  justify-content-center">
-            <div className="card card-1">
+            <div className="card card-1" id="printableArea">
                 <div className="bg-white">
                     <div className="media flex-sm-row flex-column-reverse justify-content-between  ">
                         <div className="col my-auto"> <h4 className="mb-0">Thanks for your Order,<span className="change-color"> {userName}</span> !</h4> </div>
@@ -53,8 +71,8 @@ const Order_details = () => {
                         <div className="col-auto  "> <small>Order Id : {orderData?.order_id}</small> </div>
                     </div>
                     {
-                        orderDetails?.map((ele) => (
-                            <div className="row mb-2">
+                        orderDetails?.map((ele, id) => (
+                            <div className="row mb-2" key={id}>
                                 <div className="col">
                                     <div className="card card-2">
                                         <div className="card-body">
@@ -107,6 +125,17 @@ const Order_details = () => {
                             <div className="col-sm-auto col-auto my-auto"><img className="img-fluid my-auto align-self-center " src={logo} width={115} height={115} /></div>
                             <div className="col-auto my-auto "><h2 className="mb-0 font-weight-bold">TOTAL PAID</h2></div>
                             <div className="col-auto my-auto ml-auto"><h1 className="display-3" style={{ margin: "22px", fontSize: "3rem" }}>₹ {orderData?.total_price}</h1></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="col-xl-3">
+                <div className="invoice-actions-btn" style={{ padding: "15px", paddingTop: "15px", paddingBottom: "15px", backgroundColor: "#fff", border: "1px solid #e0e6ed", borderRadius: "6px", justifyContent: "center", display: "flex", alignItems: "center" }}>
+                    <div className="invoice-action-btn">
+                        <div className="row">
+                            <div className="col-xl-12 col-md-3 col-sm-6">
+                                <button type="button" className="btn btn-secondary" onClick={() => printDiv('printableArea')}>Print</button>
+                            </div>
                         </div>
                     </div>
                 </div>

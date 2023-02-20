@@ -19,6 +19,17 @@ const Account_order = () => {
     useEffect(() => {
         fetchData()
     }, [])
+
+    useEffect(() => {
+        const scriptTag = document.createElement('script')
+        scriptTag.src = "/js/app-html.js"
+        document.body.appendChild(scriptTag);
+
+        return () => {
+            document.body.removeChild(scriptTag)
+        }
+    }, [])
+
     return (
         <div className="page-content">
             <div className="holder breadcrumbs-wrap mt-0">
@@ -44,7 +55,7 @@ const Account_order = () => {
                                             <th scope="col">Order Date </th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Total Price</th>
-                                            <th scope="col" />
+                                            <th scope="col">View Details</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -52,11 +63,11 @@ const Account_order = () => {
                                             orderData?.map((ele) => (
                                                 <tr>
                                                     <td>1</td>
-                                                    <td><b>{ele.order_id}</b> <Link to={`/account-order/${ele._id}`} className="ml-1">View Details</Link></td>
+                                                    <td><b>{ele.order_id}</b> </td>
                                                     <td>{moment(ele.date).format('MMMM Do YYYY, h:mm:ss a')}</td>
                                                     <td>{ele.status}</td>
                                                     <td><span className="color">₹ {ele.total_price}</span></td>
-                                                    <td><a href="#" className="btn btn--grey btn--sm">REORDER</a></td>
+                                                    <td className="d-flex justify-content-center align-items-center"><Link to={`/account-order/${ele._id}`}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></Link></td>
                                                 </tr>
                                             ))
                                         }

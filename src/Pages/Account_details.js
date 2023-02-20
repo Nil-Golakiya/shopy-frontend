@@ -1,10 +1,8 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { set, useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Account_sidebar from '../Components/Account_sidebar'
-import { bcrypt } from "bcryptjs"
 
 const Account_details = () => {
 
