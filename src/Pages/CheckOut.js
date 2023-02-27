@@ -4,13 +4,16 @@ import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from 'axios'
-import { toast} from "react-toastify";
+import { toast } from "react-toastify";
 
 
 
 const CheckOut = ({ cart, clearCart }) => {
 
     const user = localStorage.getItem("myuser");
+
+    const userData = JSON.parse(localStorage.getItem("persist:user"))
+    const userId = JSON.parse(userData.Reducer).user.user._id
 
     const [priceInfo, setPriceInfo] = useState({
         totalprice: 0,
@@ -42,7 +45,8 @@ const CheckOut = ({ cart, clearCart }) => {
         register,
         handleSubmit,
         formState: { errors },
-        getValues
+        getValues,
+        reset
     } = useForm({
         resolver: yupResolver(Schema)
     });
@@ -169,6 +173,16 @@ const CheckOut = ({ cart, clearCart }) => {
         setCouponCode("")
     }
 
+    const fetchData = async () => {
+        const { data } = await axios.get(`http://localhost:8800/auth/${userId}`);
+        const Data = data.data;
+        if (Data.address) {
+            reset({
+                address_1: Data.address,
+            })
+        }
+    }
+
     useEffect(() => {
         CartTotal()
     }, [cart])
@@ -197,6 +211,10 @@ const CheckOut = ({ cart, clearCart }) => {
         }
     }, [])
 
+    useEffect(() => {
+        fetchData()
+    }, [])
+
 
     return (
         <div className="page-content">
@@ -217,22 +235,19 @@ const CheckOut = ({ cart, clearCart }) => {
                             <div className="col-md-10">
                                 <div className="steps-progress">
                                     <ul className="nav nav-tabs">
-                                        <li className="nav-item">
+                                        <li className="nav-item mr-5">
                                             <a className="nav-link active" data-toggle="tab" href="#step1" data-step={1}><span>01.</span><span>Shipping Address</span></a>
                                         </li>
-                                        <li className="nav-item">
+                                        <li className="nav-item mr-5">
                                             <a className="nav-link" data-toggle="tab" href="#step2" data-step={2}><span>02.</span><span>Billing Address</span></a>
                                         </li>
-                                        <li className="nav-item">
+                                        <li className="nav-item mr-5">
                                             <a className="nav-link" data-toggle="tab" href="#step3" data-step={3}><span>03.</span><span>Delivery Method</span></a>
                                         </li>
-                                        {/* <li className="nav-item">
-                                        <a className="nav-link" data-toggle="tab" href="#step4" data-step={4}><span>04.</span><span>Payment Method</span></a>
-                                    </li> */}
                                     </ul>
-                                    {/* <div className="progress">
-                                    <div className="progress-bar progress-bar-success" role="progressbar" aria-valuenow={1} aria-valuemin={1} aria-valuemax={3} style={{ width: '25%' }} />
-                                </div> */}
+                                    <div className="progress">
+                                        <div className="progress-bar progress-bar-success" role="progressbar" aria-valuenow={1} aria-valuemin={1} aria-valuemax={3} style={{ width: '25%' }} />
+                                    </div>
                                 </div>
                                 <div className="tab-content">
                                     <div className="tab-pane fade show active" id="step1">

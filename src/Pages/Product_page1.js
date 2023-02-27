@@ -97,6 +97,7 @@ const Product_page1 = ({ setCart, cart }) => {
 
     return (
         <div className="page-content">
+            {/* <script src="/js/app-html.js" /> */}
             <div className="holder breadcrumbs-wrap mt-0">
                 <div className="container">
                     <ul className="breadcrumbs">
@@ -354,7 +355,7 @@ const Product_page1 = ({ setCart, cart }) => {
                     <div className="tab-content">
                         <div role="tabpanel" className="tab-pane fade" id="Tab1">
                             <p>
-                                {data && data.long_description}
+                                <div dangerouslySetInnerHTML={{ __html: data && data.long_description }}></div>
                             </p>
                         </div>
                         <div role="tabpanel" className="tab-pane fade" id="Tab5">
@@ -504,7 +505,8 @@ const Product_page1 = ({ setCart, cart }) => {
                                     </div>
                                 </div>
                             </div>
-                        </div><div className="prd prd--style2 prd-labels--max prd-labels-shadow ">
+                        </div>
+                        <div className="prd prd--style2 prd-labels--max prd-labels-shadow ">
                             <div className="prd-inside">
                                 <div className="prd-img-area">
                                     <a href="product.html" className="prd-img image-hover-scale image-container" style={{ paddingBottom: '128.48%' }}>
@@ -564,7 +566,8 @@ const Product_page1 = ({ setCart, cart }) => {
                                     </div>
                                 </div>
                             </div>
-                        </div><div className="prd prd--style2 prd-labels--max prd-labels-shadow ">
+                        </div>
+                        <div className="prd prd--style2 prd-labels--max prd-labels-shadow ">
                             <div className="prd-inside">
                                 <div className="prd-img-area">
                                     <a href="product.html" className="prd-img image-hover-scale image-container" style={{ paddingBottom: '128.48%' }}>
@@ -619,7 +622,8 @@ const Product_page1 = ({ setCart, cart }) => {
                                     </div>
                                 </div>
                             </div>
-                        </div><div className="prd prd--style2 prd-labels--max prd-labels-shadow ">
+                        </div>
+                        <div className="prd prd--style2 prd-labels--max prd-labels-shadow ">
                             <div className="prd-inside">
                                 <div className="prd-img-area">
                                     <a href="product.html" className="prd-img image-hover-scale image-container" style={{ paddingBottom: '128.48%' }}>
@@ -673,7 +677,8 @@ const Product_page1 = ({ setCart, cart }) => {
                                     </div>
                                 </div>
                             </div>
-                        </div><div className="prd prd--style2 prd-labels--max prd-labels-shadow ">
+                        </div>
+                        <div className="prd prd--style2 prd-labels--max prd-labels-shadow ">
                             <div className="prd-inside">
                                 <div className="prd-img-area">
                                     <a href="product.html" className="prd-img image-hover-scale image-container" style={{ paddingBottom: '128.48%' }}>

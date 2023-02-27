@@ -29,6 +29,7 @@ const Dashbord = ({ categoryData, setWishlist, wishlist }) => {
     setActiveCollection(name)
     const getparams = {}
     getparams.category_id = name;
+    console.log("getparams", getparams)
     const { data } = await axios.get("http://localhost:8800/product/categorywiseproduct", { params: getparams });
     const Data = data.data;
     setCollectionData(Data)

@@ -17,17 +17,19 @@ const Account_address = () => {
 
     const { register, control, handleSubmit, reset, watch, getValues, setValue } = useForm({});
 
-    console.log("userName", user_id)
-
     const fetchUserData = async () => {
         const { data } = await axios.get(`http://localhost:8800/auth/${user_id}`)
         const Data = data.data;
         setUserDetailsData(Data)
+        reset({
+            address: Data.address,
+            city: Data.city,
+            state: Data.state,
+            pin_code: Data.pin_code,
+        })
     }
-    console.log("userDetailsData", userDetailsData)
 
     const submitHandler = async (data) => {
-        console.log("data", data)
         const UserData = await axios.put(`http://localhost:8800/auth/${user_id}`, data)
         if (UserData.data.status === false) {
             toast.error(UserData.data.message);
@@ -38,28 +40,26 @@ const Account_address = () => {
         fetchUserData()
     }
 
-    // const EditSubmitHandler = async (data) => {
-    //     const UserData = await axios.put(`http://localhost:8800/auth/${user_id}`, data)
-    //     if (UserData.data.status === false) {
-    //         toast.error(UserData.data.message);
-    //     } else {
-    //         toast.success(UserData.data.message);
-    //         setOpen(false)
-    //     }
-    //     reset({
-    //         address: userDetailsData.address,
-    //         city: userDetailsData.city,
-    //         state: userDetailsData.state,
-    //         pin_code: userDetailsData.pin_code,
-    //     })
-    // }
+    const EditSubmitHandler = async (data) => {
+        const UserData = await axios.put(`http://localhost:8800/auth/${user_id}`, data)
+        if (UserData.data.status === false) {
+            toast.error(UserData.data.message);
+        } else {
+            toast.success(UserData.data.message);
+            setOpen(false)
+        }
+        fetchUserData()
+        setOpenEdit(false)
+    }
 
     useEffect(() => {
         fetchUserData()
     }, [])
 
+
     return (
         <div className="page-content">
+            <script src="/js/app-html.js" />
             <div className="holder breadcrumbs-wrap mt-0">
                 <div className="container">
                     <ul className="breadcrumbs">
@@ -101,84 +101,92 @@ const Account_address = () => {
                                     </>
                                 )
                             }
-                            <form onSubmit={handleSubmit(submitHandler)}>
-                                <div className={`card mt-3 ${open ? "" : "d-none"}`}>
-                                    <div className="card-body">
-                                        <h3>Add Address</h3>
-                                        <div className="row">
-                                            <div className="col-sm-6">
-                                                <label className="text-uppercase">Address:</label>
-                                                <div className="form-group">
-                                                    <input type="text" className="form-control" name="address" {...register('address', { required: false })} />
+                            {
+                                open && (
+                                    <form onSubmit={handleSubmit(submitHandler)}>
+                                        <div className={`card mt-3 ${open ? "" : "d-none"}`}>
+                                            <div className="card-body">
+                                                <h3>Add Address</h3>
+                                                <div className="row">
+                                                    <div className="col-sm-6">
+                                                        <label className="text-uppercase">Address:</label>
+                                                        <div className="form-group">
+                                                            <input type="text" className="form-control" name="address" {...register('address', { required: false })} />
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-sm-6">
+                                                        <label className="text-uppercase">City:</label>
+                                                        <div className="form-group">
+                                                            <input type="text" className="form-control" name="city" {...register('city', { required: false })} />
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="col-sm-6">
-                                                <label className="text-uppercase">City:</label>
-                                                <div className="form-group">
-                                                    <input type="text" className="form-control" name="city" {...register('city', { required: false })} />
+                                                <div className="row">
+                                                    <div className="col-sm-6 mt-2">
+                                                        <label className="text-uppercase">state:</label>
+                                                        <div className="form-group">
+                                                            <input type="text" className="form-control" name="state" {...register('state', { required: false })} />
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-sm-6 mt-2">
+                                                        <label className="text-uppercase">zip/postal code:</label>
+                                                        <div className="form-group">
+                                                            <input type="text" className="form-control" name="pin_code" {...register('pin_code', { required: false })} />
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-sm-6 mt-2">
-                                                <label className="text-uppercase">state:</label>
-                                                <div className="form-group">
-                                                    <input type="text" className="form-control" name="state" {...register('state', { required: false })} />
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-6 mt-2">
-                                                <label className="text-uppercase">zip/postal code:</label>
-                                                <div className="form-group">
-                                                    <input type="text" className="form-control" name="pin_code" {...register('pin_code', { required: false })} />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="mt-2">
-                                            <button type="reset" className="btn btn--alt js-close-form" onClick={() => setOpen(false)}>Cancel</button>
-                                            <button type="submit" className="btn ml-1">Add Address</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            {/* <form onSubmit={handleSubmit(EditSubmitHandler)}>
-                                <div className={`card mt-3 ${openEdit ? "" : "d-none"}`}>
-                                    <div className="card-body">
-                                        <h3>Add Address</h3>
-                                        <div className="row">
-                                            <div className="col-sm-6">
-                                                <label className="text-uppercase">Address:</label>
-                                                <div className="form-group">
-                                                    <input type="text" className="form-control" name="address" {...register('address', { required: false })} />
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-6">
-                                                <label className="text-uppercase">City:</label>
-                                                <div className="form-group">
-                                                    <input type="text" className="form-control" name="city" {...register('city', { required: false })} />
+                                                <div className="mt-2">
+                                                    <button type="reset" className="btn btn--alt js-close-form" onClick={() => setOpen(false)}>Cancel</button>
+                                                    <button type="submit" className="btn ml-1">Add Address</button>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="row">
-                                            <div className="col-sm-6 mt-2">
-                                                <label className="text-uppercase">state:</label>
-                                                <div className="form-group">
-                                                    <input type="text" className="form-control" name="state" {...register('state', { required: false })} />
+                                    </form>
+                                )
+                            }
+                            {
+                                openEdit && (
+                                    <form onSubmit={handleSubmit(EditSubmitHandler)}>
+                                        <div className={`card mt-3 ${openEdit ? "" : "d-none"}`}>
+                                            <div className="card-body">
+                                                <h3>Add Address</h3>
+                                                <div className="row">
+                                                    <div className="col-sm-6">
+                                                        <label className="text-uppercase">Address:</label>
+                                                        <div className="form-group">
+                                                            <input type="text" className="form-control" name="address" {...register('address', { required: false })} />
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-sm-6">
+                                                        <label className="text-uppercase">City:</label>
+                                                        <div className="form-group">
+                                                            <input type="text" className="form-control" name="city" {...register('city', { required: false })} />
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="col-sm-6 mt-2">
-                                                <label className="text-uppercase">zip/postal code:</label>
-                                                <div className="form-group">
-                                                    <input type="text" className="form-control" name="pin_code" {...register('pin_code', { required: false })} />
+                                                <div className="row">
+                                                    <div className="col-sm-6 mt-2">
+                                                        <label className="text-uppercase">state:</label>
+                                                        <div className="form-group">
+                                                            <input type="text" className="form-control" name="state" {...register('state', { required: false })} />
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-sm-6 mt-2">
+                                                        <label className="text-uppercase">zip/postal code:</label>
+                                                        <div className="form-group">
+                                                            <input type="text" className="form-control" name="pin_code" {...register('pin_code', { required: false })} />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="mt-2">
+                                                    <button type="reset" className="btn btn--alt js-close-form" onClick={() => setOpenEdit(false)}>Cancel</button>
+                                                    <button type="submit" className="btn ml-1">Update Address</button>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="mt-2">
-                                            <button type="reset" className="btn btn--alt js-close-form" onClick={() => setOpenEdit(false)}>Cancel</button>
-                                            <button type="submit" className="btn ml-1">Add Address</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form> */}
+                                    </form>
+                                )
+                            }
                         </div>
                     </div>
                 </div>
