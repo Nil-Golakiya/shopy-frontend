@@ -97,12 +97,11 @@ const Product_page1 = ({ setCart, cart }) => {
 
     return (
         <div className="page-content">
-            {/* <script src="/js/app-html.js" /> */}
             <div className="holder breadcrumbs-wrap mt-0">
                 <div className="container">
                     <ul className="breadcrumbs">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="category.html">{params.category}</a></li>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to={`/products/${params.category}`}>{params.category}</Link></li>
                         <li><span>{data && data.title}</span></li>
                     </ul>
                 </div>
@@ -139,9 +138,6 @@ const Product_page1 = ({ setCart, cart }) => {
                                             }
                                         </div>
                                         <div className="prd-block_label-sale-squared justify-content-center align-items-center"><span>Sale</span></div>
-                                    </div>
-                                    <div className="prd-block_main-image-links">
-                                        <a href="#" className="prd-block_zoom-link"><i className="icon-zoom-in" /></a>
                                     </div>
                                 </div>
                                 <div className="product-previews-wrapper">

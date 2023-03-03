@@ -40,6 +40,7 @@ const ProductCard = ({ item, setWishlist, wishlist }) => {
 
     useEffect(() => {
         if (item) {
+            console.log("####", item)
             setProductImages(item.images)
             setDisplayImage(item.images?.[0])
             setProductPrice(item.variations[0]?.subVariation[0]?.price)
@@ -55,7 +56,7 @@ const ProductCard = ({ item, setWishlist, wishlist }) => {
             })
             setColorImages(imageObject)
         }
-    }, [])
+    }, [item])
 
     useEffect(() => {
         wishlist?.map((ele) => {
@@ -63,8 +64,17 @@ const ProductCard = ({ item, setWishlist, wishlist }) => {
                 setIsWishlist(ele.wishlist_id)
             }
         })
-    }, [])
+    }, [wishlist])
 
+    useEffect(() => {
+        const scriptTag = document.createElement('script')
+        scriptTag.src = "/js/app-html.js"
+        document.body.appendChild(scriptTag);
+
+        return () => {
+            document.body.removeChild(scriptTag)
+        }
+    }, [])
 
     return (
         <div className="prd prd--style2 prd-labels--max prd-labels-shadow ">

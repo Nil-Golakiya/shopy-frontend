@@ -10,10 +10,10 @@ import { useNavigate } from 'react-router-dom';
 import { LoginStart, LoginFailure, LoginSuccess } from '../Redux/Action'
 import { useSelector, useDispatch } from "react-redux";
 
-
 const Login = () => {
 
     const [classList, setClassList] = useState('')
+    const [displayButton, setDisplayButton] = useState(false)
 
     const user = useSelector((state) => state.Reducer.user);
     const dispatch = useDispatch();
@@ -102,11 +102,32 @@ const Login = () => {
         }
     }
 
+    const handleSignup = () => {
+        setClassList("sign-up-mode")
+        setDisplayButton(true)
+    }
+
+    const handleSignin = () => {
+        setClassList("")
+        setDisplayButton(false)
+    }
+    
+
     return (
         <div className={`login_container ${classList}`}>
             <div className="forms-container">
                 <div className="signin-signup">
-
+                    {
+                        displayButton === false ? (
+                            <button
+                                style={{ position: "absolute", top: "-165px", right: "0", marginRight: "10px", borderRadius: "174px", padding: "15px", backgroundColor: "#fff", border: "2px solid #17c6aa" }}
+                                onClick={() => navigate("/")}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#17c6aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                            </button>
+                        )
+                            :
+                            ""
+                    }
                     <form className="sign-in-form loginform" onSubmit={handleSubmit(signinsubmithandler)}>
                         <h2 className="title">Sign in</h2>
                         <div className="input-field">
@@ -119,7 +140,7 @@ const Login = () => {
                             {errors.password && <p style={{ "color": "red" }}>password is required.</p>}
                         </div>
                         <button type="submit" className="btn solid">Login</button>
-                        <p className="social-text">Or Sign in with social platforms</p>
+                        {/* <p className="social-text">Or Sign in with social platforms</p>
                         <div className="social-media">
                             <a href="#" className="social-icon">
                                 <i className="fab fa-facebook-f"></i>
@@ -127,9 +148,21 @@ const Login = () => {
                             <a href="#" className="social-icon">
                                 <i className="fab fa-google"></i>
                             </a>
-                        </div>
+                        </div> */}
                     </form>
 
+
+                    {
+                        displayButton === true ? (
+                            <button
+                                style={{ position: "absolute", top: "-165px", left: "0", marginRight: "10px", borderRadius: "174px", padding: "15px", backgroundColor: "#fff", border: "2px solid #17c6aa" }}
+                                onClick={() => navigate("/")}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#17c6aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                            </button>
+                        )
+                            :
+                            ""
+                    }
                     <form className="sign-up-form loginform" onSubmit={handleSubmit1(signupsubmithandler)}>
                         <h2 className="title">Sign up</h2>
                         <div className="input-field">
@@ -161,7 +194,7 @@ const Login = () => {
                             <input type="password" name="confirmpassword" placeholder="Confirm Password" {...register1('confirmpassword', { required: true })} />
                         </div>
                         <button type="submit" className="btn">Sign Up</button>
-                        <p className="social-text">Or Sign up with social platforms</p>
+                        {/* <p className="social-text">Or Sign up with social platforms</p>
                         <div className="social-media">
                             <a href="#" className="social-icon">
                                 <i className="fab fa-facebook-f"></i>
@@ -169,7 +202,7 @@ const Login = () => {
                             <a href="#" className="social-icon">
                                 <i className="fab fa-google"></i>
                             </a>
-                        </div>
+                        </div> */}
                     </form>
                 </div>
             </div>
@@ -182,7 +215,7 @@ const Login = () => {
                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
                             ex ratione. Aliquid!
                         </p>
-                        <button className="btn1 transparent" id="sign-up-btn" onClick={() => setClassList("sign-up-mode")}>
+                        <button className="btn1 transparent" id="sign-up-btn" onClick={() => handleSignup()}>
                             Sign up
                         </button>
                     </div>
@@ -195,7 +228,7 @@ const Login = () => {
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
                             laboriosam ad deleniti.
                         </p>
-                        <button className="btn1 transparent" id="sign-in-btn" onClick={() => setClassList("")}>
+                        <button className="btn1 transparent" id="sign-in-btn" onClick={() => handleSignin()}>
                             Sign in
                         </button>
                     </div>

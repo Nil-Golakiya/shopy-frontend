@@ -378,7 +378,7 @@ input {
     }
 
     .login_container.sign-up-mode .signin-signup {
-        top: 5%;
+        top: 0%;
         transform: translate(-50%, 0);
     }
 }

@@ -54,13 +54,6 @@ const Index = ({ Component }) => {
         Runallfunction()
     }, [Component])
 
-    useEffect(() => {
-        // const scriptTag = document.createElement('script')
-        // scriptTag.src = "/js/app-html.js"
-        // document.body.appendChild(scriptTag);
-    }, [])
-
-
     return (
         <>
             {loading ? <Loader /> : ""}

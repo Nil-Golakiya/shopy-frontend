@@ -74,18 +74,17 @@ const Sidebar = ({ categoryData, setCart, cart }) => {
             </div>
             <div className="dropdn-content account-drop" id="dropdnAccount">
                 <div className="dropdn-content-block">
-                    {/* <button className="dropdn-close"><span className="js-dropdn-close">X</span></button> */}
                     <div className="dropdn-close btn-wrap text-right" data-animation="fadeIn" data-animation-delay="2000"><span className="js-dropdn-close btn btn--sm closebtn" >X</span></div>
                     <ul className="sidebar_ul">
                         {user ? <li><button onClick={() => handleLogout()} className="logoutbutton"><i className="fa fa-power-off"></i><span>Logout</span></button></li> :
                             <li><Link to="/login"><i className="icon-login"></i><span>Log In</span></Link></li>}
 
                         {user ? "" : <li><Link to="/login"><i className="icon-user2"></i><span>Register</span></Link></li>}
-                        <li><Link to="/account-details"><i className="fa fa-user"></i><span>My Account</span></Link></li>
-                        <li><Link to="/account-order"><i className="fa fa-shopping-basket "></i><span>My Order</span></Link></li>
-                        <li><Link to="/wishlist"><i className="fa fa-heart "></i><span>My Wishlist</span></Link></li>
-                        <li><a href="checkout.html"><i className="fa fa-cart-arrow-down "></i><span>My Cart</span></a></li>
-                        <li><a href="checkout.html"><i className="fa fa-credit-card "></i><span>My Wishlist</span></a></li>
+                        {user ? <li><Link to="/account-details"><i className="fa fa-user"></i><span>My Account</span></Link></li> : <li><Link to="/login"><i className="fa fa-user"></i><span>My Account</span></Link></li>}
+                        {user ? <li><Link to="/account-order"><i className="fa fa-shopping-basket"></i><span>My Order</span></Link></li> : <li><Link to="/login"><i className="fa fa-shopping-basket"></i><span>My Order</span></Link></li>}
+                        {user ? <li><Link to="/wishlist"><i className="fa fa-heart"></i><span>My Wishlist</span></Link></li> : <li><Link to="/login"><i className="fa fa-heart"></i><span>My Wishlist</span></Link></li>}
+                        {user ? <li><Link to="/cart"><i className="fa fa-cart-arrow-down"></i><span>My Cart</span></Link></li> : <li><Link to="/login"><i className="fa fa-cart-arrow-down"></i><span>My Cart</span></Link></li>}
+                        {user ? <li><Link to="/checkout"><i className="fa fa-credit-card"></i><span>Checkout</span></Link></li> : <li><Link to="/login"><i className="fa fa-credit-card"></i><span>checkout</span></Link></li>}
                     </ul>
                 </div>
                 <div className="drop-overlay js-dropdn-close"></div>

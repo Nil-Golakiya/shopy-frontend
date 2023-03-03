@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import ProductCard from '../Components/ProductCard'
 
 const Product_list = ({ setWishlist, wishlist }) => {
@@ -44,8 +44,8 @@ const Product_list = ({ setWishlist, wishlist }) => {
             <div className="holder breadcrumbs-wrap mt-0">
                 <div className="container">
                     <ul className="breadcrumbs">
-                        <li><a href="index.html">Home</a></li>
-                        <li><span>Category</span></li>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to={`/products/${params.category}`}>{params.category}</Link></li>
                     </ul>
                 </div>
             </div>

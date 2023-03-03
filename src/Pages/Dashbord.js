@@ -35,7 +35,6 @@ const Dashbord = ({ categoryData, setWishlist, wishlist }) => {
     setCollectionData(Data)
   }
 
-
   useEffect(() => {
     TrandingProduct()
     FeaturedProduct()
@@ -51,6 +50,8 @@ const Dashbord = ({ categoryData, setWishlist, wishlist }) => {
       document.body.removeChild(scriptTag)
     }
   }, [])
+
+  console.log("categoryData", categoryData)
 
   return (
     <div className="page-content">
@@ -137,66 +138,20 @@ const Dashbord = ({ categoryData, setWishlist, wishlist }) => {
       <div class="holder holder-mt-xsmall">
         <div class="container">
           <div className="row vert-margin-small">
-            <div className="col-sm">
-              <a href="category.html" className="collection-grid-3-item image-hover-scale">
-                <div className="collection-grid-3-item-img image-container" style={{ paddingBottom: '93.68%' }}>
-                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/banner-fashion-2-02.webp" className="lazyload fade-up" alt="Banner" />
-                  <div className="foxic-loader" />
-                </div>
-                <div className="collection-grid-3-caption-bg">
-                  <h3 className="collection-grid-3-title">Accessories</h3>
-                  <h4 className="collection-grid-3-subtitle">The&nbsp;Best&nbsp;Look&nbsp;Anywhere</h4>
-                </div>
-              </a>
-            </div>
-            <div className="col-sm">
-              <a href="category.html" className="collection-grid-3-item image-hover-scale">
-                <div className="collection-grid-3-item-img image-container" style={{ paddingBottom: '93.68%' }}>
-                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/banner-fashion-2-02.webp" className="lazyload fade-up" alt="Banner" />
-                  <div className="foxic-loader" />
-                </div>
-                <div className="collection-grid-3-caption-bg">
-                  <h3 className="collection-grid-3-title">Accessories</h3>
-                  <h4 className="collection-grid-3-subtitle">The&nbsp;Best&nbsp;Look&nbsp;Anywhere</h4>
-                </div>
-              </a>
-            </div>
-            <div className="col-sm">
-              <a href="category.html" className="collection-grid-3-item image-hover-scale">
-                <div className="collection-grid-3-item-img image-container" style={{ paddingBottom: '93.68%' }}>
-                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/banner-fashion-2-02.webp" className="lazyload fade-up" alt="Banner" />
-                  <div className="foxic-loader" />
-                </div>
-                <div className="collection-grid-3-caption-bg">
-                  <h3 className="collection-grid-3-title">Accessories</h3>
-                  <h4 className="collection-grid-3-subtitle">The&nbsp;Best&nbsp;Look&nbsp;Anywhere</h4>
-                </div>
-              </a>
-            </div>
-            <div className="col-sm">
-              <a href="category.html" className="collection-grid-3-item image-hover-scale">
-                <div className="collection-grid-3-item-img image-container" style={{ paddingBottom: '93.68%' }}>
-                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/banner-fashion-2-02.webp" className="lazyload fade-up" alt="Banner" />
-                  <div className="foxic-loader" />
-                </div>
-                <div className="collection-grid-3-caption-bg">
-                  <h3 className="collection-grid-3-title">Accessories</h3>
-                  <h4 className="collection-grid-3-subtitle">The&nbsp;Best&nbsp;Look&nbsp;Anywhere</h4>
-                </div>
-              </a>
-            </div>
-            <div className="col-sm">
-              <a href="category.html" className="collection-grid-3-item image-hover-scale">
-                <div className="collection-grid-3-item-img image-container" style={{ paddingBottom: '93.68%' }}>
-                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/banner-fashion-2-04.webp" className="lazyload fade-up" alt="Banner" />
-                  <div className="foxic-loader" />
-                </div>
-                <div className="collection-grid-3-caption-bg">
-                  <h3 className="collection-grid-3-title">Fashion</h3>
-                  <h4 className="collection-grid-3-subtitle">Live&nbsp;According&nbsp;to&nbsp;Fashion</h4>
-                </div>
-              </a>
-            </div>
+            {categoryData && categoryData.map((ele) => (
+              <div className="col-sm">
+                <Link to={`/products/${ele.name}`} className="collection-grid-3-item image-hover-scale">
+                  <div className="collection-grid-3-item-img image-container" style={{ paddingBottom: '93.68%', borderRadius: "154px", height: "211px", width: "205px" }}>
+                    <img src={ele.img} className="lazyload fade-up" alt="Banner" />
+                    <div className="foxic-loader" />
+                  </div>
+                  <div className="collection-grid-3-caption-bg">
+                    <h3 className="collection-grid-3-title">{ele.name}</h3>
+                    <h4 className="collection-grid-3-subtitle">The&nbsp;Best&nbsp;Look&nbsp;Anywhere</h4>
+                  </div>
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -209,7 +164,7 @@ const Dashbord = ({ categoryData, setWishlist, wishlist }) => {
                 {
                   categoryData && categoryData.map((ele) => (
                     <h2 class={`h3-style ${ele.name === activeCollection ? "active" : ""}`} >
-                      <Link to="#" data-total="8" data-loaded="8" data-grid-tab-title onClick={() => handleProductlist(ele.name)}>
+                      <Link to="#" onClick={() => handleProductlist(ele.name)}>
                         <span class="title-tabs-text theme-font">{ele.name}</span>
                       </Link>
                     </h2>
@@ -246,7 +201,7 @@ const Dashbord = ({ categoryData, setWishlist, wishlist }) => {
       </div>
       <div className="holder holder-mt-medium ">
         <div className="container">
-          <a href="https://bit.ly/3eJX5XE" target="_blank" className="bnr-wrap bnr-">
+          <Link to="/products/Men/Shirt" target="_blank" className="bnr-wrap bnr-">
             <div className="bnr custom-caption image-hover-scale bnr--middle bnr--right bnr--fullwidth">
               <div className="bnr-img d-none d-sm-block image-container" style={{ paddingBottom: '41.36752136752137%' }}>
                 <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="images/skins/fashion/banner-fashion2-full.webp" className="lazyload fade-up" alt="" />
@@ -256,7 +211,7 @@ const Dashbord = ({ categoryData, setWishlist, wishlist }) => {
               </div>
               <div className="bnr-caption text-center" style={{ padding: '4% 4%' }}>
                 <div className="bnr-caption-inside w-s-50 w-ms-100 title-wrap">
-                  <h2 className="h1-style">The best trends<br className="d-sm-none" /> of summer 2020</h2>
+                  <h2 className="h1-style">The best trends<br className="d-sm-none" /> of summer 2023</h2>
                   <div className="h-sub mt-0">eCommerce HTML Template</div>
                   <div className="bnr-btn inherit mt-sm order-3">
                     <div className="btn">Buy Now</div>
@@ -264,7 +219,7 @@ const Dashbord = ({ categoryData, setWishlist, wishlist }) => {
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="holder">

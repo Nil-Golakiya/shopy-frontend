@@ -1,6 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const Contactus = () => {
+
+    useEffect(() => {
+        const scriptTag = document.createElement('script')
+        scriptTag.src = "/js/app-html.js"
+        document.body.appendChild(scriptTag);
+
+        return () => {
+            document.body.removeChild(scriptTag)
+        }
+    }, [])
+
     return (
         <div className="page-content" style={{ minHeight: '7px' }}>
             <div className="holder mt-0 py-3 py-sm-5 py-md-10 bg-cover fade-up-fast lazyloaded" data-bgset="images/pages/contact-bg.webp">

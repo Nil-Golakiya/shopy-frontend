@@ -19,6 +19,7 @@
     "primereact": "^8.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-google-login": "^5.2.2",
     "react-hook-form": "^7.41.3",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.3",
