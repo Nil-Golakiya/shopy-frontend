@@ -30,7 +30,7 @@ const Dashbord = ({ categoryData, setWishlist, wishlist }) => {
     const getparams = {}
     getparams.category_id = name;
     console.log("getparams", getparams)
-    const { data } = await axios.get("http://localhost:8800/product/categorywiseproduct", { params: getparams });
+    const { data } = await axios.get("http://localhost:8800/product/limitedproduct", { params: getparams });
     const Data = data.data;
     setCollectionData(Data)
   }
@@ -69,9 +69,9 @@ const Dashbord = ({ categoryData, setWishlist, wishlist }) => {
                         <div className="bnslider-text order-1 mt-sm bnslider-text--md text-center data-ini" data-animation="fadeInUp" data-animation-delay={800} data-fontcolor="#282828" data-fontweight={700} data-fontline="1.5">Best
                           Price This Year</div>
                         <div className="bnslider-text order-2 mt-sm bnslider-text--xs text-center data-ini" data-animation="fadeInUp" data-animation-delay={1000} data-fontcolor="#7c7c7c" data-fontweight={400} data-fontline="1.5">
-                          eCommerce HTML Template</div>
+                          Best Clothes</div>
                         <div className="btn-wrap text-center  order-4 mt-md" data-animation="fadeIn" data-animation-delay={2000} style={{ opacity: 1 }}>
-                          <Link to="/products/Woman" className="btn">
+                          <Link to="/products/Women" className="btn">
                             Shop now
                           </Link>
                         </div>

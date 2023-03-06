@@ -14,6 +14,9 @@ const Login = () => {
 
     const [classList, setClassList] = useState('')
     const [displayButton, setDisplayButton] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
+    const [showSignUpPassword, setShowSignUpPassword] = useState(false)
+    const [showConfirmSignUpPassword, setShowConfirmSignUpPassword] = useState(false)
 
     const user = useSelector((state) => state.Reducer.user);
     const dispatch = useDispatch();
@@ -111,7 +114,7 @@ const Login = () => {
         setClassList("")
         setDisplayButton(false)
     }
-    
+
 
     return (
         <div className={`login_container ${classList}`}>
@@ -136,22 +139,12 @@ const Login = () => {
                         </div>
                         <div className="input-field">
                             <i className="fas fa-lock"></i>
-                            <input id="password" type="password" name="password" placeholder="Password" {...register('password', { required: true })} />
+                            <input id="password" type={showPassword ? "text" : "password"} name="password" placeholder="Password" {...register('password', { required: true })} />
+                            <i className={showPassword ? "fas fa-eye-slash" : "fas fa-eye"} style={{ position: "absolute", right: "25px", cursor: "pointer" }} onClick={() => setShowPassword(!showPassword)}></i>
                             {errors.password && <p style={{ "color": "red" }}>password is required.</p>}
                         </div>
                         <button type="submit" className="btn solid">Login</button>
-                        {/* <p className="social-text">Or Sign in with social platforms</p>
-                        <div className="social-media">
-                            <a href="#" className="social-icon">
-                                <i className="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" className="social-icon">
-                                <i className="fab fa-google"></i>
-                            </a>
-                        </div> */}
                     </form>
-
-
                     {
                         displayButton === true ? (
                             <button
@@ -187,22 +180,15 @@ const Login = () => {
                         </div>
                         <div className="input-field">
                             <i className="fas fa-lock"></i>
-                            <input type="password" placeholder="Password" name="password" {...register1('password', { required: true })} />
+                            <input type={showSignUpPassword ? "text" : "password"} placeholder="Password" name="password" {...register1('password', { required: true })} />
+                            <i className={showSignUpPassword ? "fas fa-eye-slash" : "fas fa-eye"} style={{ position: "absolute", right: "25px", cursor: "pointer" }} onClick={() => setShowSignUpPassword(!showSignUpPassword)}></i>
                         </div>
                         <div className="input-field">
                             <i className="fas fa-lock"></i>
-                            <input type="password" name="confirmpassword" placeholder="Confirm Password" {...register1('confirmpassword', { required: true })} />
+                            <input type={showConfirmSignUpPassword ? "text" : "password"} name="confirmpassword" placeholder="Confirm Password" {...register1('confirmpassword', { required: true })} />
+                            <i className={showConfirmSignUpPassword ? "fas fa-eye-slash" : "fas fa-eye"} style={{ position: "absolute", right: "25px", cursor: "pointer" }} onClick={() => setShowConfirmSignUpPassword(!showConfirmSignUpPassword)}></i>
                         </div>
                         <button type="submit" className="btn">Sign Up</button>
-                        {/* <p className="social-text">Or Sign up with social platforms</p>
-                        <div className="social-media">
-                            <a href="#" className="social-icon">
-                                <i className="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" className="social-icon">
-                                <i className="fab fa-google"></i>
-                            </a>
-                        </div> */}
                     </form>
                 </div>
             </div>

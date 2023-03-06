@@ -3,14 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import ProductCard from '../Components/ProductCard'
 
-const Product_list = ({ setWishlist, wishlist }) => {
+const Product_list = ({ setWishlist, wishlist, setLoading }) => {
 
     const [data, setData] = useState(null)
 
     const params = useParams()
 
     const fetchData = async () => {
-
         const getparams = {}
         if (params.category) {
             getparams.category_id = params.category;
@@ -22,7 +21,7 @@ const Product_list = ({ setWishlist, wishlist }) => {
 
         const { data } = await axios.get("http://localhost:8800/product/categorywiseproduct", { params: getparams });
         const Data = data.data;
-        setData(Data)
+        setData(Data);
     }
 
     useEffect(() => {

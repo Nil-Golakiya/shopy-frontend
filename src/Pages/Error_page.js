@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 const Error_page = () => {
 
@@ -11,7 +12,7 @@ const Error_page = () => {
       document.body.removeChild(scriptTag)
     }
   }, [])
-  
+
   return (
     <div className="page-content">
       <div className="holder breadcrumbs-wrap mt-0">
@@ -36,7 +37,7 @@ const Error_page = () => {
             </svg>
           </div>
           <div className="page404-info text-center">
-            <a href="#" className="btn">Go Back</a>
+            <Link to="/" className="btn">Go Back</Link>
           </div>
         </div>
       </div>

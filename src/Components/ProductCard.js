@@ -8,7 +8,7 @@ const ProductCard = ({ item, setWishlist, wishlist }) => {
     const [productImages, setProductImages] = useState([])
     const [displayImage, setDisplayImage] = useState(null)
     const [productPrice, setProductPrice] = useState(null)
-    const [isWishlist, setIsWishlist] = useState(false)
+    const [isWishlist, setIsWishlist] = useState(null)
 
     const userData = JSON.parse(localStorage.getItem("persist:user"))
     const userId = JSON.parse(userData.Reducer)?.user?.user?._id
@@ -20,7 +20,7 @@ const ProductCard = ({ item, setWishlist, wishlist }) => {
     }
 
     const handleWishlist = async (id) => {
-        const data = await axios.post("http://localhost:8800/wishlist", {
+        const { data } = await axios.post("http://localhost:8800/wishlist", {
             product_id: id,
             user_id: userId
         })
@@ -29,18 +29,17 @@ const ProductCard = ({ item, setWishlist, wishlist }) => {
         data.data.wishlist_id = data.data._id
         Array.push(data.data);
         setWishlist(Array.concat(wishlist))
-        setIsWishlist(data.data._id)
+        setIsWishlist(data.data.wishlist_id)
     }
 
     const handleRemoveWishlist = async (id) => {
-        setIsWishlist(false)
+        setIsWishlist(null)
         const data = await axios.delete(`http://localhost:8800/wishlist/${id}`)
         setWishlist(wishlist.filter((e) => e.wishlist_id !== id))
     }
 
     useEffect(() => {
         if (item) {
-            console.log("####", item)
             setProductImages(item.images)
             setDisplayImage(item.images?.[0])
             setProductPrice(item.variations[0]?.subVariation[0]?.price)
