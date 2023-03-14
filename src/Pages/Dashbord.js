@@ -4,14 +4,12 @@ import axios from 'axios'
 import ProductCard from '../Components/ProductCard'
 
 
-const Dashbord = ({ categoryData, setWishlist, wishlist }) => {
+const Dashbord = ({ categoryData, setWishlist, wishlist, setLoading }) => {
 
   const [trandingData, setTrandingData] = useState()
   const [featuredData, setFeaturedData] = useState()
   const [collectionData, setCollectionData] = useState()
   const [activeCollection, setActiveCollection] = useState()
-
-
 
   const TrandingProduct = async () => {
     const { data } = await axios.get("http://localhost:8800/product?type=tranding")
@@ -26,13 +24,14 @@ const Dashbord = ({ categoryData, setWishlist, wishlist }) => {
   }
 
   const handleProductlist = async (name) => {
+    setLoading(true)
     setActiveCollection(name)
     const getparams = {}
     getparams.category_id = name;
-    console.log("getparams", getparams)
     const { data } = await axios.get("http://localhost:8800/product/limitedproduct", { params: getparams });
     const Data = data.data;
     setCollectionData(Data)
+    setLoading(false)
   }
 
   useEffect(() => {

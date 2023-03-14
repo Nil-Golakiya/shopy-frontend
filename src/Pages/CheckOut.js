@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from 'axios'
 import { toast } from "react-toastify";
+import image from "../Image/login_logo.jpeg"
+// import Razorpay from "razorpay";
+
 
 
 
@@ -25,6 +28,8 @@ const CheckOut = ({ cart, clearCart }) => {
     const [isValid, setIsValid] = useState(true)
     const [couponCode, setCouponCode] = useState()
     const [productId, setProductId] = useState([])
+
+    const navigate = useNavigate()
 
 
 
@@ -114,49 +119,54 @@ const CheckOut = ({ cart, clearCart }) => {
         amount: priceInfo.discount
     }
 
-    const submitHandler = async (data) => {
+    const submitHandler = async (Data) => {
+        console.log("Data", Data)
         let oid = Math.floor(Math.random() * Date.now());
         const contact_info = {
-            email: data.email,
-            phone_no: data.phone_no
+            email: Data.email,
+            phone_no: Data.phone_no
         }
-
         const shippingCharge = priceInfo.shippingcharge;
+        const razorpayorder = { oid, user_id, finalPrice }
 
-        const ApiData = { oid, user_id, finalPrice, contact_info, data, discount, productId, cart, shippingCharge }
-        let a = await axios.post(`${process.env.REACT_APP_HOST}/api/pretransaction`, ApiData)
-        let txnData = await a.data;
-        if (txnData.success) {
-            let txnToken = await txnData.myr.txnToken;
-            var config = {
-                "root": "",
-                "flow": "DEFAULT",
-                "data": {
-                    "orderId": oid,
-                    "token": txnToken,
-                    "tokenType": "TXN_TOKEN",
-                    "amount": finalPrice
-                },
-                "handler": {
-                    "notifyMerchant": function (eventName, data) {
-                        console.log("notifyMerchant handler function called");
-                        console.log("eventName => ", eventName);
-                        console.log("data => ", data);
-                    }
-                }
-            };
-            window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
-                window.Paytm.CheckoutJS.invoke();
-            }).catch(function onError(error) {
-                console.log("error => ", error);
-            });
-            clearCart()
-        } else {
-            if (txnData.cartClear) {
+        const { data } = await axios.post("http://localhost:8800/api/checkout", razorpayorder)
+
+        const options = {
+            key: process.env.REACT_APP_RAZORPAY_KEY_ID,
+            amount: data.amount,
+            currency: "INR",
+            name: "Shopy",
+            description: "Transaction For Your Order",
+            image: { image },
+            order_id: data.id,
+            handler: async function (res) {
+                console.log("res--", res)
+                const paymentVerificationData = await axios.post("http://localhost:8800/api/paymentverification", {
+                    res,
+                    amount: data.amount,
+                    user_id,
+                    oid
+                })
+                const createOrder = await axios.post("http://localhost:8800/order", {
+                    oid, user_id, finalPrice, contact_info, Data, discount, productId, cart, shippingCharge
+                })
                 clearCart()
+                navigate("/account-order")
+            },
+            prefill: {
+                name: Data.first_name,
+                email: Data.email,
+                contact: Data.phone_no
+            },
+            notes: {
+                "address": "Razorpay Corporate Office"
+            },
+            theme: {
+                "color": "#17c6aa"
             }
-            toast.error(txnData.error);
-        }
+        };
+        const razor = new window.Razorpay(options);
+        razor.open();
     }
 
     const handleChange = (e) => {
@@ -194,16 +204,6 @@ const CheckOut = ({ cart, clearCart }) => {
     useEffect(() => {
         const scriptTag = document.createElement('script')
         scriptTag.src = "/js/app-html.js"
-        document.body.appendChild(scriptTag);
-
-        return () => {
-            document.body.removeChild(scriptTag)
-        }
-    }, [])
-
-    useEffect(() => {
-        const scriptTag = document.createElement('script')
-        scriptTag.src = `${process.env.REACT_APP_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.REACT_APP_PAYTM_MID}.js`;
         document.body.appendChild(scriptTag);
 
         return () => {

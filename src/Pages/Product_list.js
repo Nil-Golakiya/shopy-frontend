@@ -10,6 +10,7 @@ const Product_list = ({ setWishlist, wishlist, setLoading }) => {
     const params = useParams()
 
     const fetchData = async () => {
+        setLoading(true)
         const getparams = {}
         if (params.category) {
             getparams.category_id = params.category;
@@ -22,6 +23,7 @@ const Product_list = ({ setWishlist, wishlist, setLoading }) => {
         const { data } = await axios.get("http://localhost:8800/product/categorywiseproduct", { params: getparams });
         const Data = data.data;
         setData(Data);
+        setLoading(false)
     }
 
     useEffect(() => {

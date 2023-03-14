@@ -31,7 +31,7 @@ const Index = ({ Component }) => {
         setLoading(true)
         const { data } = await axios.get("http://localhost:8800/category/Customercategory")
         setCategoryData(data)
-
+        setLoading(false)
     }
 
     const CartData = async () => {
@@ -47,9 +47,6 @@ const Index = ({ Component }) => {
             await fetchData()
             await CartData()
             await fetchWishlistData()
-            setTimeout(() => {
-                setLoading(false)
-            }, 3000);
         }
         Runallfunction()
     }, [Component])

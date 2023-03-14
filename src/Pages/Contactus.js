@@ -14,11 +14,11 @@ const Contactus = () => {
 
     return (
         <div className="page-content" style={{ minHeight: '7px' }}>
-            <div className="holder mt-0 py-3 py-sm-5 py-md-10 bg-cover fade-up-fast lazyloaded" data-bgset="images/pages/contact-bg.webp">
+            <div className="holder bg-cover fade-up-fast lazyloaded" data-bgset="images/pages/contact-bg.webp">
                 <div className="container">
                     <div className="row">
-                        <div className="col-12 col-md-9 col-xl-9">
-                            <div className="page-title-bg py-md-3">
+                        <div className="col-12 col-md-9">
+                            <div className="page-title-bg">
                                 <h1>CONTACT US</h1>
                                 <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally</p>
                                 <p>Have a great question, comment or concern? Simply fill out the form below and click Submit. We will respond to all inquiries within 48 business hours.Check out our <a href="faq.html">Frequently Asked Questions</a>.</p>

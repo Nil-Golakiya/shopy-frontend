@@ -35199,8 +35199,6 @@ p.countdown-box-text:not(:first-child) {
 .tab-content {
     position: relative;
     z-index: 1;
-
-    padding: 25px 0 0;
 }
 
 .tab-content input.spr-form-input:not(.spr-starrating),

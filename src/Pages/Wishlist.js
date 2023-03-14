@@ -17,7 +17,6 @@ const Wishlist = ({ wishlist, setWishlist }) => {
         }
     }, [])
 
-    console.log("wishlist", wishlist.length)
     return (
         <div className="page-content">
             <div className="holder">

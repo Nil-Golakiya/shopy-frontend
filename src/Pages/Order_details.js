@@ -5,10 +5,9 @@ import { useParams } from 'react-router-dom'
 import "../asstes/Order_details.css"
 import logo from "../Image/logo.jpeg"
 
-const Order_details = () => {
+const Order_details = ({ setLoading }) => {
 
     const [orderData, setOrderData] = useState()
-    const [paymentInfo, setPaymentInfo] = useState()
     const [orderDetails, setOrderDetails] = useState()
 
     const params = useParams()
@@ -17,11 +16,14 @@ const Order_details = () => {
     const userName = JSON.parse(userData.Reducer).user.user.user_name
 
     const fetchData = async () => {
+        setLoading(true)
         const { data } = await axios.get(`http://localhost:8800/order/orderdetils/${params.id}`)
         setOrderData(data)
-        setPaymentInfo(JSON.parse(data.paymentInfo))
         getOrderDetails(data)
+        setLoading(false)
     }
+
+    console.log("orderData", orderData)
 
     const getOrderDetails = (data) => {
         const Array = []
@@ -116,7 +118,9 @@ const Order_details = () => {
                         </div>
                     </div>
                     <div className="row invoice ">
-                        <div className="col"><p className="mb-1"> BANKTXNID : {paymentInfo?.BANKTXNID}</p><p className="mb-1">Invoice Date :  {moment(orderData?.date).format('ll')}</p><p className="mb-1">Bank Name: {orderData?.contact_info?.email}</p></div>
+                        <div className="col"><p className="mb-1"> Email_id : {orderData?.contact_info?.email}</p>
+                            <p className="mb-1">Contact_No: {orderData?.contact_info?.phone_no}</p>
+                            <p className="mb-1">Invoice Date :  {moment(orderData?.date).format('ll')}</p></div>
                     </div>
                 </div>
                 <div className="card-footer">
