@@ -11,7 +11,7 @@ import image from "../Image/login_logo.jpeg"
 
 
 
-const CheckOut = ({ cart, clearCart }) => {
+const CheckOut = ({ cart, clearCart, setLoading }) => {
 
     const user = localStorage.getItem("myuser");
 
@@ -150,8 +150,10 @@ const CheckOut = ({ cart, clearCart }) => {
                 const createOrder = await axios.post("http://localhost:8800/order", {
                     oid, user_id, finalPrice, contact_info, Data, discount, productId, cart, shippingCharge
                 })
-                clearCart()
-                navigate("/account-order")
+                setLoading(true)
+                await clearCart()
+                await navigate("/account-order")
+                setLoading(false)
             },
             prefill: {
                 name: Data.first_name,

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Account_sidebar from '../Components/Account_sidebar'
 import moment from "moment"
 
-const Account_order = () => {
+const Account_order = ({ setLoading }) => {
 
     const [orderData, setOrderData] = useState()
 
@@ -12,8 +12,10 @@ const Account_order = () => {
     const userId = JSON.parse(userData.Reducer).user.user._id;
 
     const fetchData = async () => {
+        setLoading(true)
         const { data } = await axios.get(`http://localhost:8800/order/${userId}`)
         setOrderData(data)
+        setLoading(false)
     }
 
     useEffect(() => {
