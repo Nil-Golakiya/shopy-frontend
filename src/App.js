@@ -17,6 +17,7 @@ import Contactus from './Pages/Contactus';
 import Aboutus from './Pages/Aboutus';
 import Order_details from './Pages/Order_details';
 import Error_page from './Pages/Error_page';
+import Terms_condition from './Components/Terms_condition';
 
 
 
@@ -86,6 +87,7 @@ function App() {
         <Route exact path="/about" element={<Homepage Component={Aboutus} />} />
         <Route exact path="*" element={<Homepage Component={Error_page} />} />
         <Route exact path="/login" element={<Login />} />
+        <Route exact path="/terms_condition" element={<Homepage Component={Terms_condition} />} />
       </Routes>
     </>
 

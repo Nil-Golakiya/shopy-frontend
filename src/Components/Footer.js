@@ -101,9 +101,9 @@ const Footer = () => {
                                         <ul>
                                             <li><Link to="/about">About Us</Link></li>
                                             <li><Link to="/contact">Contact Us</Link></li>
-                                            <li><Link tp="/">Terms &amp; Conditions</Link></li>
-                                            <li><Link tp="/">Returns &amp; Exchanges</Link></li>
-                                            <li><Link tp="/">Shipping &amp; Delivery</Link></li>
+                                            <li><Link to="/terms_condition">Terms &amp; Conditions</Link></li>
+                                            <li><Link to="/">Returns &amp; Exchanges</Link></li>
+                                            <li><Link to="/">Shipping &amp; Delivery</Link></li>
                                         </ul>
                                     </div>
                                 </div>
