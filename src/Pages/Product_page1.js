@@ -18,7 +18,7 @@ const Product_page1 = ({ setCart, cart }) => {
     const navigate = useNavigate()
 
     const userData = JSON.parse(localStorage.getItem("persist:user"))
-    const userId = JSON.parse(userData.Reducer).user.user._id
+    const userId = JSON.parse(userData.Reducer)?.user?.user._id
 
 
     const fetchData = async () => {
