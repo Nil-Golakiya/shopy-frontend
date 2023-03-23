@@ -100,7 +100,7 @@ const Sidebar = ({ categoryData, setCart, cart }) => {
                                         <div className="minicart-prd row">
                                             <div className="minicart-prd-image image-hover-scale-circle col">
                                                 <a href="product.html"><img className="lazyload fade-up"
-                                                    src={ele.subVariation.image} alt="" style={{ height: "100px", objectFit: "contain" }} /></a>
+                                                    src={ele?.subVariation?.image} alt="" style={{ height: "100px", objectFit: "contain" }} /></a>
                                             </div>
                                             <div className="minicart-prd-info col">
                                                 <div className="minicart-prd-tag">Shopy</div>
