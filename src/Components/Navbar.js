@@ -11,7 +11,7 @@ const Navbar = ({ categoryData, cart, wishlist }) => {
     const CartTotal = () => {
         let carttotal = 0;
         cart?.map((ele) => {
-            carttotal += (ele.subVariation.price - (ele.subVariation.price / ele.subVariation.discount)) * ele.cart_quantity;
+            carttotal += (ele.subVariation?.price - (ele.subVariation?.price / ele.subVariation?.discount)) * ele?.cart_quantity;
         })
         setTotalPrice(carttotal)
     }
