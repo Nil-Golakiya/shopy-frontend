@@ -10,6 +10,7 @@ const Dashbord = ({ categoryData, setWishlist, wishlist, setLoading }) => {
   const [featuredData, setFeaturedData] = useState()
   const [collectionData, setCollectionData] = useState()
   const [activeCollection, setActiveCollection] = useState()
+  const [carouselData, setCarouselData] = useState()
 
   const TrandingProduct = async () => {
     const { data } = await axios.get("http://localhost:8800/product?type=tranding")
@@ -34,10 +35,17 @@ const Dashbord = ({ categoryData, setWishlist, wishlist, setLoading }) => {
     setLoading(false)
   }
 
+  const fetchData = async () => {
+    const { data } = await axios.get("http://localhost:8800/carousel")
+    setCarouselData(data)
+    console.log("data", data)
+  }
+
   useEffect(() => {
     TrandingProduct()
     FeaturedProduct()
     handleProductlist("Men")
+    fetchData()
   }, [])
 
   useEffect(() => {
@@ -50,7 +58,6 @@ const Dashbord = ({ categoryData, setWishlist, wishlist, setLoading }) => {
     }
   }, [])
 
-  console.log("categoryData", categoryData)
 
   return (
     <div className="page-content">
@@ -58,71 +65,35 @@ const Dashbord = ({ categoryData, setWishlist, wishlist, setLoading }) => {
         <div className="container">
           <div className="bnslider-wrapper">
             <div className="bnslider bnslider--lg keep-scale" id="bnslider-001" data-slick="{&quot;arrows&quot;: true, &quot;dots&quot;: true}" data-autoplay="false" data-speed={12000} data-start-width={1917} data-start-height={764} data-start-mwidth={1550} data-start-mheight={1000}>
-              <div className="bnslider-slide">
-                <div className="bnslider-image-mobile lazyload" data-bgset="images/skins/fashion/slider/slide-fashion-02-m.webp" />
-                <div className="bnslider-image lazyload" data-bgset="images/skins/fashion/slider/slide-fashion-02.webp" />
-                <div className="bnslider-text-wrap bnslider-overlay ">
-                  <div className="bnslider-text-content txt-middle txt-right txt-middle-m txt-center-m">
-                    <div className="bnslider-text-content-flex ">
-                      <div className="bnslider-vert w-s-60 w-ms-100" style={{ padding: '0px' }}>
-                        <div className="bnslider-text order-1 mt-sm bnslider-text--md text-center data-ini" data-animation="fadeInUp" data-animation-delay={800} data-fontcolor="#282828" data-fontweight={700} data-fontline="1.5">Best
-                          Price This Year</div>
-                        <div className="bnslider-text order-2 mt-sm bnslider-text--xs text-center data-ini" data-animation="fadeInUp" data-animation-delay={1000} data-fontcolor="#7c7c7c" data-fontweight={400} data-fontline="1.5">
-                          Best Clothes</div>
-                        <div className="btn-wrap text-center  order-4 mt-md" data-animation="fadeIn" data-animation-delay={2000} style={{ opacity: 1 }}>
-                          <Link to="/products/Women" className="btn">
-                            Shop now
-                          </Link>
+              {
+                carouselData && carouselData.map((item) => (
+                  <div className="bnslider-slide">
+                    <div className="bnslider-image-mobile lazyload" style={{ backgroundImage: ` url(${item.image})` }} />
+                    <div className="bnslider-image lazyload" style={{ backgroundImage: ` url(${item.image})` }} />
+                    <div className="bnslider-text-wrap bnslider-overlay ">
+                      <div className="bnslider-text-content txt-middle txt-right txt-middle-m txt-center-m">
+                        <div className="bnslider-text-content-flex ">
+                          <div className="bnslider-vert w-s-60 w-ms-100" style={{ padding: '0px' }}>
+                            <div className="bnslider-text order-1 mt-sm bnslider-text--md text-center data-ini" data-animation="fadeInUp" data-animation-delay={800} data-fontcolor="#282828" data-fontweight={700} data-fontline="1.5">
+                              Best Price This Year
+                              </div>
+                            <div className="bnslider-text order-2 mt-sm bnslider-text--xs text-center data-ini" data-animation="fadeInUp" data-animation-delay={1000} data-fontcolor="#7c7c7c" data-fontweight={400} data-fontline="1.5">
+                              Best Clothes</div>
+                            <div className="btn-wrap text-center  order-4 mt-md" data-animation="fadeIn" data-animation-delay={2000} style={{ opacity: 1 }}>
+                              <Link to="/products/Women" className="btn">
+                                Shop now
+                              </Link>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div className="bnslider-slide">
-                <div className="bnslider-image-mobile lazyload" data-bgset="images/skins/fashion/slider/slide-fashion-01-m.webp" />
-                <div className="bnslider-image lazyload" data-bgset="images/skins/fashion/slider/slide-fashion-01.webp" />
-                <div className="bnslider-text-wrap bnslider-overlay ">
-                  <div className="bnslider-text-content txt-middle txt-left txt-middle-m txt-center-m">
-                    <div className="bnslider-text-content-flex ">
-                      <div className="bnslider-vert w-s-60 w-ms-100" style={{ padding: '0px' }}>
-                        <div className="bnslider-text order-1 mt-0 bnslider-text--md text-center data-ini" data-animation="fadeInUp" data-animation-delay={800} data-fontcolor="#282828" data-fontweight={700} data-fontline="1.5">Best
-                          Rated Theme 2020</div>
-                        <div className="bnslider-text order-2 mt-sm bnslider-text--xs text-center data-ini" data-animation="fadeInUp" data-animation-delay={1000} data-fontcolor="#7c7c7c" data-fontweight={400} data-fontline="1.5">
-                          eCommerce HTML Template</div>
-                        <div className="btn-wrap text-center  order-4 mt-md" data-animation="fadeIn" data-animation-delay={2000} style={{ opacity: 1 }}>
-                          <Link to="/products/Man" className="btn">
-                            Shop now
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="bnslider-slide">
-                <div className="bnslider-image-mobile lazyload" data-bgset="images/skins/fashion/slider/slide-fashion-01-m.webp" />
-                <div className="bnslider-image lazyload" data-bgset="images/skins/fashion/slider/slide-fashion-01.webp" />
-                <div className="bnslider-text-wrap bnslider-overlay ">
-                  <div className="bnslider-text-content txt-middle txt-left txt-middle-m txt-center-m">
-                    <div className="bnslider-text-content-flex ">
-                      <div className="bnslider-vert w-s-60 w-ms-100" style={{ padding: '0px' }}>
-                        <div className="bnslider-text order-1 mt-0 bnslider-text--md text-center data-ini" data-animation="fadeInUp" data-animation-delay={800} data-fontcolor="#282828" data-fontweight={700} data-fontline="1.5">Best
-                          Rated Theme 2020</div>
-                        <div className="bnslider-text order-2 mt-sm bnslider-text--xs text-center data-ini" data-animation="fadeInUp" data-animation-delay={1000} data-fontcolor="#7c7c7c" data-fontweight={400} data-fontline="1.5">
-                          eCommerce HTML Template</div>
-                        <div className="btn-wrap text-center  order-4 mt-md" data-animation="fadeIn" data-animation-delay={2000} style={{ opacity: 1 }}>
-                          <Link to="/products/Man" className="btn">
-                            Shop now
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                ))
+              }
+
             </div>
-            <div className="bnslider-arrows container-fluid">
+            <div className="bnslider-arrows container-fluid mt-0">
               <div />
             </div>
             <div className="bnslider-dots container-fluid" />
