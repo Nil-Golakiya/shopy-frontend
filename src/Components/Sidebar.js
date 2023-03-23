@@ -104,12 +104,12 @@ const Sidebar = ({ categoryData, setCart, cart }) => {
                                             </div>
                                             <div className="minicart-prd-info col">
                                                 <div className="minicart-prd-tag">Shopy</div>
-                                                <h2 className="minicart-prd-name"><a href="#">{ele.subVariation.product_name}</a></h2>
+                                                <h2 className="minicart-prd-name"><a href="#">{ele.subVariation?.product_name}</a></h2>
                                                 <div className="minicart-prd-qty"><span className="minicart-prd-qty-label">Quantity:</span><span
-                                                    className="minicart-prd-qty-value">{ele.cart_quantity}</span></div>
+                                                    className="minicart-prd-qty-value">{ele?.cart_quantity}</span></div>
                                                 <div className="minicart-prd-price prd-price">
-                                                    <div className="price-old">₹ {ele.subVariation.price}</div>
-                                                    <div className="price-new">₹ {ele.subVariation.price - ele.subVariation.price / ele.subVariation.discount}</div>
+                                                    <div className="price-old">₹ {ele.subVariation?.price}</div>
+                                                    <div className="price-new">₹ {ele.subVariation?.price - ele.subVariation?.price / ele.subVariation?.discount}</div>
                                                 </div>
                                             </div>
                                             <div className="minicart-prd-action">
