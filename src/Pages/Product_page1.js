@@ -29,14 +29,18 @@ const Product_page1 = ({ setCart, cart }) => {
     }
 
     const createCart = async () => {
-        localStorage.setItem('cartItem', JSON.stringify(activeInfo))
-        const { data: resData } = await axios.post("/cart/", {
-            variation_id: activeInfo.variation_id,
-            user_id: userId,
-            subVariation: { ...activeInfo, image: images[0], product_name: data.title },
-            cart_quantity: count,
-        })
-        setCart([...cart, resData])
+        if (userId) {
+            localStorage.setItem('cartItem', JSON.stringify(activeInfo))
+            const { data: resData } = await axios.post("/cart/", {
+                variation_id: activeInfo.variation_id,
+                user_id: userId,
+                subVariation: { ...activeInfo, image: images[0], product_name: data.title },
+                cart_quantity: count,
+            })
+            setCart([...cart, resData])
+        } else {
+            navigate("/login")
+        }
     }
 
     const handleGotoCart = () => {
