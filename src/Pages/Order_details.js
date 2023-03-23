@@ -17,7 +17,7 @@ const Order_details = ({ setLoading }) => {
 
     const fetchData = async () => {
         setLoading(true)
-        const { data } = await axios.get(`http://localhost:8800/order/orderdetils/${params.id}`)
+        const { data } = await axios.get(`/order/orderdetils/${params.id}`)
         setOrderData(data)
         getOrderDetails(data)
         setLoading(false)

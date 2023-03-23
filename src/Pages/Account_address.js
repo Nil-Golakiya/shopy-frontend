@@ -18,7 +18,7 @@ const Account_address = () => {
     const { register, control, handleSubmit, reset, watch, getValues, setValue } = useForm({});
 
     const fetchUserData = async () => {
-        const { data } = await axios.get(`http://localhost:8800/auth/${user_id}`)
+        const { data } = await axios.get(`/auth/${user_id}`)
         const Data = data.data;
         setUserDetailsData(Data)
         reset({
@@ -30,7 +30,7 @@ const Account_address = () => {
     }
 
     const submitHandler = async (data) => {
-        const UserData = await axios.put(`http://localhost:8800/auth/${user_id}`, data)
+        const UserData = await axios.put(`/auth/${user_id}`, data)
         if (UserData.data.status === false) {
             toast.error(UserData.data.message);
         } else {
@@ -41,7 +41,7 @@ const Account_address = () => {
     }
 
     const EditSubmitHandler = async (data) => {
-        const UserData = await axios.put(`http://localhost:8800/auth/${user_id}`, data)
+        const UserData = await axios.put(`/auth/${user_id}`, data)
         if (UserData.data.status === false) {
             toast.error(UserData.data.message);
         } else {

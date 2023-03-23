@@ -22,7 +22,7 @@ const Product_page1 = ({ setCart, cart }) => {
 
 
     const fetchData = async () => {
-        const { data } = await axios.get(`http://localhost:8800/product/${params.id}`)
+        const { data } = await axios.get(`/product/${params.id}`)
         const productData = data.data[0]
         setData(productData)
         handleChangeColorSize(productData, null)
@@ -30,7 +30,7 @@ const Product_page1 = ({ setCart, cart }) => {
 
     const createCart = async () => {
         localStorage.setItem('cartItem', JSON.stringify(activeInfo))
-        const { data: resData } = await axios.post("http://localhost:8800/cart/", {
+        const { data: resData } = await axios.post("/cart/", {
             variation_id: activeInfo.variation_id,
             user_id: userId,
             subVariation: { ...activeInfo, image: images[0], product_name: data.title },

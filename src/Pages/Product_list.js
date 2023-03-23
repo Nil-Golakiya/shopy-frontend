@@ -20,7 +20,7 @@ const Product_list = ({ setWishlist, wishlist, setLoading }) => {
             getparams.subcategory_id = params.subcategory;
         }
 
-        const { data } = await axios.get("http://localhost:8800/product/categorywiseproduct", { params: getparams });
+        const { data } = await axios.get("/product/categorywiseproduct", { params: getparams });
         const Data = data.data;
         setData(Data);
         setLoading(false)

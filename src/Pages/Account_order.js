@@ -13,7 +13,7 @@ const Account_order = ({ setLoading }) => {
 
     const fetchData = async () => {
         setLoading(true)
-        const { data } = await axios.get(`http://localhost:8800/order/${userId}`)
+        const { data } = await axios.get(`/order/${userId}`)
         setOrderData(data)
         setLoading(false)
     }

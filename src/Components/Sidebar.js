@@ -26,7 +26,7 @@ const Sidebar = ({ categoryData, setCart, cart }) => {
     }
 
     const handleDelete = async (id) => {
-        const deleteProduct = await axios.delete(`http://localhost:8800/cart/${id}`)
+        const deleteProduct = await axios.delete(`/cart/${id}`)
         setCart(cart.filter((item) => item._id !== id));
     }
 

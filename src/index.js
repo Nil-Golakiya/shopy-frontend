@@ -7,6 +7,9 @@ import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import store, { persistor } from "./Redux/store";
 import { Provider } from "react-redux";
+import axios from 'axios';
+
+axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

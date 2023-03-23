@@ -58,7 +58,7 @@ const CheckOut = ({ cart, clearCart, setLoading }) => {
 
 
     const handleCoupon = async () => {
-        const couponData = await axios.get(`http://localhost:8800/coupon/${coupon}`);
+        const couponData = await axios.get(`/coupon/${coupon}`);
         if (couponData.data.is_active === false) {
             toast.error("Coupon Is Expire");
         } else {
@@ -129,7 +129,7 @@ const CheckOut = ({ cart, clearCart, setLoading }) => {
         const shippingCharge = priceInfo.shippingcharge;
         const razorpayorder = { oid, user_id, finalPrice }
 
-        const { data } = await axios.post("http://localhost:8800/api/checkout", razorpayorder)
+        const { data } = await axios.post("/api/checkout", razorpayorder)
 
         const options = {
             key: process.env.REACT_APP_RAZORPAY_KEY_ID,
@@ -141,13 +141,13 @@ const CheckOut = ({ cart, clearCart, setLoading }) => {
             order_id: data.id,
             handler: async function (res) {
                 console.log("res--", res)
-                const paymentVerificationData = await axios.post("http://localhost:8800/api/paymentverification", {
+                const paymentVerificationData = await axios.post("/api/paymentverification", {
                     res,
                     amount: data.amount,
                     user_id,
                     oid
                 })
-                const createOrder = await axios.post("http://localhost:8800/order", {
+                const createOrder = await axios.post("/order", {
                     oid, user_id, finalPrice, contact_info, Data, discount, productId, cart, shippingCharge
                 })
                 setLoading(true)
@@ -186,7 +186,7 @@ const CheckOut = ({ cart, clearCart, setLoading }) => {
     }
 
     const fetchData = async () => {
-        const { data } = await axios.get(`http://localhost:8800/auth/${userId}`);
+        const { data } = await axios.get(`/auth/${userId}`);
         const Data = data.data;
         if (Data.address) {
             reset({

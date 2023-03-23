@@ -18,7 +18,7 @@ const Account_details = () => {
     const { register, control, handleSubmit, reset, watch, getValues, setValue } = useForm({});
 
     const fetchData = async () => {
-        const { data } = await axios.get(`http://localhost:8800/auth/${user_id}`)
+        const { data } = await axios.get(`/auth/${user_id}`)
         const Data = data.data;
         reset({
             first_name: Data.first_name,
@@ -52,7 +52,7 @@ const Account_details = () => {
 
     const submitHandler = async (data) => {
         try {
-            const UserData = await axios.put(`http://localhost:8800/auth/${user_id}`, data)
+            const UserData = await axios.put(`/auth/${user_id}`, data)
             fetchData()
             if (UserData.data.status === false) {
                 toast.error(UserData.data.message);
@@ -74,7 +74,7 @@ const Account_details = () => {
             email: userData.email
         }
         if (PasswordData.new_password === PasswordData.confirm_new_password) {
-            const updatePasswordData = await axios.put("http://localhost:8800/auth/password/updatepassword", PasswordData)
+            const updatePasswordData = await axios.put("/auth/password/updatepassword", PasswordData)
             if (updatePasswordData.data.status === true) {
                 toast.success(updatePasswordData.data.message);
                 setOpenPassword(false)

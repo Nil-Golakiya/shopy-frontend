@@ -59,7 +59,7 @@ const Login = () => {
     const signinsubmithandler = async (formData) => {
         dispatch(LoginStart());
         try {
-            const { data } = await axios.post("http://localhost:8800/auth/userregister", {
+            const { data } = await axios.post("/auth/userregister", {
                 email: formData.email,
                 password: formData.password,
                 roles: "user"
@@ -83,7 +83,7 @@ const Login = () => {
         console.log("formdata1", formdata1)
         try {
             if (formdata1.password === formdata1.confirmpassword) {
-                const signupData = await axios.post("http://localhost:8800/auth/signup", {
+                const signupData = await axios.post("/auth/signup", {
                     first_name: formdata1.first_name,
                     last_name: formdata1.last_name,
                     user_name: formdata1.user_name,

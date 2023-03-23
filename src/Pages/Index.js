@@ -17,26 +17,26 @@ const Index = ({ Component }) => {
 
     const fetchWishlistData = async () => {
         if (userId) {
-            const { data } = await axios.get(`http://localhost:8800/wishlist/${userId}`)
+            const { data } = await axios.get(`/wishlist/${userId}`)
             const Data = data.data;
             setWishlist(Data)
         }
     }
 
     const clearCart = async () => {
-        const { data } = await axios.delete(`http://localhost:8800/cart/deltemany/${userId}`)
+        const { data } = await axios.delete(`/cart/deltemany/${userId}`)
     }
 
     const fetchData = async () => {
         setLoading(true)
-        const { data } = await axios.get("http://localhost:8800/category/Customercategory")
+        const { data } = await axios.get("/category/Customercategory")
         setCategoryData(data)
         setLoading(false)
     }
 
     const CartData = async () => {
         if (userId) {
-            const { data } = await axios.get(`http://localhost:8800/cart/${userId}`)
+            const { data } = await axios.get(`/cart/${userId}`)
             setCart(data)
         }
     }

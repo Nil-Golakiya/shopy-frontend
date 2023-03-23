@@ -13,13 +13,13 @@ const Dashbord = ({ categoryData, setWishlist, wishlist, setLoading }) => {
   const [carouselData, setCarouselData] = useState()
 
   const TrandingProduct = async () => {
-    const { data } = await axios.get("http://localhost:8800/product?type=tranding")
+    const { data } = await axios.get("/product?type=tranding")
     const TrandingProductData = data.data;
     setTrandingData(TrandingProductData)
   }
 
   const FeaturedProduct = async () => {
-    const { data } = await axios.get("http://localhost:8800/product?type=featured")
+    const { data } = await axios.get("/product?type=featured")
     const FeaturedProductData = data.data;
     setFeaturedData(FeaturedProductData)
   }
@@ -29,14 +29,14 @@ const Dashbord = ({ categoryData, setWishlist, wishlist, setLoading }) => {
     setActiveCollection(name)
     const getparams = {}
     getparams.category_id = name;
-    const { data } = await axios.get("http://localhost:8800/product/limitedproduct", { params: getparams });
+    const { data } = await axios.get("/product/limitedproduct", { params: getparams });
     const Data = data.data;
     setCollectionData(Data)
     setLoading(false)
   }
 
   const fetchData = async () => {
-    const { data } = await axios.get("http://localhost:8800/carousel")
+    const { data } = await axios.get("/carousel")
     setCarouselData(data)
     console.log("data", data)
   }
@@ -68,8 +68,8 @@ const Dashbord = ({ categoryData, setWishlist, wishlist, setLoading }) => {
               {
                 carouselData && carouselData.map((item) => (
                   <div className="bnslider-slide">
-                    <div className="bnslider-image-mobile lazyload" style={{ backgroundImage: ` url(${item.image})` }} />
-                    <div className="bnslider-image lazyload" style={{ backgroundImage: ` url(${item.image})` }} />
+                    <div className="bnslider-image-mobile lazyload" style={{ backgroundImage: ` url(https://shopybackend.onrender.com/${item.image})` }} />
+                    <div className="bnslider-image lazyload" style={{ backgroundImage: ` url(https://shopybackend.onrender.com/${item.image})` }} />
                     <div className="bnslider-text-wrap bnslider-overlay ">
                       <div className="bnslider-text-content txt-middle txt-right txt-middle-m txt-center-m">
                         <div className="bnslider-text-content-flex ">
@@ -107,7 +107,7 @@ const Dashbord = ({ categoryData, setWishlist, wishlist, setLoading }) => {
               <div className="col-sm">
                 <Link to={`/products/${ele.name}`} className="collection-grid-3-item image-hover-scale">
                   <div className="collection-grid-3-item-img image-container" style={{ paddingBottom: '93.68%', borderRadius: "154px", height: "211px", width: "205px" }}>
-                    <img src={ele.img} className="lazyload fade-up" alt="Banner" />
+                    <img src={`https://shopybackend.onrender.com/${ele.img}`} className="lazyload fade-up" alt="Banner" />
                     <div className="foxic-loader" />
                   </div>
                   <div className="collection-grid-3-caption-bg">

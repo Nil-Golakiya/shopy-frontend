@@ -17,7 +17,7 @@ const Cart = ({ cart, setCart }) => {
   }
 
   const handleDelete = async (id) => {
-    const deleteProduct = await axios.delete(`http://localhost:8800/cart/${id}`)
+    const deleteProduct = await axios.delete(`/cart/${id}`)
     setCart(cart.filter((item) => item._id !== id));
   }
 
@@ -42,7 +42,7 @@ const Cart = ({ cart, setCart }) => {
       })
       setCart(cartObject)
       const dataObj = cartObject.find(ele => ele._id === item._id)
-      const data = axios.put(`http://localhost:8800/cart/${dataObj._id}`, dataObj)
+      const data = axios.put(`/cart/${dataObj._id}`, dataObj)
     }
   }
 

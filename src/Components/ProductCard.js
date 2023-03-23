@@ -20,7 +20,7 @@ const ProductCard = ({ item, setWishlist, wishlist }) => {
     }
 
     const handleWishlist = async (id) => {
-        const { data } = await axios.post("http://localhost:8800/wishlist", {
+        const { data } = await axios.post("/wishlist", {
             product_id: id,
             user_id: userId
         })
@@ -34,7 +34,7 @@ const ProductCard = ({ item, setWishlist, wishlist }) => {
 
     const handleRemoveWishlist = async (id) => {
         setIsWishlist(null)
-        const data = await axios.delete(`http://localhost:8800/wishlist/${id}`)
+        const data = await axios.delete(`/wishlist/${id}`)
         setWishlist(wishlist.filter((e) => e.wishlist_id !== id))
     }
 
