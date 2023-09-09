@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
 import axios from 'axios'
 import ProductCard from '../Components/ProductCard'
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel'
 
 
 const Dashbord = ({ categoryData, setWishlist, wishlist, setLoading }) => {
@@ -37,8 +39,13 @@ const Dashbord = ({ categoryData, setWishlist, wishlist, setLoading }) => {
 
   const fetchData = async () => {
     const { data } = await axios.get("/carousel")
-    setCarouselData(data)
-    console.log("data", data)
+    const updatedData = data.map((item) => {
+      const pngURL = `${process.env.REACT_APP_API_BASE_URL}/${item.image}`;
+      return { ...item, pngURL }
+    })
+
+    setCarouselData(updatedData)
+    // console.log("updatedData", updatedData)
   }
 
   useEffect(() => {
@@ -57,47 +64,45 @@ const Dashbord = ({ categoryData, setWishlist, wishlist, setLoading }) => {
       document.body.removeChild(scriptTag)
     }
   }, [])
-
+  // console.log('carouselData--', carouselData);
 
   return (
     <div className="page-content">
       <div className="holder fullwidth full-nopad mt-0">
         <div className="container">
-          <div className="bnslider-wrapper">
-            <div className="bnslider bnslider--lg keep-scale" id="bnslider-001" data-slick="{&quot;arrows&quot;: true, &quot;dots&quot;: true}" data-autoplay="false" data-speed={12000} data-start-width={1917} data-start-height={764} data-start-mwidth={1550} data-start-mheight={1000}>
-              {
-                carouselData && carouselData.map((item) => (
-                  <div className="bnslider-slide">
-                    <div className="bnslider-image-mobile lazyload" style={{ backgroundImage: ` url(https://shopybackend.onrender.com/${item.image})` }} />
-                    <div className="bnslider-image lazyload" style={{ backgroundImage: ` url(https://shopybackend.onrender.com/${item.image})` }} />
-                    <div className="bnslider-text-wrap bnslider-overlay ">
-                      <div className="bnslider-text-content txt-middle txt-right txt-middle-m txt-center-m">
-                        <div className="bnslider-text-content-flex ">
-                          <div className="bnslider-vert w-s-60 w-ms-100" style={{ padding: '0px' }}>
-                            <div className="bnslider-text order-1 mt-sm bnslider-text--md text-center data-ini" data-animation="fadeInUp" data-animation-delay={800} data-fontcolor="#282828" data-fontweight={700} data-fontline="1.5">
-                              Best Price This Year
-                              </div>
-                            <div className="bnslider-text order-2 mt-sm bnslider-text--xs text-center data-ini" data-animation="fadeInUp" data-animation-delay={1000} data-fontcolor="#7c7c7c" data-fontweight={400} data-fontline="1.5">
-                              Best Clothes</div>
-                            <div className="btn-wrap text-center  order-4 mt-md" data-animation="fadeIn" data-animation-delay={2000} style={{ opacity: 1 }}>
-                              <Link to="/products/Women" className="btn">
-                                Shop now
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+          <Carousel infiniteLoop={true} autoPlay={true}  >
+            {
+              carouselData && carouselData.map((item) => (
+
+                <div>
+                  <img src={`${item.pngURL}`} />
+                </div>
+              ))
+            }
+          </Carousel>
+
+          {/* <div className="bnslider-slide">
+            <div className="bnslider-image-mobile lazyload" style={{ backgroundImage: ` url(${item.pngURL})` }} />
+            <div className="bnslider-image lazyload" style={{ backgroundImage: ` url(${item.pngURL})` }} />
+            <div className="bnslider-text-wrap bnslider-overlay ">
+              <div className="bnslider-text-content txt-middle txt-right txt-middle-m txt-center-m">
+                <div className="bnslider-text-content-flex ">
+                  <div className="bnslider-vert w-s-60 w-ms-100" style={{ padding: '0px' }}>
+                    <div className="bnslider-text order-1 mt-sm bnslider-text--md text-center data-ini" data-animation="fadeInUp" data-animation-delay={800} data-fontcolor="#282828" data-fontweight={700} data-fontline="1.5">
+                      Best Price This Year
+                    </div>
+                    <div className="bnslider-text order-2 mt-sm bnslider-text--xs text-center data-ini" data-animation="fadeInUp" data-animation-delay={1000} data-fontcolor="#7c7c7c" data-fontweight={400} data-fontline="1.5">
+                      Best Clothes</div>
+                    <div className="btn-wrap text-center  order-4 mt-md" data-animation="fadeIn" data-animation-delay={2000} style={{ opacity: 1 }}>
+                      <Link to="/products/Women" className="btn">
+                        Shop now
+                      </Link>
                     </div>
                   </div>
-                ))
-              }
-
-            </div>
-            <div className="bnslider-arrows container-fluid mt-0">
-              <div />
-            </div>
-            <div className="bnslider-dots container-fluid" />
-          </div>
+                </div>
+              </div> 
+            </div> 
+          </div> */}
         </div>
       </div>
       <div class="holder holder-mt-xsmall">

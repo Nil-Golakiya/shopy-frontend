@@ -37,7 +37,11 @@ const Product_page1 = ({ setCart, cart }) => {
                 subVariation: { ...activeInfo, image: images[0], product_name: data.title },
                 cart_quantity: count,
             })
-            setCart([...cart, resData])
+            // console.log('resData--',resData);
+            // console.log('cart--',cart);
+            const findItem =await cart.find((item)=>item.variation_id === resData.variation_id && item.subVariation._id === resData.subVariation._id)
+            // console.log('findItem--',findItem);
+            setCart([...cart, resData]) 
         } else {
             navigate("/login")
         }
@@ -48,8 +52,9 @@ const Product_page1 = ({ setCart, cart }) => {
     }
 
     const handleChangeColorSize = (data, color) => {
+        // console.log('data--',data);
         const colorArray = [];
-        data.variations.map((ele) => {
+        data?.variations.map((ele) => {
             colorArray.push({
                 color: ele.color,
                 image: ele.image[0]
@@ -60,7 +65,7 @@ const Product_page1 = ({ setCart, cart }) => {
             color = colorArray[0].color;
         }
 
-        const variationObj = data.variations.find((v) => v.color === color);
+        const variationObj = data?.variations.find((v) => v.color === color);
         if (variationObj) {
             setImages(variationObj.image);
             setVariations(variationObj.subVariation);
@@ -127,25 +132,25 @@ const Product_page1 = ({ setCart, cart }) => {
                     <div className="row prd-block prd-block--prv-bottom">
                         <div className="col-md-8 col-lg-8 col-xl-8 aside--sticky js-sticky-collision">
                             <div className="aside-content">
-                                <div className="mb-2 js-prd-m-holder" />
+                                {/* <div className="mb-2 js-prd-m-holder" /> */}
                                 <div className="prd-block_main-image">
-                                    <div className="prd-block_main-image-holder" id="prdMainImage">
-                                        <div className="product-main-carousel js-product-main-carousel">
-                                            {
-                                                images.map((image) => (
+                                    {/* <div className="prd-block_main-image-holder" id="prdMainImage">
+                                        <div className="product-main-carousel js-product-main-carousel"> */}
+                                            {/* {
+                                                images.map((image) => ( */}
                                                     <div data-value="Beige">
                                                         <span className="prd-img">
-                                                            <img src={image} data-src={image} className="lazyload fade-up" alt="" />
+                                                            <img src={images[0]} data-src={images[0]} className="lazyload fade-up" alt="" />
                                                         </span>
                                                     </div>
-                                                ))
-                                            }
-                                        </div>
+                                                {/* ))
+                                            } */}
+                                        {/* </div> */}
                                         <div className="prd-block_label-sale-squared justify-content-center align-items-center"><span>Sale</span></div>
-                                    </div>
+                                    {/* </div> */}
                                 </div>
                                 <div className="product-previews-wrapper">
-                                    <div className="product-previews-carousel js-product-previews-carousel">
+                                    <div className="product-previews-carousel d-flex js-product-previews-carousel">
                                         {images.map((image) => (
                                             <a href="#">
                                                 <span className="prd-img">

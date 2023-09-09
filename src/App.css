@@ -1,0 +1,29 @@
+.carousel .control-dots,.carousel .carousel-status{
+    display: none !important;
+}
+
+.carousel .slider-wrapper{
+    margin-top: 50px !important;
+}
+
+.carousel .thumbs-wrapper{
+    margin: 0 !important;
+}
+
+.carousel.carousel-slider .control-arrow{
+    display: none !important;
+}
+
+.carousel .thumb{
+    cursor: pointer;
+}
+
+.holder-mt-xsmall{
+    margin-top: 50px !important;
+}
+
+/* 
+.carousel .slide .legend{
+    background: transparent !important;
+    color: #000 !important;
+} */
