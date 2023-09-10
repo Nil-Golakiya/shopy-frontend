@@ -57,9 +57,9 @@ const Product_list = ({ setWishlist, wishlist, setLoading }) => {
                             <div className="page-title text-center">
                                 <h1>{data?.[0]?.categories[0]?.name}</h1>
                             </div>
-                            <div className="filter-row">
+                            {/* <div className="filter-row"> 
                                 <div className="row">
-                                    <div className="items-count">35 item(s)</div>
+                                    <div className="items-count">{data.length} item(s)</div>
                                     <div className="select-wrap d-none d-md-flex">
                                         <div className="select-label">SORT:</div>
                                         <div className="select-wrapper select-wrapper-xxs">
@@ -88,7 +88,7 @@ const Product_list = ({ setWishlist, wishlist, setLoading }) => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*/}
                             <div className="row">
                                 <div className="col-lg-4 aside aside--left filter-col filter-mobile-col filter-col--sticky js-filter-col" data-grid-tab-content>
                                     <div className="filter-col-content filter-mobile-content">
@@ -249,7 +249,7 @@ const Product_list = ({ setWishlist, wishlist, setLoading }) => {
                                                 <ProductCard item={item} setWishlist={setWishlist} wishlist={wishlist} />
                                             ))}
                                         </div>
-                                        <div className="loader-horizontal-sm js-loader-horizontal-sm d-none" data-loader-horizontal style={{ opacity: 0 }}><span /></div>
+                                        {/* <div className="loader-horizontal-sm js-loader-horizontal-sm d-none" data-loader-horizontal style={{ opacity: 0 }}><span /></div>
                                         <div className="circle-loader-wrap">
                                             <div className="circle-loader">
                                                 <a href="ajax/ajax-product-category.json" data-total={30} data-loaded={12} data-load={6} className="lazyload js-circle-loader">
@@ -265,13 +265,13 @@ const Product_list = ({ setWishlist, wishlist, setLoading }) => {
                                                     <div className="circle-loader-text-alt"><span className="js-circle-loader-start" />&nbsp;out of&nbsp;<span className="js-circle-loader-end" /></div>
                                                 </a>
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="holder">
+                    {/* <div className="holder"> 
                         <div className="container">
                             <div className="title-wrap text-center">
                                 <h2 className="h1-style">You may also like</h2>
@@ -566,7 +566,7 @@ const Product_list = ({ setWishlist, wishlist, setLoading }) => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </>
             ) : (
                 <div className="col-lg aside">

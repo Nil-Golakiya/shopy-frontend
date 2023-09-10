@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel'
 
 const Product_page1 = ({ setCart, cart }) => {
 
@@ -37,11 +39,22 @@ const Product_page1 = ({ setCart, cart }) => {
                 subVariation: { ...activeInfo, image: images[0], product_name: data.title },
                 cart_quantity: count,
             })
-            // console.log('resData--',resData);
-            // console.log('cart--',cart);
-            const findItem =await cart.find((item)=>item.variation_id === resData.variation_id && item.subVariation._id === resData.subVariation._id)
-            // console.log('findItem--',findItem);
-            setCart([...cart, resData]) 
+
+            const findItem = await cart.find((item) => item.variation_id === resData.variation_id && item.subVariation._id === resData.subVariation._id)
+
+            let checkCart = cart.map((item) => {
+                if (item.variation_id === resData.variation_id && item.subVariation._id === resData.subVariation._id) {
+                    item.cart_quantity += resData.cart_quantity
+                }
+                return item;
+            })
+
+            if (findItem) {
+                setCart(checkCart)
+            } else {
+                setCart([...checkCart, resData])
+            }
+
         } else {
             navigate("/login")
         }
@@ -52,7 +65,7 @@ const Product_page1 = ({ setCart, cart }) => {
     }
 
     const handleChangeColorSize = (data, color) => {
-        // console.log('data--',data);
+
         const colorArray = [];
         data?.variations.map((ele) => {
             colorArray.push({
@@ -132,34 +145,29 @@ const Product_page1 = ({ setCart, cart }) => {
                     <div className="row prd-block prd-block--prv-bottom">
                         <div className="col-md-8 col-lg-8 col-xl-8 aside--sticky js-sticky-collision">
                             <div className="aside-content">
-                                {/* <div className="mb-2 js-prd-m-holder" /> */}
+                                <div className="mb-2 js-prd-m-holder" />
                                 <div className="prd-block_main-image">
-                                    {/* <div className="prd-block_main-image-holder" id="prdMainImage">
-                                        <div className="product-main-carousel js-product-main-carousel"> */}
-                                            {/* {
-                                                images.map((image) => ( */}
+                                    <div className="prd-block_main-image-holder" id="prdMainImage">
+                                        <Carousel infiniteLoop={true} autoPlay={true}  >
+                                            {
+                                                images.map((image) => (
                                                     <div data-value="Beige">
                                                         <span className="prd-img">
-                                                            <img src={images[0]} data-src={images[0]} className="lazyload fade-up" alt="" />
+                                                            <img src={image} data-src={image} className="lazyload fade-up" alt="" />
                                                         </span>
                                                     </div>
-                                                {/* ))
-                                            } */}
-                                        {/* </div> */}
+                                                ))
+                                            }
+                                            </Carousel>
                                         <div className="prd-block_label-sale-squared justify-content-center align-items-center"><span>Sale</span></div>
-                                    {/* </div> */}
-                                </div>
-                                <div className="product-previews-wrapper">
-                                    <div className="product-previews-carousel d-flex js-product-previews-carousel">
-                                        {images.map((image) => (
-                                            <a href="#">
-                                                <span className="prd-img">
-                                                    <img src={image} data-src={image} className="lazyload fade-up" alt="" style={{ height: "150px", objectFit: "contain" }} />
-                                                </span>
-                                            </a>
-                                        ))}
-
                                     </div>
+                                </div>
+                                <div className='d-flex mt-2'>
+                                    {images.map((image) => (
+                                        <span className="prd-img">
+                                            <img src={image} onLoadStart={() => console.log('loading..')} onLoad={() => console.log('loaded..')} className="lazyload fade-up" alt="" style={{ height: "150px", objectFit: "contain" }} />
+                                        </span>
+                                    ))}
                                 </div>
                             </div>
                         </div>

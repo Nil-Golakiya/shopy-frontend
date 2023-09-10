@@ -42,6 +42,7 @@ const Account_order = ({ setLoading }) => {
                     </ul>
                 </div>
             </div>
+
             <div className="holder">
                 <div className="container">
                     <div className="row">
@@ -49,35 +50,42 @@ const Account_order = ({ setLoading }) => {
                         <div className="col-md-14 aside">
                             <h1 className="mb-3">Order History</h1>
                             <div className="table-responsive">
-                                <table className="table table-bordered table-striped table-order-history">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col"># </th>
-                                            <th scope="col">Order Number</th>
-                                            <th scope="col">Order Date </th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Total Price</th>
-                                            <th scope="col">View Details</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            orderData?.map((ele) => (
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td><b>{ele.order_id}</b> </td>
-                                                    <td>{moment(ele.date).format('MMMM Do YYYY, h:mm:ss a')}</td>
-                                                    <td>{ele.status}</td>
-                                                    <td><span className="color">₹ {ele.total_price}</span></td>
-                                                    <td className="d-flex justify-content-center align-items-center"><Link to={`/account-order/${ele._id}`}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></Link></td>
-                                                </tr>
-                                            ))
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div className="text-right mt-2">
-                                <a href="#" className="btn btn--alt">Clear History</a>
+                                {orderData?.length > 0 ?
+                                    <table className="table table-bordered table-striped table-order-history">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"># </th>
+                                                <th scope="col">Order Number</th>
+                                                <th scope="col">Order Date </th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Total Price</th>
+                                                <th scope="col">View Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                orderData?.map((ele) => (
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td><b>{ele.order_id}</b> </td>
+                                                        <td>{moment(ele.date).format('MMMM Do YYYY, h:mm:ss a')}</td>
+                                                        <td>{ele.status}</td>
+                                                        <td><span className="color">₹ {ele.total_price}</span></td>
+                                                        <td className="d-flex justify-content-center align-items-center"><Link to={`/account-order/${ele._id}`}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></Link></td>
+                                                    </tr>
+                                                ))
+                                            }
+                                        </tbody>
+                                    </table>
+                                    : (
+                                        <div className="empty-wishlist js-empty-wishlist text-center py-3 py-sm-5">
+                                            <h3>No orders found.</h3>
+                                            <div className="mt-5">
+                                                <Link to="/" className="btn">Continue shopping</Link>
+                                            </div>
+                                        </div>
+                                    )
+                                }
                             </div>
                         </div>
                     </div>

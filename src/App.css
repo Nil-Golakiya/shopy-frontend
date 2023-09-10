@@ -11,8 +11,21 @@
 }
 
 .carousel.carousel-slider .control-arrow{
-    display: none !important;
+   height: 30px !important;
+   width: 30px !important;
+   top:48% !important;
+   border-radius: 6px !important;
+   opacity: 0.5 !important;
+   background: #000 !important;
+   color: #fff !important;
+   display: flex !important;
+   align-items: center;
+   justify-content: flex-start;
 }
+
+.carousel.carousel-slider .control-arrow:hover{
+    opacity: 0.8 !important;
+ }
 
 .carousel .thumb{
     cursor: pointer;
@@ -20,6 +33,11 @@
 
 .holder-mt-xsmall{
     margin-top: 50px !important;
+}
+
+a.image-hover-scale{
+    display: flex !important;
+    justify-content: center;
 }
 
 /* 
