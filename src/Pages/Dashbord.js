@@ -70,7 +70,7 @@ const Dashbord = ({ categoryData, setWishlist, wishlist, setLoading }) => {
     <div className="page-content">
       <div className="holder fullwidth full-nopad mt-0">
         <div className="container">
-          <Carousel infiniteLoop={true} autoPlay={true}  >
+          <Carousel infiniteLoop={true} autoPlay={true} showThumbs={false}  >
             {
               carouselData && carouselData.map((item) => (
 
